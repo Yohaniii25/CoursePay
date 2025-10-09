@@ -119,6 +119,15 @@ $conn->close();
                 Download Receipt (PDF)
             </button>
         </form>
+
+        <!-- email send that payment successful -->
+         <form action="send-email.php" method="POST" class="mt-6">
+            <input type="hidden" name="reference_no" value="<?php echo htmlspecialchars($reference_no); ?>">
+            <input type="hidden" name="transaction_id" value="<?php echo htmlspecialchars($transaction_id ?: ''); ?>">
+            <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">
+                Send Payment Confirmation Email
+            </button>
+            </form>
     </div>
 </body>
 </html>

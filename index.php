@@ -16,7 +16,6 @@
 
         <form action="submit.php" method="POST" enctype="multipart/form-data" class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg space-y-6">
 
-            <!-- Full Name -->
             <div>
                 <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
                     Full Name <span class="text-red-500">*</span>
@@ -25,7 +24,6 @@
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none">
             </div>
 
-            <!-- Contact Number -->
             <div>
                 <label for="contact-number" class="block text-sm font-semibold text-gray-700 mb-2">
                     Contact Number <span class="text-red-500">*</span>
@@ -34,16 +32,15 @@
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none">
             </div>
 
-            <!-- Email -->
             <div>
-                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                <label for="gmail" class="block text-sm font-semibold text-gray-700 mb-2">
                     Email
                 </label>
-                <input type="email" id="email" name="email"
+                <input type="email" id="gmail" name="gmail"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none">
             </div>
 
-            <!-- Address -->
+
             <div>
                 <label for="address" class="block text-sm font-semibold text-gray-700 mb-2">
                     Address
@@ -52,7 +49,6 @@
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none resize-none"></textarea>
             </div>
 
-            <!-- Regional Centre -->
             <div>
                 <label for="regional-centre" class="block text-sm font-semibold text-gray-700 mb-2">
                     Regional Centre <span class="text-red-500">*</span>
@@ -78,7 +74,7 @@
                 </select>
             </div>
 
-            <!-- Course Type -->
+
             <div>
                 <label for="course-type" class="block text-sm font-semibold text-gray-700 mb-2">
                     Course Type <span class="text-red-500">*</span>
@@ -92,7 +88,7 @@
                 </select>
             </div>
 
-            <!-- Course -->
+
             <div>
                 <label for="course" class="block text-sm font-semibold text-gray-700 mb-2">
                     Course <span class="text-red-500">*</span>
@@ -103,7 +99,7 @@
                 </select>
             </div>
 
-            <!-- Course Fee -->
+
             <div>
                 <label for="course-price" class="block text-sm font-semibold text-gray-700 mb-2">
                     Course Fee
@@ -114,7 +110,6 @@
                 <input type="hidden" id="course-fee" name="course_fee">
             </div>
 
-            <!-- Total Fee -->
             <div>
                 <label for="total-fee" class="block text-sm font-semibold text-gray-700 mb-2">
                     Total Fee
@@ -123,7 +118,6 @@
                     class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-600 font-semibold cursor-not-allowed">
             </div>
 
-            <!-- NIC/Passport Number -->
             <div>
                 <label for="nic-passport" class="block text-sm font-semibold text-gray-700 mb-2">
                     NIC No. / Passport No. <span class="text-red-500">*</span>
@@ -132,7 +126,7 @@
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none">
             </div>
 
-            <!-- NIC/Passport File Upload -->
+
             <div>
                 <label for="nic-file" class="block text-sm font-semibold text-gray-700 mb-2">
                     Attach a copy of NIC / Passport <span class="text-red-500">*</span>
@@ -141,7 +135,7 @@
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer">
             </div>
 
-            <!-- Educational Background -->
+
             <div>
                 <label for="education-background" class="block text-sm font-semibold text-gray-700 mb-2">
                     Educational Background
@@ -150,7 +144,7 @@
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none resize-none"></textarea>
             </div>
 
-            <!-- Declaration Checkbox -->
+
             <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
                 <label class="flex items-start cursor-pointer">
                     <input type="checkbox" name="declaration" value="1" required
@@ -161,7 +155,7 @@
                 </label>
             </div>
 
-            <!-- Submit Button -->
+
             <div class="pt-4">
                 <button type="submit"
                     class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 transform transition duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-md">
