@@ -12,6 +12,7 @@ SELECT
     s.gmail,
     s.contact_number,
     s.nic_file,
+    s.education_background,
     a.course_name,
     a.regional_centre,
     p.amount,
@@ -82,6 +83,7 @@ $result = $conn->query($sql);
                             <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Contact</th>
                             <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Course</th>
                             <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Centre</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Educational Qualifications</th>
                             <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Amount</th>
                             <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Status</th>
                             <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">NIC / Passport</th>
@@ -105,6 +107,9 @@ $result = $conn->query($sql);
                                 </td>
                                 <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-600">
                                     <?= htmlspecialchars($row['regional_centre']) ?>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-600">
+                                    <?= htmlspecialchars($row['education_background']) ?>
                                 </td>
                                 <td class="px-4 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                                     Rs. <?= number_format($row['amount'], 2) ?>
