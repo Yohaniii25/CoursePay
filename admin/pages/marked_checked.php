@@ -14,10 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_id'])) {
         $stmt->bind_param("i", $student_id);
         $stmt->execute();
         $stmt->close();
-        header("Location: dashboard.php");
-        exit();
+
+        // Reload the same page after updateslt
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        exit;
     } else {
         die("Database error: " . $conn->error);
     }
+} else {
+    header("Location: " . $_SERVER['HTTP_REFERER']);
+    exit;
 }
 ?>

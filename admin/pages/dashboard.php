@@ -146,7 +146,7 @@ $result = $conn->query($sql);
                                             Checked
                                         </button>
                                     <?php else: ?>
-                                        <form method="POST" action="mark_checked.php" class="inline">
+                                        <form method="POST" action="marked_checked.php" class="inline">
                                             <input type="hidden" name="student_id" value="<?= $row['student_id'] ?>">
                                             <button type="submit" class="inline-flex items-center px-4 py-2 text-xs font-semibold rounded-lg bg-gray-200 text-gray-700 hover:bg-purple-600 hover:text-white transition">
                                                 Mark as Checked
