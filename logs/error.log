@@ -1,0 +1,146 @@
+[2025-10-26 10:26:47] Application data for ref 25228EB0: Array
+(
+    [student_id] => 16
+    [reference_no] => 25228EB0
+    [name] => Yohani Abeykoon
+    [gmail] => womoni3285@bizmud.com
+    [checked] => 1
+    [application_id] => 16
+    [regional_centre] => Head Office - Kaduwela
+    [course_name] => Certificate in Basic Gemmology
+    [registration_fee] => 2000.00
+    [course_fee] => 50000.00
+    [total_amount] => 52000.00
+    [paid_amount] => 0.00
+    [due_amount] => 52000.00
+    [payment_status] => pending
+)
+[2025-10-26 10:27:04] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:27:04] POST data: {"reference_no":"25228EB0","amount":"26000"}[2025-10-26 10:27:04] Invalid payment method: [2025-10-26 10:28:41] Application data for ref 25228EB0: Array
+(
+    [student_id] => 16
+    [reference_no] => 25228EB0
+    [name] => Yohani Abeykoon
+    [gmail] => womoni3285@bizmud.com
+    [checked] => 1
+    [application_id] => 16
+    [regional_centre] => Head Office - Kaduwela
+    [course_name] => Certificate in Basic Gemmology
+    [registration_fee] => 2000.00
+    [course_fee] => 50000.00
+    [total_amount] => 52000.00
+    [paid_amount] => 0.00
+    [due_amount] => 52000.00
+    [payment_status] => pending
+)
+[2025-10-26 10:28:42] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:28:42] POST data: {"reference_no":"25228EB0","amount":"26000"}[2025-10-26 10:28:42] Invalid payment method: [2025-10-26 10:28:50] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:28:50] POST data: {"reference_no":"25228EB0","amount":"52000"}[2025-10-26 10:28:50] Invalid payment method: [2025-10-26 10:35:06] Application data for ref 25228EB0: Array
+(
+    [student_id] => 16
+    [reference_no] => 25228EB0
+    [name] => Yohani Abeykoon
+    [gmail] => womoni3285@bizmud.com
+    [checked] => 1
+    [application_id] => 16
+    [regional_centre] => Head Office - Kaduwela
+    [course_name] => Certificate in Basic Gemmology
+    [registration_fee] => 2000.00
+    [course_fee] => 50000.00
+    [total_amount] => 52000.00
+    [paid_amount] => 0.00
+    [due_amount] => 52000.00
+    [payment_status] => pending
+)
+[2025-10-26 10:37:05] Application data for ref 25228EB0: Array
+(
+    [student_id] => 16
+    [reference_no] => 25228EB0
+    [name] => Yohani Abeykoon
+    [gmail] => womoni3285@bizmud.com
+    [checked] => 1
+    [application_id] => 16
+    [regional_centre] => Head Office - Kaduwela
+    [course_name] => Certificate in Basic Gemmology
+    [registration_fee] => 2000.00
+    [course_fee] => 50000.00
+    [total_amount] => 52000.00
+    [paid_amount] => 0.00
+    [due_amount] => 52000.00
+    [payment_status] => pending
+)
+[2025-10-26 10:37:07] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:37:07] POST data: {
+    "reference_no": "25228EB0",
+    "amount": "26000",
+    "payment_method": "Online"
+}[2025-10-26 10:37:07] Processed input: reference_no=25228EB0, amount=26000, payment_method='Online'[2025-10-26 10:41:43] Application data for ref 25228EB0: Array
+(
+    [student_id] => 16
+    [reference_no] => 25228EB0
+    [name] => Yohani Abeykoon
+    [gmail] => womoni3285@bizmud.com
+    [checked] => 1
+    [application_id] => 16
+    [regional_centre] => Head Office - Kaduwela
+    [course_name] => Certificate in Basic Gemmology
+    [registration_fee] => 2000.00
+    [course_fee] => 50000.00
+    [total_amount] => 52000.00
+    [paid_amount] => 0.00
+    [due_amount] => 52000.00
+    [payment_status] => pending
+)
+[2025-10-26 10:41:45] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:41:45] POST data: {
+    "reference_no": "25228EB0",
+    "amount": "26000",
+    "payment_method": "Online"
+}[2025-10-26 10:41:45] Processed input: reference_no=25228EB0, amount=26000, payment_method='Online'[2025-10-26 10:41:45] Amount mismatch: input=26000, db=[2025-10-26 10:42:41] Application data for ref 25228EB0: Array
+(
+    [student_id] => 16
+    [reference_no] => 25228EB0
+    [name] => Yohani Abeykoon
+    [gmail] => womoni3285@bizmud.com
+    [checked] => 1
+    [application_id] => 16
+    [regional_centre] => Head Office - Kaduwela
+    [course_name] => Certificate in Basic Gemmology
+    [registration_fee] => 2000.00
+    [course_fee] => 50000.00
+    [total_amount] => 52000.00
+    [paid_amount] => 0.00
+    [due_amount] => 52000.00
+    [payment_status] => pending
+)
+[2025-10-26 10:42:48] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:42:48] POST data: {
+    "reference_no": "25228EB0",
+    "amount": "26000",
+    "payment_method": "Online"
+}[2025-10-26 10:42:48] Processed input: reference_no=25228EB0, amount=26000, payment_method='Online'[2025-10-26 10:42:55] MPGS INITIATE_CHECKOUT Response: {
+    "checkoutMode": "WEBSITE",
+    "merchant": "TEST700182200500",
+    "result": "SUCCESS",
+    "session": {
+        "id": "SESSION0002185487004I5753652N98",
+        "updateStatus": "SUCCESS",
+        "version": "31dccf5901"
+    },
+    "successIndicator": "5f3772d8e8c44078"
+}[2025-10-26 10:42:55] Session data set: {
+    "user": {
+        "email": "admin_gem@gmail.com",
+        "username": "admin_gem"
+    },
+    "session_id": "SESSION0002185487004I5753652N98",
+    "reference_no": "25228EB0",
+    "amount": 26000,
+    "success_indicator": "5f3772d8e8c44078",
+    "name": "Yohani Abeykoon",
+    "gmail": "womoni3285@bizmud.com",
+    "course_name": "Certificate in Basic Gemmology",
+    "regional_centre": "Head Office - Kaduwela"
+}[2025-10-26 12:01:29] complete.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 12:01:29] GET data: {
+    "resultIndicator": "470b4ef3a1a44c2d",
+    "sessionVersion": "2fd79eb609",
+    "checkoutVersion": "1.0.0"
+}[2025-10-26 12:01:29] POST data: [][2025-10-26 12:01:29] Transaction failed: resultIndicator=470b4ef3a1a44c2d, expected=5f3772d8e8c44078[2025-10-26 12:21:11] complete.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 12:21:11] GET data: {
+    "resultIndicator": "84ec7165398e44a1",
+    "sessionVersion": "74e8107809",
+    "checkoutVersion": "1.0.0"
+}[2025-10-26 12:21:11] POST data: [][2025-10-26 12:21:11] Transaction failed: resultIndicator=84ec7165398e44a1, expected=5f3772d8e8c44078

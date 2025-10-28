@@ -1,43 +1,64 @@
 <?php
 session_start();
-require_once __DIR__ . '/classes/db.php';
+require_once dirname(__FILE__) . '/classes/db.php';
+
+$logDir = dirname(__FILE__) . '/logs/';
+if (!is_dir($logDir)) {
+    mkdir($logDir, 0755, true);
+    chmod($logDir, 0755);
+}
+
+error_log(date('[Y-m-d H:i:s] ') . "proceed-to-pay.php: GET data: " . json_encode($_GET, JSON_PRETTY_PRINT), 3, $logDir . 'error.log');
 
 $db = new Database();
 $conn = $db->getConnection();
 
+$reference_no = filter_var($_GET['ref'] ?? '', FILTER_SANITIZE_STRING);
+$error = $_GET['error'] ?? '';
 
-if (!isset($_SESSION['reference_no']) || empty($_SESSION['reference_no'])) {
-    $reference_no = ''; 
-} else {
-    $reference_no = $_SESSION['reference_no'];
+if (empty($reference_no)) {
+    die("Error: Invalid reference number.");
 }
 
-
-$application = null;
-if (!empty($reference_no)) {
-    $stmt = $conn->prepare("
-        SELECT s.reference_no, s.name, a.regional_centre, a.course_name, a.registration_fee, a.course_fee, p.amount
-        FROM students s
-        JOIN applications a ON s.id = a.student_id
-        JOIN payments p ON a.id = p.application_id
-        WHERE s.reference_no = ?
-    ");
-    if (!$stmt) {
-        die("Prepare failed: " . $conn->error);
-    }
-    $stmt->bind_param("s", $reference_no);
-    if (!$stmt->execute()) {
-        die("Query failed: " . $stmt->error);
-    }
-    $result = $stmt->get_result();
-    $application = $result->fetch_assoc();
-    $stmt->close();
+// Fetch application details
+$stmt = $conn->prepare("
+    SELECT s.id AS student_id, s.name, s.gmail, s.checked, a.id AS application_id, a.course_name, a.regional_centre, a.registration_fee, a.course_fee,
+           p.id AS payment_id, p.amount, p.paid_amount, p.due_amount
+    FROM students s
+    JOIN applications a ON s.id = a.student_id
+    LEFT JOIN payments p ON a.id = p.application_id
+    WHERE s.reference_no = ?
+");
+if (!$stmt) {
+    error_log(date('[Y-m-d H:i:s] ') . "Prepare failed: " . $conn->error, 3, $logDir . 'error.log');
+    die("Prepare failed: " . $conn->error);
 }
-
-
-unset($_SESSION['reference_no']);
-
+$stmt->bind_param("s", $reference_no);
+if (!$stmt->execute()) {
+    error_log(date('[Y-m-d H:i:s] ') . "Query failed: " . $stmt->error, 3, $logDir . 'error.log');
+    die("Query failed: " . $stmt->error);
+}
+$result = $stmt->get_result();
+$application = $result->fetch_assoc();
+$stmt->close();
 $conn->close();
+
+if (!$application) {
+    error_log(date('[Y-m-d H:i:s] ') . "Invalid Reference ID: $reference_no", 3, $logDir . 'error.log');
+    die("Error: Invalid Reference ID.");
+}
+
+if (!$application['checked']) {
+    error_log(date('[Y-m-d H:i:s] ') . "Application not approved: $reference_no", 3, $logDir . 'error.log');
+    die("Error: Your application is still pending approval. Please wait for admin approval.");
+}
+
+$total_amount = $application['registration_fee'] + $application['course_fee'];
+$due_amount = $application['due_amount'] ?? $total_amount;
+$paid_amount = $application['paid_amount'] ?? 0;
+$course_fee = $application['course_fee'];
+$course_due_amount = $due_amount - $application['registration_fee'];
+if ($course_due_amount < 0) $course_due_amount = 0;
 ?>
 
 <!DOCTYPE html>
@@ -45,132 +66,125 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proceed to Payment</title>
+    <title>Proceed to Payment - Gem and Jewellery Research and Training Institute</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen py-12 px-4">
-    <div class="max-w-3xl mx-auto">
-        
-  
-        <div class="bg-white shadow-lg rounded-xl p-8 mb-6">
-            <div class="flex items-center justify-between mb-4">
-                <h1 class="text-3xl font-bold text-gray-800">Proceed to Payment</h1>
-                <div class="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                    </svg>
-                </div>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md py-4 px-6 flex items-center justify-between relative">
+        <div class="flex items-center">
+            <img src="https://sltdigital.site/gem/wp-content/uploads/2025/06/GJRT-1.png"
+                 alt="Gem and Jewellery Research and Training Institute Logo"
+                 class="h-20 w-auto">
+        </div>
+        <h1 class="text-xl font-semibold text-indigo-800 text-center absolute left-1/2 transform -translate-x-1/2">
+            Gem and Jewellery Research and Training Institute
+        </h1>
+        <a href="https://sltdigital.site/gem/"
+           class="bg-[#25116F] text-white px-5 py-2 rounded-lg hover:opacity-90 transition">
+            ← Back to Website
+        </a>
+    </header>
+
+    <div class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-8">
+        <h1 class="text-2xl font-bold mb-6 text-blue-700">Proceed to Payment</h1>
+
+        <?php if (!empty($error)): ?>
+            <div class="p-6 bg-red-50 border-l-4 border-red-500 rounded-lg mb-6">
+                <p class="font-semibold text-red-700">Error</p>
+                <p class="text-gray-600 mt-2"><?php echo htmlspecialchars($error); ?></p>
             </div>
+        <?php endif; ?>
 
-            <?php if ($application): ?>
-      
-                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 p-6 rounded-lg mb-6">
-                    <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">Your Reference Number</p>
-                    <p class="text-3xl font-bold text-blue-600 tracking-wider"><?php echo htmlspecialchars($application['reference_no']); ?></p>
-                    <p class="mt-3 text-sm text-gray-600">Please save this reference number for your records and use it to track your payment.</p>
-                </div>
+        <div class="mb-6">
+            <p class="text-gray-600">Reference Number: <strong><?php echo htmlspecialchars($reference_no); ?></strong></p>
+            <p class="text-gray-600">Course: <strong><?php echo htmlspecialchars($application['course_name']); ?></strong></p>
+            <p class="text-gray-600">Regional Centre: <strong><?php echo htmlspecialchars($application['regional_centre']); ?></strong></p>
+            <p class="text-gray-600">Registration Fee: <strong>Rs. <?php echo number_format($application['registration_fee'], 2); ?></strong></p>
+            <p class="text-gray-600">Course Fee: <strong>Rs. <?php echo number_format($course_fee, 2); ?></strong></p>
+            <p class="text-gray-600">Total Amount: <strong>Rs. <?php echo number_format($total_amount, 2); ?></strong></p>
+            <p class="text-gray-600">Paid Amount: <strong>Rs. <?php echo number_format($paid_amount, 2); ?></strong></p>
+            <p class="text-gray-600">Due Amount: <strong>Rs. <?php echo number_format($due_amount, 2); ?></strong></p>
+        </div>
 
-                <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        How to Pay
-                    </h2>
-                    <ol class="space-y-3">
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">1</span>
-                            <span class="text-gray-700 pt-0.5"><strong>Enter Reference ID:</strong> Input your Reference ID in the field below (pre-filled if provided).</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">2</span>
-                            <span class="text-gray-700 pt-0.5"><strong>Submit Form:</strong> Click the "Proceed to Payment" button to continue.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">3</span>
-                            <span class="text-gray-700 pt-0.5"><strong>Complete Payment:</strong> Follow the instructions on the payment page to finalize your transaction.</span>
-                        </li>
-                    </ol>
-                </div>
-
-  
-                <div class="border border-gray-200 rounded-lg overflow-hidden mb-6">
-                    <div class="bg-gradient-to-r from-gray-100 to-gray-50 px-6 py-3 border-b border-gray-200">
-                        <h2 class="text-lg font-bold text-gray-800">Application Details</h2>
-                    </div>
-                    <div class="divide-y divide-gray-200">
-                        <div class="px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition">
-                            <span class="text-sm font-semibold text-gray-600">Name</span>
-                            <span class="text-sm text-gray-800 font-medium"><?php echo htmlspecialchars($application['name']); ?></span>
-                        </div>
-                        <div class="px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition">
-                            <span class="text-sm font-semibold text-gray-600">Regional Centre</span>
-                            <span class="text-sm text-gray-800 font-medium"><?php echo htmlspecialchars($application['regional_centre']); ?></span>
-                        </div>
-                        <div class="px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition">
-                            <span class="text-sm font-semibold text-gray-600">Course</span>
-                            <span class="text-sm text-gray-800 font-medium"><?php echo htmlspecialchars($application['course_name']); ?></span>
-                        </div>
-                        <div class="px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition">
-                            <span class="text-sm font-semibold text-gray-600">Registration Fee</span>
-                            <span class="text-sm text-gray-800 font-medium">Rs. <?php echo number_format($application['registration_fee'], 2); ?></span>
-                        </div>
-                        <div class="px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition">
-                            <span class="text-sm font-semibold text-gray-600">Course Fee</span>
-                            <span class="text-sm text-gray-800 font-medium">Rs. <?php echo number_format($application['course_fee'], 2); ?></span>
-                        </div>
-                        <div class="px-6 py-4 flex justify-between items-center bg-blue-50">
-                            <span class="text-base font-bold text-gray-800">Total Amount</span>
-                            <span class="text-xl font-bold text-blue-600">Rs. <?php echo number_format($application['amount'], 2); ?></span>
-                        </div>
-                    </div>
-                </div>
-
-            <?php else: ?>
-   
-                <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg mb-6">
-                    <div class="flex items-center">
-                        <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <div>
-                            <p class="font-semibold text-red-800">Application Not Found</p>
-                            <p class="text-sm text-red-700 mt-1">Please enter a valid Reference ID below to proceed.</p>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-
-            <form action="process-payment.php" method="POST" class="space-y-6">
+        <?php if ($due_amount > 0): ?>
+            <h2 class="text-xl font-semibold mb-4 text-gray-700">Select Payment Method</h2>
+            <form action="process-payment.php" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <input type="hidden" name="reference_no" value="<?php echo htmlspecialchars($reference_no); ?>">
                 <div>
-                    <label for="reference_no" class="block text-sm font-semibold text-gray-700 mb-2">
-                        Reference ID <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" id="reference_no" name="reference_no" 
-                           value="<?php echo htmlspecialchars($reference_no); ?>"
-                           required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none text-lg font-mono tracking-wider"
-                           placeholder="Enter your reference number">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Payment Method <span class="text-red-500">*</span></label>
+                    <select name="payment_method" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select a method</option>
+                        <option value="Online Payment">Online Payment</option>
+                        <option value="Bank Slip">Bank Slip</option>
+                    </select>
                 </div>
-                
-                <?php if ($application): ?>
-                    <input type="hidden" name="amount" value="<?php echo $application['amount']; ?>">
-                <?php endif; ?>
-                
-                <button type="submit" 
-                        class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 transform transition duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg flex items-center justify-center space-x-2">
-                    <span>Proceed to Payment</span>
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                    </svg>
+                <div class="payment-options">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Payment Option <span class="text-red-500">*</span></label>
+                    <select name="payment_option" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select an option</option>
+                        <option value="full">100% Course Fee (Rs. <?php echo number_format($course_due_amount, 2); ?>)</option>
+                        <?php if ($course_due_amount > 0): ?>
+                            <option value="50_percent">50% Course Fee (Rs. <?php echo number_format($course_due_amount / 2, 2); ?>)</option>
+                        <?php endif; ?>
+                    </select>
+                    <p class="text-sm text-gray-600 mt-2 fifty-percent-message hidden">
+                        The 50% due amount should be paid within half the time of the course (e.g., if the course is 6 months, after three months payment should be completed).
+                        Amount to be paid: <strong>Rs. <?php echo number_format($course_due_amount / 2, 2); ?></strong>
+                    </p>
+                </div>
+                <div class="bank-slip-options hidden">
+                    <label for="payment_slip" class="block text-sm font-semibold text-gray-700 mb-2 mt-4">Upload Payment Slip <span class="text-red-500">*</span></label>
+                    <input type="file" name="payment_slip" accept=".jpg,.jpeg,.png,.pdf"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg">
+                    Proceed with Payment
                 </button>
             </form>
-        </div>
+        <?php else: ?>
+            <div class="p-6 bg-green-50 border-l-4 border-green-500 rounded-lg">
+                <p class="font-semibold text-green-700">Payment Completed</p>
+                <p class="text-gray-600 mt-2">No further payments are required.</p>
+            </div>
+        <?php endif; ?>
 
-
-        <div class="text-center text-sm text-gray-600">
-            <p>Need help? Contact our support team for assistance.</p>
-        </div>
+        <a href="index.php" class="block text-center bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-lg mt-6">
+            Return to Home
+        </a>
     </div>
+
+    <footer class="bg-black text-white text-sm py-4 text-left mt-10">
+        © 2025 Gem and Jewellery Research and Training Institute. All rights reserved.
+    </footer>
+
+    <script>
+        const paymentMethod = document.querySelector('[name="payment_method"]');
+        const paymentOptions = document.querySelector('.payment-options');
+        const bankSlipOptions = document.querySelector('.bank-slip-options');
+        const paymentOption = document.querySelector('[name="payment_option"]');
+        const fiftyPercentMessage = document.querySelector('.fifty-percent-message');
+
+        paymentMethod.addEventListener('change', function () {
+            paymentOptions.classList.toggle('hidden', this.value === '');
+            bankSlipOptions.classList.toggle('hidden', this.value !== 'Bank Slip');
+            paymentOption.dispatchEvent(new Event('change')); // Trigger message visibility
+        });
+
+        paymentOption.addEventListener('change', function () {
+            fiftyPercentMessage.classList.toggle('hidden', this.value !== '50_percent');
+            // Require file upload for Bank Slip
+            const fileInput = document.querySelector('[name="payment_slip"]');
+            if (paymentMethod.value === 'Bank Slip') {
+                fileInput.required = true;
+            } else {
+                fileInput.required = false;
+            }
+        });
+
+        // Trigger initial state
+        if (paymentMethod.value) {
+            paymentMethod.dispatchEvent(new Event('change'));
+        }
+    </script>
 </body>
 </html>
