@@ -77,8 +77,8 @@ try {
 
     // Insert into students table
     $stmt = $conn->prepare("
-        INSERT INTO students (reference_no, name, contact_number, gmail, address, nic_passport, nic_file, education_background)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO students (reference_no, name, contact_number, gmail, address, nic_passport, nic_file, education_background, checked)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)
     ");
     if (!$stmt) {
         throw new Exception("Prepare failed: " . $conn->error);
@@ -105,12 +105,9 @@ try {
     $application_id = $conn->insert_id;
     $stmt->close();
 
-    // Do NOT insert into payments table here
-    // Payment record will be created in process-payment.php or complete.php
-
     // Send email to student
     $to = $gmail;
-    $subject = "Application Submitted Successfully";
+    $subject = "Application Successfully Submitted";
     $message = "
 Dear $name,
 
@@ -121,8 +118,7 @@ Course Fee: Rs. " . number_format($course_fee, 2) . "
 Registration Fee: Rs. " . number_format($reg_fee, 2) . "
 Total Fee: Rs. " . number_format($reg_fee + $course_fee, 2) . "
 
-Please use the following link to proceed with payment:
-http://localhost/CoursePay/proceed-to-pay.php?ref=$reference_no
+Please wait for admin approval. You will receive an email with payment instructions once your application is approved.
 
 Best regards,
 Gem and Jewellery Research and Training Institute
@@ -135,7 +131,7 @@ Gem and Jewellery Research and Training Institute
     }
 
     // Send email to admin
-    $admin_email = 'yohanii725@gmail.com';
+    $admin_email = 'sutharshankanna04@gmail.com';
     $admin_subject = "New Application Received";
     $admin_message = "
 Dear Admin,
@@ -150,7 +146,7 @@ Course Fee: Rs. " . number_format($course_fee, 2) . "
 Registration Fee: Rs. " . number_format($reg_fee, 2) . "
 Total Fee: Rs. " . number_format($reg_fee + $course_fee, 2) . "
 
-Please verify the application in the system.
+Please review and approve the application in the system.
 
 Best regards,
 Gem and Jewellery Research and Training Institute

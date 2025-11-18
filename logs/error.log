@@ -1,146 +1,1070 @@
-[2025-10-26 10:26:47] Application data for ref 25228EB0: Array
-(
-    [student_id] => 16
-    [reference_no] => 25228EB0
-    [name] => Yohani Abeykoon
-    [gmail] => womoni3285@bizmud.com
-    [checked] => 1
-    [application_id] => 16
-    [regional_centre] => Head Office - Kaduwela
-    [course_name] => Certificate in Basic Gemmology
-    [registration_fee] => 2000.00
-    [course_fee] => 50000.00
-    [total_amount] => 52000.00
-    [paid_amount] => 0.00
-    [due_amount] => 52000.00
-    [payment_status] => pending
-)
-[2025-10-26 10:27:04] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:27:04] POST data: {"reference_no":"25228EB0","amount":"26000"}[2025-10-26 10:27:04] Invalid payment method: [2025-10-26 10:28:41] Application data for ref 25228EB0: Array
-(
-    [student_id] => 16
-    [reference_no] => 25228EB0
-    [name] => Yohani Abeykoon
-    [gmail] => womoni3285@bizmud.com
-    [checked] => 1
-    [application_id] => 16
-    [regional_centre] => Head Office - Kaduwela
-    [course_name] => Certificate in Basic Gemmology
-    [registration_fee] => 2000.00
-    [course_fee] => 50000.00
-    [total_amount] => 52000.00
-    [paid_amount] => 0.00
-    [due_amount] => 52000.00
-    [payment_status] => pending
-)
-[2025-10-26 10:28:42] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:28:42] POST data: {"reference_no":"25228EB0","amount":"26000"}[2025-10-26 10:28:42] Invalid payment method: [2025-10-26 10:28:50] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:28:50] POST data: {"reference_no":"25228EB0","amount":"52000"}[2025-10-26 10:28:50] Invalid payment method: [2025-10-26 10:35:06] Application data for ref 25228EB0: Array
-(
-    [student_id] => 16
-    [reference_no] => 25228EB0
-    [name] => Yohani Abeykoon
-    [gmail] => womoni3285@bizmud.com
-    [checked] => 1
-    [application_id] => 16
-    [regional_centre] => Head Office - Kaduwela
-    [course_name] => Certificate in Basic Gemmology
-    [registration_fee] => 2000.00
-    [course_fee] => 50000.00
-    [total_amount] => 52000.00
-    [paid_amount] => 0.00
-    [due_amount] => 52000.00
-    [payment_status] => pending
-)
-[2025-10-26 10:37:05] Application data for ref 25228EB0: Array
-(
-    [student_id] => 16
-    [reference_no] => 25228EB0
-    [name] => Yohani Abeykoon
-    [gmail] => womoni3285@bizmud.com
-    [checked] => 1
-    [application_id] => 16
-    [regional_centre] => Head Office - Kaduwela
-    [course_name] => Certificate in Basic Gemmology
-    [registration_fee] => 2000.00
-    [course_fee] => 50000.00
-    [total_amount] => 52000.00
-    [paid_amount] => 0.00
-    [due_amount] => 52000.00
-    [payment_status] => pending
-)
-[2025-10-26 10:37:07] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:37:07] POST data: {
-    "reference_no": "25228EB0",
-    "amount": "26000",
-    "payment_method": "Online"
-}[2025-10-26 10:37:07] Processed input: reference_no=25228EB0, amount=26000, payment_method='Online'[2025-10-26 10:41:43] Application data for ref 25228EB0: Array
-(
-    [student_id] => 16
-    [reference_no] => 25228EB0
-    [name] => Yohani Abeykoon
-    [gmail] => womoni3285@bizmud.com
-    [checked] => 1
-    [application_id] => 16
-    [regional_centre] => Head Office - Kaduwela
-    [course_name] => Certificate in Basic Gemmology
-    [registration_fee] => 2000.00
-    [course_fee] => 50000.00
-    [total_amount] => 52000.00
-    [paid_amount] => 0.00
-    [due_amount] => 52000.00
-    [payment_status] => pending
-)
-[2025-10-26 10:41:45] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:41:45] POST data: {
-    "reference_no": "25228EB0",
-    "amount": "26000",
-    "payment_method": "Online"
-}[2025-10-26 10:41:45] Processed input: reference_no=25228EB0, amount=26000, payment_method='Online'[2025-10-26 10:41:45] Amount mismatch: input=26000, db=[2025-10-26 10:42:41] Application data for ref 25228EB0: Array
-(
-    [student_id] => 16
-    [reference_no] => 25228EB0
-    [name] => Yohani Abeykoon
-    [gmail] => womoni3285@bizmud.com
-    [checked] => 1
-    [application_id] => 16
-    [regional_centre] => Head Office - Kaduwela
-    [course_name] => Certificate in Basic Gemmology
-    [registration_fee] => 2000.00
-    [course_fee] => 50000.00
-    [total_amount] => 52000.00
-    [paid_amount] => 0.00
-    [due_amount] => 52000.00
-    [payment_status] => pending
-)
-[2025-10-26 10:42:48] process-payment.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 10:42:48] POST data: {
-    "reference_no": "25228EB0",
-    "amount": "26000",
-    "payment_method": "Online"
-}[2025-10-26 10:42:48] Processed input: reference_no=25228EB0, amount=26000, payment_method='Online'[2025-10-26 10:42:55] MPGS INITIATE_CHECKOUT Response: {
-    "checkoutMode": "WEBSITE",
-    "merchant": "TEST700182200500",
-    "result": "SUCCESS",
-    "session": {
-        "id": "SESSION0002185487004I5753652N98",
-        "updateStatus": "SUCCESS",
-        "version": "31dccf5901"
-    },
-    "successIndicator": "5f3772d8e8c44078"
-}[2025-10-26 10:42:55] Session data set: {
-    "user": {
-        "email": "admin_gem@gmail.com",
-        "username": "admin_gem"
-    },
-    "session_id": "SESSION0002185487004I5753652N98",
-    "reference_no": "25228EB0",
-    "amount": 26000,
-    "success_indicator": "5f3772d8e8c44078",
-    "name": "Yohani Abeykoon",
-    "gmail": "womoni3285@bizmud.com",
-    "course_name": "Certificate in Basic Gemmology",
-    "regional_centre": "Head Office - Kaduwela"
-}[2025-10-26 12:01:29] complete.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 12:01:29] GET data: {
-    "resultIndicator": "470b4ef3a1a44c2d",
-    "sessionVersion": "2fd79eb609",
-    "checkoutVersion": "1.0.0"
-}[2025-10-26 12:01:29] POST data: [][2025-10-26 12:01:29] Transaction failed: resultIndicator=470b4ef3a1a44c2d, expected=5f3772d8e8c44078[2025-10-26 12:21:11] complete.php: Session started, ID: kldvovg1njni5g3ss4cqp09mk0[2025-10-26 12:21:11] GET data: {
-    "resultIndicator": "84ec7165398e44a1",
-    "sessionVersion": "74e8107809",
-    "checkoutVersion": "1.0.0"
-}[2025-10-26 12:21:11] POST data: [][2025-10-26 12:21:11] Transaction failed: resultIndicator=84ec7165398e44a1, expected=5f3772d8e8c44078
+[2025-11-07 01:52:11] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "test",
+    "regional_centre": "Ratnapura",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (NVQ 3)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 35,000",
+    "reg_fee": "2000",
+    "course_fee": "35000",
+    "total_fee_display": "Total Fee: Rs. 37,000",
+    "nic_passport": "1999999999",
+    "education_background": "ee",
+    "declaration": "1"
+}[2025-11-07 02:00:50] proceed-to-pay.php: GET data: {
+    "ref": "ED385AFF"
+}[2025-11-07 02:00:58] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 02:00:58] POST data: {
+    "reference_no": "ED385AFF",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 02:00:58] Payment calculation: due_amount=37000, payment_option=50_percent, amount_to_pay=18500[2025-11-07 02:00:58] Online Payment: amount_to_pay=18500 stored in session[2025-11-07 02:00:58] ipg_start: total_amount=37000, due_amount=37000.00, amount=18500[2025-11-07 02:00:59] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002076962558L35960762F3","updateStatus":"SUCCESS","version":"3dbdd2b401"},"successIndicator":"0783f72f71ff40dc"}[2025-11-07 02:00:59] Session data set: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"ED385AFF","amount":18500,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (NVQ 3)","regional_centre":"Ratnapura","session_id":"SESSION0002076962558L35960762F3","success_indicator":"0783f72f71ff40dc"}[2025-11-07 02:02:49] complete.php started – SID: cb8e7b30a1d4bbd6409d5396e1387c9b
+[2025-11-07 02:02:49] GET: {"resultIndicator":"685e0f7ecc654824","sessionVersion":"50be225309","checkoutVersion":"1.0.0"}
+[2025-11-07 02:02:49] POST: []
+[2025-11-07 02:02:49] SESSION: []
+[2025-11-07 02:02:49] Missing session data
+[2025-11-07 02:02:49] proceed-to-pay.php: GET data: {
+    "ref": "",
+    "error": "Invalid session"
+}[2025-11-07 02:05:15] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 02:05:15] GET: {"resultIndicator":"0783f72f71ff40dc","sessionVersion":"87254a5509","checkoutVersion":"1.0.0"}
+[2025-11-07 02:05:15] POST: []
+[2025-11-07 02:05:15] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"ED385AFF","amount":18500,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (NVQ 3)","regional_centre":"Ratnapura","session_id":"SESSION0002076962558L35960762F3","success_indicator":"0783f72f71ff40dc"}
+[2025-11-07 02:05:15] Online payment recorded: Rs. 18500 (option: 50_percent)
+[2025-11-07 02:09:51] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 02:09:51] GET: []
+[2025-11-07 02:09:51] POST: {"upload_slip":"1","slip_amount":"18500"}
+[2025-11-07 02:09:51] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"ED385AFF","amount":18500,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (NVQ 3)","regional_centre":"Ratnapura","session_id":"SESSION0002076962558L35960762F3","success_indicator":"0783f72f71ff40dc","online_processed":true}
+[2025-11-07 02:13:54] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ssss",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Geuda Heat Treatment",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 55,000",
+    "reg_fee": "2000",
+    "course_fee": "55000",
+    "total_fee_display": "Total Fee: Rs. 57,000",
+    "nic_passport": "1999999999",
+    "education_background": "yiuiuu",
+    "declaration": "1"
+}[2025-11-07 02:39:42] proceed-to-pay.php: GET data: {
+    "ref": "$reference_no"
+}[2025-11-07 02:39:42] Invalid Reference ID: $reference_no[2025-11-07 02:39:42] proceed-to-pay.php: GET data: {
+    "ref": "$reference_no"
+}[2025-11-07 02:39:42] Invalid Reference ID: $reference_no[2025-11-07 04:20:06] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "hiii",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "e",
+    "declaration": "1"
+}[2025-11-07 04:23:52] proceed-to-pay.php: GET data: {
+    "ref": "AE6E7F20"
+}[2025-11-07 04:24:10] proceed-to-pay.php: GET data: {
+    "ref": "AE6E7F20"
+}[2025-11-07 04:24:25] proceed-to-pay.php: GET data: {
+    "ref": "AE6E7F20"
+}[2025-11-07 04:29:21] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (Weekend)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 35,000",
+    "reg_fee": "2000",
+    "course_fee": "35000",
+    "total_fee_display": "Total Fee: Rs. 37,000",
+    "nic_passport": "1999999999",
+    "education_background": "errr",
+    "declaration": "1"
+}[2025-11-07 04:41:35] proceed-to-pay.php: GET data: {
+    "ref": "6A4492CF"
+}[2025-11-07 04:41:35] proceed-to-pay.php: GET data: {
+    "ref": "6A4492CF"
+}[2025-11-07 05:05:00] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ss",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (10 DAYS)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 14,000",
+    "reg_fee": "2000",
+    "course_fee": "14000",
+    "total_fee_display": "Total Fee: Rs. 16,000",
+    "nic_passport": "1999999999",
+    "education_background": "sss",
+    "declaration": "1"
+}[2025-11-07 05:06:24] proceed-to-pay.php: GET data: {
+    "ref": "02604BC2"
+}[2025-11-07 05:08:45] proceed-to-pay.php: GET data: {
+    "ref": "02604BC2"
+}[2025-11-07 05:42:50] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 05:42:50] POST data: {
+    "reference_no": "02604BC2",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 05:42:50] Payment calculation: due_amount=16000.00, payment_option=50_percent, amount_to_pay=8000[2025-11-07 05:42:50] Online Payment: amount_to_pay=8000 stored in session[2025-11-07 05:42:50] ipg_start: total_amount=16000, due_amount=16000.00, amount=8000[2025-11-07 05:42:51] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002558502770I36316506K0","updateStatus":"SUCCESS","version":"80d69dc801"},"successIndicator":"a9f73b6cc8d34243"}[2025-11-07 05:42:51] Session data set: {"payment_option":"50_percent","amount_to_pay":8000,"reference_no":"02604BC2","amount":8000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (10 DAYS)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002558502770I36316506K0","success_indicator":"a9f73b6cc8d34243"}[2025-11-07 05:43:39] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 05:43:39] GET: {"resultIndicator":"a9f73b6cc8d34243","sessionVersion":"df41935d09","checkoutVersion":"1.0.0"}
+[2025-11-07 05:43:39] POST: []
+[2025-11-07 05:43:39] SESSION: {"payment_option":"50_percent","amount_to_pay":8000,"reference_no":"02604BC2","amount":8000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (10 DAYS)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002558502770I36316506K0","success_indicator":"a9f73b6cc8d34243"}
+[2025-11-07 05:43:40] Online payment recorded: Rs. 8000 (option: 50_percent)
+[2025-11-07 05:44:20] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 05:44:20] GET: []
+[2025-11-07 05:44:20] POST: {"upload_slip":"1","slip_amount":"8000"}
+[2025-11-07 05:44:20] SESSION: {"payment_option":"50_percent","amount_to_pay":8000,"reference_no":"02604BC2","amount":8000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (10 DAYS)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002558502770I36316506K0","success_indicator":"a9f73b6cc8d34243","online_processed":true}
+[2025-11-07 05:58:26] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ssss",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (Weekend)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 35,000",
+    "reg_fee": "2000",
+    "course_fee": "35000",
+    "total_fee_display": "Total Fee: Rs. 37,000",
+    "nic_passport": "1999999999",
+    "education_background": "ss",
+    "declaration": "1"
+}[2025-11-07 05:59:36] proceed-to-pay.php: GET data: {
+    "ref": "D2B492CF"
+}[2025-11-07 05:59:54] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 05:59:54] POST data: {
+    "reference_no": "D2B492CF",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 05:59:54] Payment calculation: due_amount=37000.00, payment_option=50_percent, amount_to_pay=18500[2025-11-07 05:59:54] Online Payment: amount_to_pay=18500 stored in session[2025-11-07 05:59:54] ipg_start: total_amount=37000, due_amount=37000.00, amount=18500[2025-11-07 05:59:54] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002279578590N99716954L0","updateStatus":"SUCCESS","version":"110c7b0e01"},"successIndicator":"16f8ee8e8c104f24"}[2025-11-07 05:59:54] Session data set: {"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"D2B492CF","amount":18500,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (Weekend)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002279578590N99716954L0","success_indicator":"16f8ee8e8c104f24","online_processed":true,"payment_success":{"name":"Test","ref":"02604BC2","course":"Certificate in Gem Cutting and Polishing (10 DAYS)","paid":16000,"due":0,"status":"completed"}}[2025-11-07 06:00:49] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:00:49] GET: {"resultIndicator":"16f8ee8e8c104f24","sessionVersion":"c9a459d609","checkoutVersion":"1.0.0"}
+[2025-11-07 06:00:49] POST: []
+[2025-11-07 06:00:49] SESSION: {"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"D2B492CF","amount":18500,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (Weekend)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002279578590N99716954L0","success_indicator":"16f8ee8e8c104f24","online_processed":true,"payment_success":{"name":"Test","ref":"02604BC2","course":"Certificate in Gem Cutting and Polishing (10 DAYS)","paid":16000,"due":0,"status":"completed"}}
+[2025-11-07 06:03:22] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:03:22] GET: []
+[2025-11-07 06:03:22] POST: {"upload_slip":"1","slip_amount":"18500"}
+[2025-11-07 06:03:22] SESSION: {"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"D2B492CF","amount":18500,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (Weekend)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002279578590N99716954L0","success_indicator":"16f8ee8e8c104f24","online_processed":true,"payment_success":{"name":"Test","ref":"02604BC2","course":"Certificate in Gem Cutting and Polishing (10 DAYS)","paid":16000,"due":0,"status":"completed"}}
+[2025-11-07 06:06:58] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "hi",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "gj",
+    "declaration": "1"
+}[2025-11-07 06:07:29] proceed-to-pay.php: GET data: {
+    "ref": "A024BFB8"
+}[2025-11-07 06:07:38] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:07:38] POST data: {
+    "reference_no": "A024BFB8",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:07:38] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 06:07:38] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 06:07:38] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 06:07:38] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002474916433G13972560I6","updateStatus":"SUCCESS","version":"fa05f41c01"},"successIndicator":"c001b6ad418c4802"}[2025-11-07 06:07:38] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"A024BFB8","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002474916433G13972560I6","success_indicator":"c001b6ad418c4802","online_processed":true,"payment_success":{"name":"Test","ref":"D2B492CF","course":"Certificate in Gem Cutting and Polishing (Weekend)","paid":18500,"due":18500,"status":"pending"}}[2025-11-07 06:08:14] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:08:14] GET: {"resultIndicator":"c001b6ad418c4802","sessionVersion":"158e5ecb09","checkoutVersion":"1.0.0"}
+[2025-11-07 06:08:14] POST: []
+[2025-11-07 06:08:14] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"A024BFB8","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002474916433G13972560I6","success_indicator":"c001b6ad418c4802","online_processed":true,"payment_success":{"name":"Test","ref":"D2B492CF","course":"Certificate in Gem Cutting and Polishing (Weekend)","paid":18500,"due":18500,"status":"pending"}}
+[2025-11-07 06:10:48] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:10:48] GET: {"resultIndicator":"c001b6ad418c4802","sessionVersion":"158e5ecb09","checkoutVersion":"1.0.0"}
+[2025-11-07 06:10:48] POST: []
+[2025-11-07 06:10:48] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"A024BFB8","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002474916433G13972560I6","success_indicator":"c001b6ad418c4802","online_processed":true,"payment_success":{"name":"Test","ref":"D2B492CF","course":"Certificate in Gem Cutting and Polishing (Weekend)","paid":18500,"due":18500,"status":"pending"}}
+[2025-11-07 06:12:13] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:12:13] GET: {"resultIndicator":"c001b6ad418c4802","sessionVersion":"158e5ecb09","checkoutVersion":"1.0.0"}
+[2025-11-07 06:12:13] POST: []
+[2025-11-07 06:12:13] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"A024BFB8","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002474916433G13972560I6","success_indicator":"c001b6ad418c4802","online_processed":true,"payment_success":{"name":"Test","ref":"D2B492CF","course":"Certificate in Gem Cutting and Polishing (Weekend)","paid":18500,"due":18500,"status":"pending"}}
+[2025-11-07 06:12:18] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:12:18] GET: {"resultIndicator":"c001b6ad418c4802","sessionVersion":"158e5ecb09","checkoutVersion":"1.0.0"}
+[2025-11-07 06:12:18] POST: []
+[2025-11-07 06:12:18] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"A024BFB8","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002474916433G13972560I6","success_indicator":"c001b6ad418c4802","online_processed":true,"payment_success":{"name":"Test","ref":"D2B492CF","course":"Certificate in Gem Cutting and Polishing (Weekend)","paid":18500,"due":18500,"status":"pending"}}
+[2025-11-07 06:12:49] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "sss",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "sss",
+    "declaration": "1"
+}[2025-11-07 06:13:09] proceed-to-pay.php: GET data: {
+    "ref": "14B493EF"
+}[2025-11-07 06:13:17] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:13:17] POST data: {
+    "reference_no": "14B493EF",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:13:17] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 06:13:17] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 06:13:17] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 06:13:17] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002532825124J57304869L5","updateStatus":"SUCCESS","version":"7972505501"},"successIndicator":"3b63edf4316c4c63"}[2025-11-07 06:13:17] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"14B493EF","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002532825124J57304869L5","success_indicator":"3b63edf4316c4c63","online_processed":true,"payment_success":{"name":"Test","ref":"D2B492CF","course":"Certificate in Gem Cutting and Polishing (Weekend)","paid":18500,"due":18500,"status":"pending"}}[2025-11-07 06:14:06] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:14:06] GET: {"resultIndicator":"3b63edf4316c4c63","sessionVersion":"3161712809","checkoutVersion":"1.0.0"}
+[2025-11-07 06:14:06] POST: []
+[2025-11-07 06:14:06] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"14B493EF","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002532825124J57304869L5","success_indicator":"3b63edf4316c4c63","online_processed":true,"payment_success":{"name":"Test","ref":"D2B492CF","course":"Certificate in Gem Cutting and Polishing (Weekend)","paid":18500,"due":18500,"status":"pending"}}
+[2025-11-07 06:15:20] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:15:20] GET: []
+[2025-11-07 06:15:20] POST: {"upload_slip":"1","slip_amount":"3333"}
+[2025-11-07 06:15:20] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"14B493EF","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002532825124J57304869L5","success_indicator":"3b63edf4316c4c63","online_processed":true,"payment_success":{"name":"Test","ref":"D2B492CF","course":"Certificate in Gem Cutting and Polishing (Weekend)","paid":18500,"due":18500,"status":"pending"}}
+[2025-11-07 06:26:25] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ll",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Blended Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "i",
+    "declaration": "1"
+}[2025-11-07 06:26:42] proceed-to-pay.php: GET data: {
+    "ref": "553EB427"
+}[2025-11-07 06:26:46] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:26:46] POST data: {
+    "reference_no": "553EB427",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:26:46] Payment calculation: due_amount=72000.00, payment_option=50_percent, amount_to_pay=36000[2025-11-07 06:26:46] Online Payment: amount_to_pay=36000 stored in session[2025-11-07 06:26:46] ipg_start: total_amount=72000, due_amount=72000.00, amount=36000[2025-11-07 06:26:47] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002478763026J96657029L4","updateStatus":"SUCCESS","version":"514e15bb01"},"successIndicator":"c845f8b992bf4e04"}[2025-11-07 06:26:47] Session data set: {"payment_option":"50_percent","amount_to_pay":36000,"reference_no":"553EB427","amount":36000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Blended Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002478763026J96657029L4","success_indicator":"c845f8b992bf4e04","online_processed":true,"payment_success":{"name":"Test","ref":"14B493EF","course":"Certificate in Basic Gemmology","paid":3333,"due":48667,"status":"pending"}}[2025-11-07 06:27:28] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:27:28] GET: {"resultIndicator":"c845f8b992bf4e04","sessionVersion":"b35ba58509","checkoutVersion":"1.0.0"}
+[2025-11-07 06:27:28] POST: []
+[2025-11-07 06:27:28] SESSION: {"payment_option":"50_percent","amount_to_pay":36000,"reference_no":"553EB427","amount":36000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Blended Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002478763026J96657029L4","success_indicator":"c845f8b992bf4e04","online_processed":true,"payment_success":{"name":"Test","ref":"14B493EF","course":"Certificate in Basic Gemmology","paid":3333,"due":48667,"status":"pending"}}
+[2025-11-07 06:28:00] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:28:00] GET: []
+[2025-11-07 06:28:00] POST: {"upload_slip":"1"}
+[2025-11-07 06:28:00] SESSION: {"payment_option":"50_percent","amount_to_pay":36000,"reference_no":"553EB427","amount":36000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Blended Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002478763026J96657029L4","success_indicator":"c845f8b992bf4e04","online_processed":true,"payment_success":{"name":"Test","ref":"14B493EF","course":"Certificate in Basic Gemmology","paid":3333,"due":48667,"status":"pending"}}
+[2025-11-07 06:31:32] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "sss",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "1999999999",
+    "education_background": "s",
+    "declaration": "1"
+}[2025-11-07 06:31:54] proceed-to-pay.php: GET data: {
+    "ref": "4557FC6A"
+}[2025-11-07 06:32:03] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:32:03] POST data: {
+    "reference_no": "4557FC6A",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:32:03] Payment calculation: due_amount=152000.00, payment_option=50_percent, amount_to_pay=76000[2025-11-07 06:32:03] Online Payment: amount_to_pay=76000 stored in session[2025-11-07 06:32:03] ipg_start: total_amount=152000, due_amount=152000.00, amount=76000[2025-11-07 06:32:03] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002441480793E81565990H2","updateStatus":"SUCCESS","version":"e28cbe1201"},"successIndicator":"7fb543e5f92d4c85"}[2025-11-07 06:32:03] Session data set: {"payment_option":"50_percent","amount_to_pay":76000,"reference_no":"4557FC6A","amount":76000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Diploma in Professional Gemmology (Dip. PGSL)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002441480793E81565990H2","success_indicator":"7fb543e5f92d4c85","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 06:32:33] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:32:33] GET: {"resultIndicator":"7fb543e5f92d4c85","sessionVersion":"4641aea109","checkoutVersion":"1.0.0"}
+[2025-11-07 06:32:33] POST: []
+[2025-11-07 06:32:33] SESSION: {"payment_option":"50_percent","amount_to_pay":76000,"reference_no":"4557FC6A","amount":76000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Diploma in Professional Gemmology (Dip. PGSL)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002441480793E81565990H2","success_indicator":"7fb543e5f92d4c85","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:35:18] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "hi",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "888",
+    "declaration": "1"
+}[2025-11-07 06:35:38] proceed-to-pay.php: GET data: {
+    "ref": "CA426F70"
+}[2025-11-07 06:35:43] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:35:43] POST data: {
+    "reference_no": "CA426F70",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:35:43] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 06:35:43] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 06:35:43] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 06:35:43] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002637364712N01341344F1","updateStatus":"SUCCESS","version":"6854c0da01"},"successIndicator":"438092e266134d63"}[2025-11-07 06:35:43] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"CA426F70","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002637364712N01341344F1","success_indicator":"438092e266134d63","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 06:36:16] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:36:16] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"CA426F70","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002637364712N01341344F1","success_indicator":"438092e266134d63","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:38:00] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gems and Jewellery Valuation and Marketing",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 20,000",
+    "reg_fee": "2000",
+    "course_fee": "20000",
+    "total_fee_display": "Total Fee: Rs. 22,000",
+    "nic_passport": "1999999999",
+    "education_background": "hhh",
+    "declaration": "1"
+}[2025-11-07 06:38:16] proceed-to-pay.php: GET data: {
+    "ref": "DD7FFE58"
+}[2025-11-07 06:38:24] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:38:24] POST data: {
+    "reference_no": "DD7FFE58",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:38:24] Payment calculation: due_amount=22000.00, payment_option=50_percent, amount_to_pay=11000[2025-11-07 06:38:24] Online Payment: amount_to_pay=11000 stored in session[2025-11-07 06:38:24] ipg_start: total_amount=22000, due_amount=22000.00, amount=11000[2025-11-07 06:38:24] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002564872932H10431297E8","updateStatus":"SUCCESS","version":"c54acb6a01"},"successIndicator":"8dc00ad93cca444a"}[2025-11-07 06:38:24] Session data set: {"payment_option":"50_percent","amount_to_pay":11000,"reference_no":"DD7FFE58","amount":11000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gems and Jewellery Valuation and Marketing","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002564872932H10431297E8","success_indicator":"8dc00ad93cca444a","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 06:39:18] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:39:18] SESSION: {"payment_option":"50_percent","amount_to_pay":11000,"reference_no":"DD7FFE58","amount":11000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gems and Jewellery Valuation and Marketing","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002564872932H10431297E8","success_indicator":"8dc00ad93cca444a","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:40:01] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ddd",
+    "regional_centre": "Kandy",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (NVQ 3)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 35,000",
+    "reg_fee": "2000",
+    "course_fee": "35000",
+    "total_fee_display": "Total Fee: Rs. 37,000",
+    "nic_passport": "1999999999",
+    "education_background": "d",
+    "declaration": "1"
+}[2025-11-07 06:40:13] proceed-to-pay.php: GET data: {
+    "ref": "EF21CA6C"
+}[2025-11-07 06:40:22] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:40:22] POST data: {
+    "reference_no": "EF21CA6C",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:40:22] Payment calculation: due_amount=37000.00, payment_option=50_percent, amount_to_pay=18500[2025-11-07 06:40:22] Online Payment: amount_to_pay=18500 stored in session[2025-11-07 06:40:22] ipg_start: total_amount=37000, due_amount=37000.00, amount=18500[2025-11-07 06:40:22] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002943905885J80591425G0","updateStatus":"SUCCESS","version":"b539d51001"},"successIndicator":"7126f3b74a734021"}[2025-11-07 06:40:22] Session data set: {"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"EF21CA6C","amount":18500,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (NVQ 3)","regional_centre":"Kandy","session_id":"SESSION0002943905885J80591425G0","success_indicator":"7126f3b74a734021","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 06:40:54] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:40:54] GET: {"resultIndicator":"7126f3b74a734021","sessionVersion":"1472575109","checkoutVersion":"1.0.0"}
+[2025-11-07 06:40:54] POST: []
+[2025-11-07 06:40:54] SESSION: {"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"EF21CA6C","amount":18500,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (NVQ 3)","regional_centre":"Kandy","session_id":"SESSION0002943905885J80591425G0","success_indicator":"7126f3b74a734021","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:42:19] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "sss",
+    "regional_centre": "Kandy",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "ss",
+    "declaration": "1"
+}[2025-11-07 06:42:31] proceed-to-pay.php: GET data: {
+    "ref": "2CDD7500"
+}[2025-11-07 06:42:41] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:42:41] POST data: {
+    "reference_no": "2CDD7500",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:42:41] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 06:42:41] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 06:42:41] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 06:42:41] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002393086492H30851069F5","updateStatus":"SUCCESS","version":"43a82c6801"},"successIndicator":"5dfc1bd78ef6406e"}[2025-11-07 06:42:41] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"2CDD7500","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Kandy","session_id":"SESSION0002393086492H30851069F5","success_indicator":"5dfc1bd78ef6406e","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 06:43:13] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:43:13] GET: {"resultIndicator":"5dfc1bd78ef6406e","sessionVersion":"f095466f09","checkoutVersion":"1.0.0"}
+[2025-11-07 06:43:13] POST: []
+[2025-11-07 06:43:13] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"2CDD7500","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Kandy","session_id":"SESSION0002393086492H30851069F5","success_indicator":"5dfc1bd78ef6406e","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:44:56] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "sss",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gems and Jewellery Valuation and Marketing",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 20,000",
+    "reg_fee": "2000",
+    "course_fee": "20000",
+    "total_fee_display": "Total Fee: Rs. 22,000",
+    "nic_passport": "1999999999",
+    "education_background": "sss",
+    "declaration": "1"
+}[2025-11-07 06:45:11] proceed-to-pay.php: GET data: {
+    "ref": "B858AB14"
+}[2025-11-07 06:45:17] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:45:17] POST data: {
+    "reference_no": "B858AB14",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:45:17] Payment calculation: due_amount=22000.00, payment_option=50_percent, amount_to_pay=11000[2025-11-07 06:45:17] Online Payment: amount_to_pay=11000 stored in session[2025-11-07 06:45:17] ipg_start: total_amount=22000, due_amount=22000.00, amount=11000[2025-11-07 06:45:17] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002341820388N87559264M8","updateStatus":"SUCCESS","version":"14ef0f8f01"},"successIndicator":"8fcbeae91e504a9c"}[2025-11-07 06:45:17] Session data set: {"payment_option":"50_percent","amount_to_pay":11000,"reference_no":"B858AB14","amount":11000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gems and Jewellery Valuation and Marketing","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002341820388N87559264M8","success_indicator":"8fcbeae91e504a9c","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 06:46:36] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:46:36] GET: {"resultIndicator":"8fcbeae91e504a9c","sessionVersion":"b904471710","checkoutVersion":"1.0.0"}
+[2025-11-07 06:46:36] POST: []
+[2025-11-07 06:46:36] SESSION: {"payment_option":"50_percent","amount_to_pay":11000,"reference_no":"B858AB14","amount":11000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gems and Jewellery Valuation and Marketing","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002341820388N87559264M8","success_indicator":"8fcbeae91e504a9c","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:47:22] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gems and Jewellery Valuation and Marketing",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 20,000",
+    "reg_fee": "2000",
+    "course_fee": "20000",
+    "total_fee_display": "Total Fee: Rs. 22,000",
+    "nic_passport": "1999999999",
+    "education_background": "8787",
+    "declaration": "1"
+}[2025-11-07 06:47:35] proceed-to-pay.php: GET data: {
+    "ref": "DA4779E9"
+}[2025-11-07 06:47:40] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:47:40] POST data: {
+    "reference_no": "DA4779E9",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:47:40] Payment calculation: due_amount=22000.00, payment_option=50_percent, amount_to_pay=11000[2025-11-07 06:47:40] Online Payment: amount_to_pay=11000 stored in session[2025-11-07 06:47:40] ipg_start: total_amount=22000, due_amount=22000.00, amount=11000[2025-11-07 06:47:40] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002814625447M55828823I7","updateStatus":"SUCCESS","version":"e255b1ac01"},"successIndicator":"8ca8355847544d74"}[2025-11-07 06:47:40] Session data set: {"payment_option":"50_percent","amount_to_pay":11000,"reference_no":"DA4779E9","amount":11000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gems and Jewellery Valuation and Marketing","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002814625447M55828823I7","success_indicator":"8ca8355847544d74","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 06:48:53] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:48:53] GET: {"resultIndicator":"8ca8355847544d74","sessionVersion":"cc1749d809","checkoutVersion":"1.0.0"}
+[2025-11-07 06:48:53] POST: []
+[2025-11-07 06:48:53] SESSION: {"payment_option":"50_percent","amount_to_pay":11000,"reference_no":"DA4779E9","amount":11000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gems and Jewellery Valuation and Marketing","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002814625447M55828823I7","success_indicator":"8ca8355847544d74","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:54:11] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "u",
+    "declaration": "1"
+}[2025-11-07 06:54:36] proceed-to-pay.php: GET data: {
+    "ref": "C00FAC60"
+}[2025-11-07 06:54:42] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:54:42] POST data: {
+    "reference_no": "C00FAC60",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:54:42] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 06:54:42] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 06:54:42] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 06:54:42] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002821006545K19637526N9","updateStatus":"SUCCESS","version":"05edca7c01"},"successIndicator":"0b406507dbba40d5"}[2025-11-07 06:54:42] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"C00FAC60","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002821006545K19637526N9","success_indicator":"0b406507dbba40d5","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 06:55:34] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:55:34] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"C00FAC60","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002821006545K19637526N9","success_indicator":"0b406507dbba40d5","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:56:17] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:56:17] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"C00FAC60","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002821006545K19637526N9","success_indicator":"0b406507dbba40d5","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:56:20] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:56:20] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"C00FAC60","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002821006545K19637526N9","success_indicator":"0b406507dbba40d5","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:56:28] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:56:28] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"C00FAC60","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002821006545K19637526N9","success_indicator":"0b406507dbba40d5","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:56:31] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:56:31] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"C00FAC60","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002821006545K19637526N9","success_indicator":"0b406507dbba40d5","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 06:57:37] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ll",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "9",
+    "declaration": "1"
+}[2025-11-07 06:58:05] proceed-to-pay.php: GET data: {
+    "ref": "5CF3DDE5"
+}[2025-11-07 06:58:36] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 06:58:36] POST data: {
+    "reference_no": "5CF3DDE5",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 06:58:36] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 06:58:36] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 06:58:36] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 06:58:37] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002468295506I93588018E5","updateStatus":"SUCCESS","version":"7858455b01"},"successIndicator":"0d9f0be891c14f5e"}[2025-11-07 06:58:37] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"5CF3DDE5","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002468295506I93588018E5","success_indicator":"0d9f0be891c14f5e","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 06:59:56] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 06:59:56] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"5CF3DDE5","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002468295506I93588018E5","success_indicator":"0d9f0be891c14f5e","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:02:31] complete.php started – SID: ee9c1f96fe225a12f40dc9dddddaa24c
+[2025-11-07 07:02:31] SESSION: []
+[2025-11-07 07:02:31] proceed-to-pay.php: GET data: {
+    "error": "Invalid session"
+}[2025-11-07 07:02:54] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:02:54] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"5CF3DDE5","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002468295506I93588018E5","success_indicator":"0d9f0be891c14f5e","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:03:36] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:03:36] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"5CF3DDE5","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002468295506I93588018E5","success_indicator":"0d9f0be891c14f5e","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:10:35] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "trtrt",
+    "declaration": "1"
+}[2025-11-07 07:11:01] proceed-to-pay.php: GET data: {
+    "ref": "96B4AA1F"
+}[2025-11-07 07:11:08] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 07:11:08] POST data: {
+    "reference_no": "96B4AA1F",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 07:11:08] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 07:11:08] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 07:11:08] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 07:11:09] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002607237364L95021143J5","updateStatus":"SUCCESS","version":"578c4c2801"},"successIndicator":"3e107eb0733c43c8"}[2025-11-07 07:11:09] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}[2025-11-07 07:11:46] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:11:46] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:12:04] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:12:04] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:13:00] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:13:00] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:15:12] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:15:12] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:15:26] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:15:26] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:15:59] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:15:59] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:16:14] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:16:14] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:17:16] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:17:16] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:17:42] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:17:42] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:17:59] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:17:59] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:18:19] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:18:19] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"96B4AA1F","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002607237364L95021143J5","success_indicator":"3e107eb0733c43c8","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"}}
+[2025-11-07 07:22:18] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (Weekend)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 35,000",
+    "reg_fee": "2000",
+    "course_fee": "35000",
+    "total_fee_display": "Total Fee: Rs. 37,000",
+    "nic_passport": "1999999999",
+    "education_background": "rhty",
+    "declaration": "1"
+}[2025-11-07 07:22:48] proceed-to-pay.php: GET data: {
+    "ref": "DFAFC388"
+}[2025-11-07 07:23:02] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 07:23:02] POST data: {
+    "reference_no": "DFAFC388",
+    "payment_method": "Online Payment",
+    "payment_option": "full"
+}[2025-11-07 07:23:02] Payment calculation: due_amount=37000.00, payment_option=full, amount_to_pay=37000.00[2025-11-07 07:23:02] Online Payment: amount_to_pay=37000.00 stored in session[2025-11-07 07:23:02] ipg_start: total_amount=37000, due_amount=37000.00, amount=37000.00[2025-11-07 07:23:02] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002464925827F15139305F1","updateStatus":"SUCCESS","version":"19a7539b01"},"successIndicator":"a931457ce49948a7"}[2025-11-07 07:23:02] Session data set: {"payment_option":"full","amount_to_pay":"37000.00","reference_no":"DFAFC388","amount":"37000.00","name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (Weekend)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002464925827F15139305F1","success_indicator":"a931457ce49948a7","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"},"user":{"email":"admin_gem@gmail.com","username":"admin_gem"}}[2025-11-07 07:23:48] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:23:48] SESSION: {"payment_option":"full","amount_to_pay":"37000.00","reference_no":"DFAFC388","amount":"37000.00","name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (Weekend)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002464925827F15139305F1","success_indicator":"a931457ce49948a7","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"},"user":{"email":"admin_gem@gmail.com","username":"admin_gem"}}
+[2025-11-07 07:24:04] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:24:04] SESSION: {"payment_option":"full","amount_to_pay":"37000.00","reference_no":"DFAFC388","amount":"37000.00","name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (Weekend)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002464925827F15139305F1","success_indicator":"a931457ce49948a7","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"},"user":{"email":"admin_gem@gmail.com","username":"admin_gem"}}
+[2025-11-07 07:24:20] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 07:24:20] SESSION: {"payment_option":"full","amount_to_pay":"37000.00","reference_no":"DFAFC388","amount":"37000.00","name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (Weekend)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002464925827F15139305F1","success_indicator":"a931457ce49948a7","online_processed":true,"payment_success":{"name":"Test","ref":"553EB427","course":"Certificate in Blended Gemmology","paid":72000,"due":0,"status":"completed"},"user":{"email":"admin_gem@gmail.com","username":"admin_gem"}}
+[2025-11-07 10:35:09] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "yohanii725@gmail.com",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "wwwww",
+    "declaration": "1"
+}[2025-11-07 10:36:55] proceed-to-pay.php: GET data: {
+    "ref": "9D1857E3"
+}[2025-11-07 10:36:57] proceed-to-pay.php: GET data: {
+    "ref": "9D1857E3"
+}[2025-11-07 10:37:10] process-payment.php: Session started, ID: be6de2870ff09e3021b13154b9d0eb2b[2025-11-07 10:37:10] POST data: {
+    "reference_no": "9D1857E3",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 10:37:10] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 10:37:10] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 10:37:10] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 10:37:11] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002008067205H35023539I3","updateStatus":"SUCCESS","version":"04b6de2501"},"successIndicator":"4a65408877de4119"}[2025-11-07 10:37:11] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"9D1857E3","amount":26000,"name":"Test","gmail":"yohanii725@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002008067205H35023539I3","success_indicator":"4a65408877de4119"}[2025-11-07 10:37:13] process-payment.php: Session started, ID: be6de2870ff09e3021b13154b9d0eb2b[2025-11-07 10:37:13] POST data: [][2025-11-07 10:37:13] Invalid request method: GET[2025-11-07 10:39:43] complete.php started – SID: be6de2870ff09e3021b13154b9d0eb2b
+[2025-11-07 10:39:43] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"9D1857E3","amount":26000,"name":"Test","gmail":"yohanii725@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002008067205H35023539I3","success_indicator":"4a65408877de4119"}
+[2025-11-07 10:39:44] proceed-to-pay.php: GET data: {
+    "error": "Payment failed"
+}[2025-11-07 10:39:45] proceed-to-pay.php: GET data: {
+    "error": "Payment failed"
+}[2025-11-07 10:39:57] proceed-to-pay.php: GET data: {
+    "ref": "9D1857E3"
+}[2025-11-07 10:39:58] proceed-to-pay.php: GET data: {
+    "ref": "9D1857E3"
+}[2025-11-07 10:40:10] process-payment.php: Session started, ID: be6de2870ff09e3021b13154b9d0eb2b[2025-11-07 10:40:10] POST data: {
+    "reference_no": "9D1857E3",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 10:40:10] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 10:40:10] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 10:40:10] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 10:40:11] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002111095440I77289139J5","updateStatus":"SUCCESS","version":"2e93590801"},"successIndicator":"99cd1a0dde744989"}[2025-11-07 10:40:11] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"9D1857E3","amount":26000,"name":"Test","gmail":"yohanii725@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002111095440I77289139J5","success_indicator":"99cd1a0dde744989"}[2025-11-07 10:40:12] process-payment.php: Session started, ID: be6de2870ff09e3021b13154b9d0eb2b[2025-11-07 10:40:12] POST data: [][2025-11-07 10:40:12] Invalid request method: GET[2025-11-07 10:41:56] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ll",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "2342234",
+    "declaration": "1"
+}[2025-11-07 10:42:19] proceed-to-pay.php: GET data: {
+    "ref": "F7F69544"
+}[2025-11-07 10:42:28] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 10:42:28] POST data: {
+    "reference_no": "F7F69544",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 10:42:28] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 10:42:28] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 10:42:28] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 10:42:28] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002837556537N68570445L7","updateStatus":"SUCCESS","version":"27b2ff4301"},"successIndicator":"10fe6992c39d4c98"}[2025-11-07 10:42:28] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"F7F69544","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002837556537N68570445L7","success_indicator":"10fe6992c39d4c98"}[2025-11-07 10:43:16] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 10:43:16] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"F7F69544","amount":26000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002837556537N68570445L7","success_indicator":"10fe6992c39d4c98"}
+[2025-11-07 10:43:16] proceed-to-pay.php: GET data: {
+    "error": "Payment failed"
+}[2025-11-07 10:49:30] submit.php: POST data: {
+    "name": "Yohani",
+    "contact_number": "0778439871",
+    "gmail": "yohanii725@gmail.com",
+    "address": "333",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (Weekend)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 35,000",
+    "reg_fee": "2000",
+    "course_fee": "35000",
+    "total_fee_display": "Total Fee: Rs. 37,000",
+    "nic_passport": "19999999",
+    "education_background": "wrre",
+    "declaration": "1"
+}[2025-11-07 10:52:40] proceed-to-pay.php: GET data: {
+    "ref": "BAEF2C10"
+}[2025-11-07 10:52:41] proceed-to-pay.php: GET data: {
+    "ref": "BAEF2C10"
+}[2025-11-07 10:53:13] process-payment.php: Session started, ID: be6de2870ff09e3021b13154b9d0eb2b[2025-11-07 10:53:13] POST data: {
+    "reference_no": "BAEF2C10",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 10:53:13] Payment calculation: due_amount=37000.00, payment_option=50_percent, amount_to_pay=18500[2025-11-07 10:53:13] Online Payment: amount_to_pay=18500 stored in session[2025-11-07 10:53:13] ipg_start: total_amount=37000, due_amount=37000.00, amount=18500[2025-11-07 10:53:13] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002655508024L40588424J2","updateStatus":"SUCCESS","version":"86f96c2f01"},"successIndicator":"c01353c03304441c"}[2025-11-07 10:53:13] Session data set: {"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"BAEF2C10","amount":18500,"name":"Yohani","gmail":"yohanii725@gmail.com","course_name":"Certificate in Gem Cutting and Polishing (Weekend)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002655508024L40588424J2","success_indicator":"c01353c03304441c"}[2025-11-07 10:53:14] process-payment.php: Session started, ID: be6de2870ff09e3021b13154b9d0eb2b[2025-11-07 10:53:14] POST data: [][2025-11-07 10:53:14] Invalid request method: GET[2025-11-07 10:54:53] complete.php started – SID: be6de2870ff09e3021b13154b9d0eb2b
+[2025-11-07 10:54:53] SESSION: {"payment_option":"50_percent","amount_to_pay":18500,"reference_no":"BAEF2C10","amount":18500,"name":"Yohani","gmail":"yohanii725@gmail.com","course_name":"Certificate in Gem Cutting and Polishing (Weekend)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002655508024L40588424J2","success_indicator":"c01353c03304441c"}
+[2025-11-07 10:54:54] proceed-to-pay.php: GET data: {
+    "error": "Payment failed"
+}[2025-11-07 10:54:55] proceed-to-pay.php: GET data: {
+    "error": "Payment failed"
+}[2025-11-07 11:05:44] proceed-to-pay.php: GET data: {
+    "error": "Payment failed"
+}[2025-11-07 11:05:45] proceed-to-pay.php: GET data: {
+    "error": "Payment failed"
+}[2025-11-07 11:05:45] proceed-to-pay.php: GET data: {
+    "error": "Payment failed"
+}[2025-11-07 11:13:23] submit.php: POST data: {
+    "name": "Yohani",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "333",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Jewellery Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "19999999",
+    "education_background": "qq",
+    "declaration": "1"
+}[2025-11-07 11:13:52] proceed-to-pay.php: GET data: {
+    "ref": "F93C1A76"
+}[2025-11-07 11:14:00] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 11:14:00] POST data: {
+    "reference_no": "F93C1A76",
+    "payment_method": "Online Payment",
+    "payment_option": "full"
+}[2025-11-07 11:14:00] Payment calculation: due_amount=52000.00, payment_option=full, amount_to_pay=52000.00[2025-11-07 11:14:00] Online Payment: amount_to_pay=52000.00 stored in session[2025-11-07 11:14:00] ipg_start: total_amount=52000, due_amount=52000.00, amount=52000.00[2025-11-07 11:14:00] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002033496582L47679736N0","updateStatus":"SUCCESS","version":"e0368dfd01"},"successIndicator":"af85b65d9bd245d6"}[2025-11-07 11:14:00] Session data set: {"payment_option":"full","amount_to_pay":"52000.00","reference_no":"F93C1A76","amount":"52000.00","name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Jewellery Certificate in Tailor \u2013 Made Courses","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002033496582L47679736N0","success_indicator":"af85b65d9bd245d6"}[2025-11-07 11:14:49] complete.php started – GET: {"resultIndicator":"af85b65d9bd245d6","sessionVersion":"373e0fd609","checkoutVersion":"1.0.0"}
+[2025-11-07 11:14:49] SESSION before: {"payment_option":"full","amount_to_pay":"52000.00","reference_no":"F93C1A76","amount":"52000.00","name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Jewellery Certificate in Tailor \u2013 Made Courses","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002033496582L47679736N0","success_indicator":"af85b65d9bd245d6"}
+[2025-11-07 11:14:49] Restored session: ref=F93C1A76
+[2025-11-07 11:14:50] proceed-to-pay.php: GET data: {
+    "error": "Payment failed"
+}[2025-11-07 11:18:20] submit.php: POST data: {
+    "name": "Yohani",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "2223",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "19999999",
+    "education_background": "22",
+    "declaration": "1"
+}[2025-11-07 11:19:01] proceed-to-pay.php: GET data: {
+    "ref": "0A9DDBE6"
+}[2025-11-07 11:19:08] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 11:19:08] POST data: {
+    "reference_no": "0A9DDBE6",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 11:19:08] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-07 11:19:08] Online Payment: amount_to_pay=26000 stored in session[2025-11-07 11:19:08] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-07 11:19:09] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002264221179J00477245K5","updateStatus":"SUCCESS","version":"1c81e41701"},"successIndicator":"196e35fd93514142"}[2025-11-07 11:19:09] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"0A9DDBE6","amount":26000,"name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002264221179J00477245K5","success_indicator":"196e35fd93514142","online_processed":false}[2025-11-07 11:19:54] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 11:19:54] GET: {"resultIndicator":"196e35fd93514142","sessionVersion":"21106a0b09","checkoutVersion":"1.0.0"}
+[2025-11-07 11:19:54] POST: []
+[2025-11-07 11:19:54] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"0A9DDBE6","amount":26000,"name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002264221179J00477245K5","success_indicator":"196e35fd93514142","online_processed":false}
+[2025-11-07 11:19:55] Online payment recorded: Rs. 26000 (option: 50_percent)
+[2025-11-07 11:20:32] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 11:20:32] GET: []
+[2025-11-07 11:20:32] POST: {"upload_slip":"1"}
+[2025-11-07 11:20:32] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"0A9DDBE6","amount":26000,"name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002264221179J00477245K5","success_indicator":"196e35fd93514142","online_processed":true}
+[2025-11-07 11:37:52] submit.php: POST data: {
+    "name": "Yohani",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "333",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Geuda Heat Treatment",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 55,000",
+    "reg_fee": "2000",
+    "course_fee": "55000",
+    "total_fee_display": "Total Fee: Rs. 57,000",
+    "nic_passport": "19999999",
+    "education_background": "e",
+    "declaration": "1"
+}[2025-11-07 11:38:38] proceed-to-pay.php: GET data: {
+    "ref": "9A286325"
+}[2025-11-07 11:38:53] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 11:38:53] POST data: {
+    "reference_no": "9A286325",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 11:38:53] Payment calculation: due_amount=57000.00, payment_option=50_percent, amount_to_pay=28500[2025-11-07 11:38:53] Online Payment: amount_to_pay=28500 stored in session[2025-11-07 11:38:53] ipg_start: total_amount=57000, due_amount=57000.00, amount=28500[2025-11-07 11:38:54] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002533147477H37907554M6","updateStatus":"SUCCESS","version":"07bb2b3b01"},"successIndicator":"0e900a908d624a05"}[2025-11-07 11:38:54] Session data set: {"payment_option":"50_percent","amount_to_pay":28500,"reference_no":"9A286325","amount":28500,"name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Geuda Heat Treatment","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002533147477H37907554M6","success_indicator":"0e900a908d624a05","online_processed":true,"payment_success":{"name":"Yohani","ref":"0A9DDBE6","course":"Certificate in Basic Gemmology","paid":52000,"due":0,"status":"completed"}}[2025-11-07 11:39:48] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 11:39:48] GET: {"resultIndicator":"0e900a908d624a05","sessionVersion":"9f4e2c9a09","checkoutVersion":"1.0.0"}
+[2025-11-07 11:39:48] POST: []
+[2025-11-07 11:39:48] SESSION: {"payment_option":"50_percent","amount_to_pay":28500,"reference_no":"9A286325","amount":28500,"name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Geuda Heat Treatment","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002533147477H37907554M6","success_indicator":"0e900a908d624a05","online_processed":true,"payment_success":{"name":"Yohani","ref":"0A9DDBE6","course":"Certificate in Basic Gemmology","paid":52000,"due":0,"status":"completed"}}
+[2025-11-07 11:43:12] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 11:43:12] GET: {"resultIndicator":"0e900a908d624a05","sessionVersion":"9f4e2c9a09","checkoutVersion":"1.0.0"}
+[2025-11-07 11:43:12] POST: []
+[2025-11-07 11:43:12] SESSION: {"payment_option":"50_percent","amount_to_pay":28500,"reference_no":"9A286325","amount":28500,"name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Geuda Heat Treatment","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002533147477H37907554M6","success_indicator":"0e900a908d624a05","online_processed":true,"payment_success":{"name":"Yohani","ref":"0A9DDBE6","course":"Certificate in Basic Gemmology","paid":52000,"due":0,"status":"completed"}}
+[2025-11-07 11:44:01] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 11:44:01] GET: {"resultIndicator":"0e900a908d624a05","sessionVersion":"9f4e2c9a09","checkoutVersion":"1.0.0"}
+[2025-11-07 11:44:01] POST: []
+[2025-11-07 11:44:01] SESSION: {"payment_option":"50_percent","amount_to_pay":28500,"reference_no":"9A286325","amount":28500,"name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Geuda Heat Treatment","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002533147477H37907554M6","success_indicator":"0e900a908d624a05","online_processed":true,"payment_success":{"name":"Yohani","ref":"0A9DDBE6","course":"Certificate in Basic Gemmology","paid":52000,"due":0,"status":"completed"}}
+[2025-11-07 11:44:58] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 11:44:58] GET: {"resultIndicator":"0e900a908d624a05","sessionVersion":"9f4e2c9a09","checkoutVersion":"1.0.0"}
+[2025-11-07 11:44:58] POST: {"upload_slip":"1","slip_amount":"28500"}
+[2025-11-07 11:44:58] SESSION: {"payment_option":"50_percent","amount_to_pay":28500,"reference_no":"9A286325","amount":28500,"name":"Yohani","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Geuda Heat Treatment","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002533147477H37907554M6","success_indicator":"0e900a908d624a05","online_processed":true,"payment_success":{"name":"Yohani","ref":"0A9DDBE6","course":"Certificate in Basic Gemmology","paid":52000,"due":0,"status":"completed"}}
+[2025-11-07 11:45:54] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (10 DAYS)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 14,000",
+    "reg_fee": "2000",
+    "course_fee": "14000",
+    "total_fee_display": "Total Fee: Rs. 16,000",
+    "nic_passport": "1999999999",
+    "education_background": "rrr",
+    "declaration": "1"
+}[2025-11-07 11:46:17] proceed-to-pay.php: GET data: {
+    "ref": "4D9D6C00"
+}[2025-11-07 11:46:34] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 11:46:34] POST data: {
+    "reference_no": "4D9D6C00",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-07 11:46:34] Payment calculation: due_amount=16000.00, payment_option=50_percent, amount_to_pay=8000[2025-11-07 11:46:34] Online Payment: amount_to_pay=8000 stored in session[2025-11-07 11:46:34] ipg_start: total_amount=16000, due_amount=16000.00, amount=8000[2025-11-07 11:46:34] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002029058533F35550672L7","updateStatus":"SUCCESS","version":"1e7b475201"},"successIndicator":"33075ce1c51240f4"}[2025-11-07 11:46:34] Session data set: {"payment_option":"50_percent","amount_to_pay":8000,"reference_no":"4D9D6C00","amount":8000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (10 DAYS)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002029058533F35550672L7","success_indicator":"33075ce1c51240f4","online_processed":true,"payment_success":{"name":"Yohani","ref":"0A9DDBE6","course":"Certificate in Basic Gemmology","paid":52000,"due":0,"status":"completed"},"user":{"email":"admin_gem@gmail.com","username":"admin_gem"}}[2025-11-07 11:47:19] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 11:47:19] GET: {"resultIndicator":"33075ce1c51240f4","sessionVersion":"2fe2f32409","checkoutVersion":"1.0.0"}
+[2025-11-07 11:47:19] POST: []
+[2025-11-07 11:47:19] SESSION: {"payment_option":"50_percent","amount_to_pay":8000,"reference_no":"4D9D6C00","amount":8000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (10 DAYS)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002029058533F35550672L7","success_indicator":"33075ce1c51240f4","online_processed":true,"payment_success":{"name":"Yohani","ref":"0A9DDBE6","course":"Certificate in Basic Gemmology","paid":52000,"due":0,"status":"completed"},"user":{"email":"admin_gem@gmail.com","username":"admin_gem"}}
+[2025-11-07 11:47:58] complete.php started – SID: 205d63fec56834cb57f01ca1f91057a9
+[2025-11-07 11:47:58] GET: {"resultIndicator":"33075ce1c51240f4","sessionVersion":"2fe2f32409","checkoutVersion":"1.0.0"}
+[2025-11-07 11:47:58] POST: {"upload_slip":"1","slip_amount":"8000"}
+[2025-11-07 11:47:58] SESSION: {"payment_option":"50_percent","amount_to_pay":8000,"reference_no":"4D9D6C00","amount":8000,"name":"Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gem Cutting and Polishing (10 DAYS)","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002029058533F35550672L7","success_indicator":"33075ce1c51240f4","online_processed":true,"payment_success":{"name":"Yohani","ref":"0A9DDBE6","course":"Certificate in Basic Gemmology","paid":52000,"due":0,"status":"completed"},"user":{"email":"admin_gem@gmail.com","username":"admin_gem"}}
+[2025-11-07 11:49:22] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Computer Aided Jewellery Designing and Manufacturing (CAD\/CAM)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 60,000",
+    "reg_fee": "2000",
+    "course_fee": "60000",
+    "total_fee_display": "Total Fee: Rs. 62,000",
+    "nic_passport": "1999999999",
+    "education_background": "eeee",
+    "declaration": "1"
+}[2025-11-07 11:49:42] proceed-to-pay.php: GET data: {
+    "ref": "58D5B996"
+}[2025-11-07 11:50:04] process-payment.php: Session started, ID: 205d63fec56834cb57f01ca1f91057a9[2025-11-07 11:50:04] POST data: {
+    "reference_no": "58D5B996",
+    "payment_method": "Bank Slip",
+    "payment_option": "50_percent"
+}[2025-11-07 11:50:04] Payment calculation: due_amount=62000.00, payment_option=50_percent, amount_to_pay=31000[2025-11-07 11:50:04] Bank Slip: updating payment - paid_amount=31000, due_amount=31000, status=pending[2025-11-09 05:38:11] submit.php: POST data: {
+    "name": "SATKUNANATHAN SUTHARSHAN",
+    "contact_number": "0754347886",
+    "gmail": "sutharshankanna04@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "930643523V",
+    "education_background": "",
+    "declaration": "1"
+}[2025-11-09 05:43:37] submit.php: POST data: {
+    "name": "SATKUNANATHAN SUTHARSHAN",
+    "contact_number": "0754347886",
+    "gmail": "sutharshankanna04@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "930643523V",
+    "education_background": "",
+    "declaration": "1"
+}[2025-11-09 05:46:45] proceed-to-pay.php: GET data: {
+    "ref": "52F63D43"
+}[2025-11-09 05:46:56] proceed-to-pay.php: GET data: {
+    "ref": "52F63D43"
+}[2025-11-09 05:47:06] process-payment.php: Session started, ID: da007cc735c9664567f9cd6098a68dbe[2025-11-09 05:47:06] POST data: {
+    "reference_no": "52F63D43",
+    "payment_method": "Online Payment",
+    "payment_option": "full"
+}[2025-11-09 05:47:06] Payment calculation: due_amount=52000.00, payment_option=full, amount_to_pay=52000.00[2025-11-09 05:47:06] Online Payment: amount_to_pay=52000.00 stored in session[2025-11-09 05:47:06] ipg_start: total_amount=52000, due_amount=52000.00, amount=52000.00[2025-11-09 05:47:06] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002408519979J31177509N4","updateStatus":"SUCCESS","version":"552a5ebd01"},"successIndicator":"81b7a957aed644fa"}[2025-11-09 05:47:06] Session data set: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"full","amount_to_pay":"52000.00","reference_no":"52F63D43","amount":"52000.00","name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002408519979J31177509N4","success_indicator":"81b7a957aed644fa"}[2025-11-09 05:51:41] complete.php started – SID: da007cc735c9664567f9cd6098a68dbe
+[2025-11-09 05:51:41] GET: {"resultIndicator":"81b7a957aed644fa","sessionVersion":"cff92b0609","checkoutVersion":"1.0.0"}
+[2025-11-09 05:51:41] POST: []
+[2025-11-09 05:51:41] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"full","amount_to_pay":"52000.00","reference_no":"52F63D43","amount":"52000.00","name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002408519979J31177509N4","success_indicator":"81b7a957aed644fa"}
+[2025-11-09 05:51:41] Online payment recorded: Rs. 52000 (option: full)
+[2025-11-09 05:57:56] submit.php: POST data: {
+    "name": "SATKUNANATHAN SUTHARSHAN",
+    "contact_number": "0754347886",
+    "gmail": "sutharshankanna04@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Ratnapura",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "930643523V",
+    "education_background": "",
+    "declaration": "1"
+}[2025-11-09 05:59:44] proceed-to-pay.php: GET data: {
+    "ref": "3B35538D"
+}[2025-11-09 05:59:50] proceed-to-pay.php: GET data: {
+    "ref": "3B35538D"
+}[2025-11-09 05:59:55] process-payment.php: Session started, ID: da007cc735c9664567f9cd6098a68dbe[2025-11-09 05:59:55] POST data: {
+    "reference_no": "3B35538D",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-09 05:59:55] Payment calculation: due_amount=152000.00, payment_option=50_percent, amount_to_pay=76000[2025-11-09 05:59:55] Online Payment: amount_to_pay=76000 stored in session[2025-11-09 05:59:55] ipg_start: total_amount=152000, due_amount=152000.00, amount=76000[2025-11-09 05:59:56] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002472600072H84901805J6","updateStatus":"SUCCESS","version":"0a5b8d6901"},"successIndicator":"4170807a912f45f7"}[2025-11-09 05:59:56] Session data set: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":76000,"reference_no":"3B35538D","amount":76000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Diploma in Professional Gemmology (Dip. PGSL)","regional_centre":"Ratnapura","session_id":"SESSION0002472600072H84901805J6","success_indicator":"4170807a912f45f7","online_processed":true}[2025-11-09 06:01:48] complete.php started – SID: da007cc735c9664567f9cd6098a68dbe
+[2025-11-09 06:01:48] GET: {"resultIndicator":"4170807a912f45f7","sessionVersion":"5647b8c609","checkoutVersion":"1.0.0"}
+[2025-11-09 06:01:48] POST: []
+[2025-11-09 06:01:48] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":76000,"reference_no":"3B35538D","amount":76000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Diploma in Professional Gemmology (Dip. PGSL)","regional_centre":"Ratnapura","session_id":"SESSION0002472600072H84901805J6","success_indicator":"4170807a912f45f7","online_processed":true}
+[2025-11-11 21:16:39] submit.php: POST data: {
+    "name": "SATKUNANATHAN SUTHARSHAN",
+    "contact_number": "0754347886",
+    "gmail": "sutharshankanna04@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "930643523V",
+    "education_background": "",
+    "declaration": "1"
+}[2025-11-11 21:19:50] proceed-to-pay.php: GET data: {
+    "ref": "5B13409E"
+}[2025-11-11 21:20:02] proceed-to-pay.php: GET data: {
+    "ref": "5B13409E"
+}[2025-11-11 21:20:03] process-payment.php: Session started, ID: 959a6c09cda3482eca181010ad6b7d72[2025-11-11 21:20:03] POST data: {
+    "reference_no": "5B13409E",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-11 21:20:03] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-11 21:20:03] Online Payment: amount_to_pay=26000 stored in session[2025-11-11 21:20:03] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-11 21:20:04] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002225163998L27227061M4","updateStatus":"SUCCESS","version":"390c7fdc01"},"successIndicator":"19911fc7d604421c"}[2025-11-11 21:20:04] Session data set: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"5B13409E","amount":26000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002225163998L27227061M4","success_indicator":"19911fc7d604421c"}[2025-11-11 21:21:15] complete.php started – SID: 959a6c09cda3482eca181010ad6b7d72
+[2025-11-11 21:21:15] GET: {"resultIndicator":"19911fc7d604421c","sessionVersion":"146329d009","checkoutVersion":"1.0.0"}
+[2025-11-11 21:21:15] POST: []
+[2025-11-11 21:21:15] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"5B13409E","amount":26000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002225163998L27227061M4","success_indicator":"19911fc7d604421c"}
+[2025-11-11 21:21:15] Online payment recorded: Rs. 26000 (option: 50_percent)
+[2025-11-11 21:22:51] proceed-to-pay.php: GET data: {
+    "ref": "5B13409E"
+}[2025-11-11 21:23:22] process-payment.php: Session started, ID: 959a6c09cda3482eca181010ad6b7d72[2025-11-11 21:23:22] POST data: {
+    "reference_no": "5B13409E",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-11 21:23:22] Payment calculation: due_amount=26000.00, payment_option=50_percent, amount_to_pay=13000[2025-11-11 21:23:22] Online Payment: amount_to_pay=13000 stored in session[2025-11-11 21:23:22] ipg_start: total_amount=52000, due_amount=26000.00, amount=13000[2025-11-11 21:23:22] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002403519873K16586379H3","updateStatus":"SUCCESS","version":"c2b0552401"},"successIndicator":"7aa1bc6f9b314ec5"}[2025-11-11 21:23:22] Session data set: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":13000,"reference_no":"5B13409E","amount":13000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002403519873K16586379H3","success_indicator":"7aa1bc6f9b314ec5","online_processed":true}[2025-11-11 21:23:32] proceed-to-pay.php: GET data: {
+    "ref": "5B13409E"
+}[2025-11-12 00:06:47] submit.php: POST data: {
+    "name": "SATKUNANATHAN SUTHARSHAN",
+    "contact_number": "0754347886",
+    "gmail": "sutharshankanna04@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "930643523V",
+    "education_background": "",
+    "declaration": "1"
+}[2025-11-12 00:08:52] proceed-to-pay.php: GET data: {
+    "ref": "5B3989C5"
+}[2025-11-12 00:09:07] proceed-to-pay.php: GET data: {
+    "ref": "5B3989C5"
+}[2025-11-12 00:09:45] process-payment.php: Session started, ID: 959a6c09cda3482eca181010ad6b7d72[2025-11-12 00:09:45] POST data: {
+    "reference_no": "5B3989C5",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-12 00:09:45] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-12 00:09:45] Online Payment: amount_to_pay=26000 stored in session[2025-11-12 00:09:45] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-12 00:09:46] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002413468746E06075258N5","updateStatus":"SUCCESS","version":"0ba3369501"},"successIndicator":"761458a063b040f5"}[2025-11-12 00:09:46] Session data set: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"5B3989C5","amount":26000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002413468746E06075258N5","success_indicator":"761458a063b040f5"}[2025-11-12 00:10:49] complete.php started – SID: 959a6c09cda3482eca181010ad6b7d72
+[2025-11-12 00:10:49] GET: {"resultIndicator":"761458a063b040f5","sessionVersion":"fde9d9c909","checkoutVersion":"1.0.0"}
+[2025-11-12 00:10:49] POST: []
+[2025-11-12 00:10:49] SESSION: {"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"5B3989C5","amount":26000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002413468746E06075258N5","success_indicator":"761458a063b040f5"}
+[2025-11-12 00:10:49] Online payment recorded: Rs. 26000 (option: 50_percent)
+[2025-11-12 22:52:30] submit.php: POST data: {
+    "name": "SATKUNANATHAN SUTHARSHAN",
+    "contact_number": "0754347886",
+    "gmail": "sutharshankanna04@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "930643523V",
+    "education_background": "A\/L",
+    "declaration": "1"
+}[2025-11-12 22:53:34] submit.php: POST data: {
+    "name": "SATKUNANATHAN SUTHARSHAN",
+    "contact_number": "0754347886",
+    "gmail": "sutharshankanna04@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "930643523V"
+}[2025-11-12 22:53:34] Missing required fields: name=SATKUNANATHAN SUTHARSHAN, contact_number=0754347886, regional_centre=Head Office - Kaduwela, course_name=Certificate in Basic Gemmology, nic_passport=930643523V, declaration=[2025-11-12 23:00:20] proceed-to-pay.php: GET data: {
+    "ref": "A5DEBE0D"
+}[2025-11-12 23:00:27] proceed-to-pay.php: GET data: {
+    "ref": "A5DEBE0D"
+}[2025-11-12 23:01:58] process-payment.php: Session started, ID: 61d190162ce3d142df1d4195f845dff6[2025-11-12 23:01:58] POST data: {
+    "reference_no": "A5DEBE0D",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-12 23:01:58] Payment calculation: due_amount=52000.00, payment_option=50_percent, amount_to_pay=26000[2025-11-12 23:01:58] Online Payment: amount_to_pay=26000 stored in session[2025-11-12 23:01:58] ipg_start: total_amount=52000, due_amount=52000.00, amount=26000[2025-11-12 23:01:59] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002666956805F6892249E98","updateStatus":"SUCCESS","version":"c5e73d2c01"},"successIndicator":"0444e8067f444c2a"}[2025-11-12 23:01:59] Session data set: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"A5DEBE0D","amount":26000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002666956805F6892249E98","success_indicator":"0444e8067f444c2a"}[2025-11-12 23:06:24] complete.php started – SID: 61d190162ce3d142df1d4195f845dff6
+[2025-11-12 23:06:24] GET: {"resultIndicator":"0444e8067f444c2a","sessionVersion":"99545ce309","checkoutVersion":"1.0.0"}
+[2025-11-12 23:06:24] POST: []
+[2025-11-12 23:06:24] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"A5DEBE0D","amount":26000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002666956805F6892249E98","success_indicator":"0444e8067f444c2a"}
+[2025-11-12 23:06:24] Online payment recorded: Rs. 26000 (option: 50_percent)
+[2025-11-12 23:10:38] complete.php started – SID: 61d190162ce3d142df1d4195f845dff6
+[2025-11-12 23:10:38] GET: {"resultIndicator":"0444e8067f444c2a","sessionVersion":"99545ce309","checkoutVersion":"1.0.0"}
+[2025-11-12 23:10:38] POST: {"upload_slip":"1","slip_amount":"26000"}
+[2025-11-12 23:10:38] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":26000,"reference_no":"A5DEBE0D","amount":26000,"name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Certificate in Basic Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002666956805F6892249E98","success_indicator":"0444e8067f444c2a","online_processed":true}
+[2025-11-13 21:09:47] submit.php: POST data: {
+    "name": "SATKUNANATHAN SUTHARSHAN",
+    "contact_number": "0754347886",
+    "gmail": "sutharshankanna04@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "International Courses",
+    "course": "Gem-A Foundation Course",
+    "course_fee_display": "Registration Fee: Rs. 10,000 | Course Fee: Rs. 589,567.22",
+    "reg_fee": "10000",
+    "course_fee": "589567.22",
+    "total_fee_display": "Total Fee: Rs. 599,567.22",
+    "nic_passport": "930643523V",
+    "education_background": "",
+    "declaration": "1"
+}[2025-11-13 21:13:53] proceed-to-pay.php: GET data: {
+    "ref": "EAE0DF7F"
+}[2025-11-13 21:14:03] proceed-to-pay.php: GET data: {
+    "ref": "EAE0DF7F"
+}[2025-11-13 21:14:19] process-payment.php: Session started, ID: f4028a38e06cc7f395030b70c571a4cc[2025-11-13 21:14:19] POST data: {
+    "reference_no": "EAE0DF7F",
+    "payment_method": "Online Payment",
+    "payment_option": "full"
+}[2025-11-13 21:14:19] Payment calculation: due_amount=599567.22, payment_option=full, amount_to_pay=599567.22[2025-11-13 21:14:19] Online Payment: amount_to_pay=599567.22 stored in session[2025-11-13 21:14:19] ipg_start: total_amount=599567.22, due_amount=599567.22, amount=599567.22[2025-11-13 21:14:19] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002186764984N0569254N35","updateStatus":"SUCCESS","version":"33f62a4c01"},"successIndicator":"36d9cc2dc87a4bdd"}[2025-11-13 21:14:19] Session data set: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"full","amount_to_pay":"599567.22","reference_no":"EAE0DF7F","amount":"599567.22","name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Gem-A Foundation Course","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002186764984N0569254N35","success_indicator":"36d9cc2dc87a4bdd"}[2025-11-13 21:15:25] complete.php started – SID: f4028a38e06cc7f395030b70c571a4cc
+[2025-11-13 21:15:25] GET: {"resultIndicator":"36d9cc2dc87a4bdd","sessionVersion":"b411f0cd09","checkoutVersion":"1.0.0"}
+[2025-11-13 21:15:25] POST: []
+[2025-11-13 21:15:25] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"full","amount_to_pay":"599567.22","reference_no":"EAE0DF7F","amount":"599567.22","name":"SATKUNANATHAN SUTHARSHAN","gmail":"sutharshankanna04@gmail.com","course_name":"Gem-A Foundation Course","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002186764984N0569254N35","success_indicator":"36d9cc2dc87a4bdd"}
+[2025-11-13 21:15:25] Online payment recorded: Rs. 599567.22 (option: full)
+[2025-11-13 21:22:00] submit.php: POST data: {
+    "name": "Jegan Viththiya",
+    "contact_number": "0717744341",
+    "gmail": "jeganviththiya@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "930643523V",
+    "education_background": "",
+    "declaration": "1"
+}[2025-11-13 21:45:25] submit.php: POST data: {
+    "name": "Jegan Viththiya",
+    "contact_number": "0717744341",
+    "gmail": "jeganviththiya@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Ratnapura",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "930643523V",
+    "education_background": "",
+    "declaration": "1"
+}[2025-11-13 22:11:40] proceed-to-pay.php: GET data: {
+    "ref": "3695D73A"
+}[2025-11-13 22:12:02] process-payment.php: Session started, ID: f3eb669679f9dc7772f224cc450d8767[2025-11-13 22:12:02] POST data: {
+    "reference_no": "3695D73A",
+    "payment_method": "Bank Slip",
+    "payment_option": "50_percent"
+}[2025-11-13 22:12:02] Payment calculation: due_amount=152000.00, payment_option=50_percent, amount_to_pay=76000[2025-11-13 22:12:02] Bank Slip: updating payment - paid_amount=76000, due_amount=76000, status=pending[2025-11-13 22:13:45] submit.php: POST data: {
+    "name": "Jegan Viththiya",
+    "contact_number": "0754347886",
+    "gmail": "jeganviththiya@gmail.com",
+    "address": "Shangar Mill Road Vantharumoolai",
+    "regional_centre": "Ratnapura",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "930643523V",
+    "education_background": "",
+    "declaration": "1"
+}[2025-11-13 22:17:08] proceed-to-pay.php: GET data: {
+    "ref": "5F06D467"
+}[2025-11-13 22:17:16] process-payment.php: Session started, ID: f3eb669679f9dc7772f224cc450d8767[2025-11-13 22:17:16] POST data: {
+    "reference_no": "5F06D467",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-13 22:17:16] Payment calculation: due_amount=152000.00, payment_option=50_percent, amount_to_pay=76000[2025-11-13 22:17:16] Online Payment: amount_to_pay=76000 stored in session[2025-11-13 22:17:16] ipg_start: total_amount=152000, due_amount=152000.00, amount=76000[2025-11-13 22:17:17] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002603888643K5719616K60","updateStatus":"SUCCESS","version":"298d370b01"},"successIndicator":"feafa6df65ec42d4"}[2025-11-13 22:17:17] Session data set: {"payment_option":"50_percent","amount_to_pay":76000,"reference_no":"5F06D467","amount":76000,"name":"Jegan Viththiya","gmail":"jeganviththiya@gmail.com","course_name":"Diploma in Professional Gemmology (Dip. PGSL)","regional_centre":"Ratnapura","session_id":"SESSION0002603888643K5719616K60","success_indicator":"feafa6df65ec42d4"}[2025-11-13 22:18:55] complete.php started – SID: f3eb669679f9dc7772f224cc450d8767
+[2025-11-13 22:18:55] GET: {"resultIndicator":"feafa6df65ec42d4","sessionVersion":"2234dcfc09","checkoutVersion":"1.0.0"}
+[2025-11-13 22:18:55] POST: []
+[2025-11-13 22:18:55] SESSION: {"payment_option":"50_percent","amount_to_pay":76000,"reference_no":"5F06D467","amount":76000,"name":"Jegan Viththiya","gmail":"jeganviththiya@gmail.com","course_name":"Diploma in Professional Gemmology (Dip. PGSL)","regional_centre":"Ratnapura","session_id":"SESSION0002603888643K5719616K60","success_indicator":"feafa6df65ec42d4"}
+[2025-11-13 22:18:56] Online payment recorded: Rs. 76000 (option: 50_percent)
+[2025-11-16 01:21:23] proceed-to-pay.php: GET data: {
+    "ref": "5F06D467"
+}[2025-11-16 03:12:25] process-payment.php: Session started, ID: 146cce41656b97e6c9042b9f6375d19b[2025-11-16 03:12:25] POST data: [][2025-11-16 03:12:25] Invalid request method: GET[2025-11-16 11:25:40] proceed-to-pay.php: GET data: {
+    "ref": "3695D73A"
+}[2025-11-16 11:25:40] Invalid Reference ID: 3695D73A

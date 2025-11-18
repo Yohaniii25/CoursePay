@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_id'])) {
         $stmt->execute();
         $stmt->close();
 
-        // Reload the same page after updateslt
+        // Reload the same page after update
         header("Location: " . $_SERVER['HTTP_REFERER']);
         exit;
     } else {

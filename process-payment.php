@@ -93,7 +93,7 @@ function ipg_start($reference_no, $amount, $description)
                     "name" => "Gem and Jewellery",
                     "url" => "https://sltdigital.site/gem/"
                 ],
-                "returnUrl" => "https://sltdigital.site/gem/CoursePay/complete.php" // Update with ngrok URL for testing
+                "returnUrl" => "https://sltdigital.site/gem/CoursePay/complete.php"
             ],
             "order" => [
                 "currency" => "LKR",
@@ -356,7 +356,7 @@ Gem and Jewellery Research and Training Institute
             error_log(date('[Y-m-d H:i:s] ') . "Failed to send slip payment receipt email to $to", 3, $logDir . 'error.log');
         }
 
-        $admin_email = 'yohanii725@gmail.com';
+        $admin_email = 'sutharshankanna04@gmail.com';
         $admin_subject = "Bank Slip Payment Received Notification";
         $admin_message = "
 Dear Admin,

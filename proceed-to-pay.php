@@ -7,13 +7,12 @@ if (!is_dir($logDir)) {
     mkdir($logDir, 0755, true);
     chmod($logDir, 0755);
 }
-
 error_log(date('[Y-m-d H:i:s] ') . "proceed-to-pay.php: GET data: " . json_encode($_GET, JSON_PRETTY_PRINT), 3, $logDir . 'error.log');
 
 $db = new Database();
 $conn = $db->getConnection();
 
-$reference_no = filter_var($_GET['ref'] ?? '', FILTER_SANITIZE_STRING);
+$reference_no = filter_var($_GET['ref'] ?? '');
 $error = $_GET['error'] ?? '';
 
 if (empty($reference_no)) {
@@ -57,10 +56,19 @@ $total_amount = $application['registration_fee'] + $application['course_fee'];
 $due_amount = $application['due_amount'] ?? $total_amount;
 $paid_amount = $application['paid_amount'] ?? 0;
 $course_fee = $application['course_fee'];
-$course_due_amount = $due_amount - $application['registration_fee'];
-if ($course_due_amount < 0) $course_due_amount = 0;
-?>
+$half_due_amount = $due_amount / 2;
 
+// === CUSTOM INSTALLMENT LOGIC ===
+$fullPaymentOnly = [
+    "Gem-A Foundation Course",
+    "Gem-A Diploma Course",
+    "Gem Related Certificate in Tailor – Made Courses",
+    "Jewellery Certificate in Tailor – Made Courses"
+];
+
+$courseName = trim($application['course_name']);
+$isFullOnly = in_array($courseName, $fullPaymentOnly);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,6 +118,7 @@ if ($course_due_amount < 0) $course_due_amount = 0;
             <h2 class="text-xl font-semibold mb-4 text-gray-700">Select Payment Method</h2>
             <form action="process-payment.php" method="POST" enctype="multipart/form-data" class="space-y-6">
                 <input type="hidden" name="reference_no" value="<?php echo htmlspecialchars($reference_no); ?>">
+
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Payment Method <span class="text-red-500">*</span></label>
                     <select name="payment_method" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
@@ -118,25 +127,43 @@ if ($course_due_amount < 0) $course_due_amount = 0;
                         <option value="Bank Slip">Bank Slip</option>
                     </select>
                 </div>
+
+                <!-- PAYMENT OPTION: DYNAMIC BASED ON COURSE -->
                 <div class="payment-options">
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Payment Option <span class="text-red-500">*</span></label>
                     <select name="payment_option" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                         <option value="">Select an option</option>
-                        <option value="full">100% Course Fee (Rs. <?php echo number_format($course_due_amount, 2); ?>)</option>
-                        <?php if ($course_due_amount > 0): ?>
-                            <option value="50_percent">50% Course Fee (Rs. <?php echo number_format($course_due_amount / 2, 2); ?>)</option>
+
+                        <?php if ($isFullOnly): ?>
+                            <option value="full">
+                                100% Due Amount (Rs. <?= number_format($due_amount, 2) ?>)
+                            </option>
+                        <?php else: ?>
+                            <option value="full">
+                                100% Due Amount (Rs. <?= number_format($due_amount, 2) ?>)
+                            </option>
+                            <?php if ($due_amount > 0): ?>
+                                <option value="50_percent">
+                                    50% Due Amount (Rs. <?= number_format($half_due_amount, 2) ?>)
+                                </option>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </select>
-                    <p class="text-sm text-gray-600 mt-2 fifty-percent-message hidden">
-                        The 50% due amount should be paid within half the time of the course (e.g., if the course is 6 months, after three months payment should be completed).
-                        Amount to be paid: <strong>Rs. <?php echo number_format($course_due_amount / 2, 2); ?></strong>
+
+                    <p class="text-sm text-gray-600 mt-2 fifty-percent-message <?= $isFullOnly ? 'hidden' : '' ?>">
+                        The 50% due amount should be paid within half the time of the course 
+                        (e.g., if the course is 6 months, after three months payment should be completed).<br>
+                        <strong>Amount to be paid now:</strong> Rs. <?= number_format($half_due_amount, 2) ?><br>
+                        <strong>Remaining 50% to be paid:</strong> Rs. <?= number_format($half_due_amount, 2) ?>
                     </p>
                 </div>
+
                 <div class="bank-slip-options hidden">
                     <label for="payment_slip" class="block text-sm font-semibold text-gray-700 mb-2 mt-4">Upload Payment Slip <span class="text-red-500">*</span></label>
                     <input type="file" name="payment_slip" accept=".jpg,.jpeg,.png,.pdf"
                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                 </div>
+
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg">
                     Proceed with Payment
                 </button>
@@ -167,21 +194,16 @@ if ($course_due_amount < 0) $course_due_amount = 0;
         paymentMethod.addEventListener('change', function () {
             paymentOptions.classList.toggle('hidden', this.value === '');
             bankSlipOptions.classList.toggle('hidden', this.value !== 'Bank Slip');
-            paymentOption.dispatchEvent(new Event('change')); // Trigger message visibility
+            paymentOption.dispatchEvent(new Event('change'));
         });
 
         paymentOption.addEventListener('change', function () {
             fiftyPercentMessage.classList.toggle('hidden', this.value !== '50_percent');
-            // Require file upload for Bank Slip
             const fileInput = document.querySelector('[name="payment_slip"]');
-            if (paymentMethod.value === 'Bank Slip') {
-                fileInput.required = true;
-            } else {
-                fileInput.required = false;
-            }
+            fileInput.required = (paymentMethod.value === 'Bank Slip');
         });
 
-        // Trigger initial state
+        // Initialize
         if (paymentMethod.value) {
             paymentMethod.dispatchEvent(new Event('change'));
         }

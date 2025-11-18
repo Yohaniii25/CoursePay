@@ -204,7 +204,7 @@
                     "Certificate in Gem Cutting and Polishing (NVQ 4)",
                     "Certificate in Gem Cutting and Polishing (Weekend)",
                     "Certificate in Gem Cutting and Polishing (10 DAYS)",
-                    "Certificate in Tailor – Made Course - Gem",
+                    "Gem Related Certificate in Tailor – Made Courses",
                     "Certificate in Jewellery Designing (Manual)",
                     "Certificate in Jewellery Designing Technology (NVQ 4)",
                     "Certificate in Computer Aided Jewellery Designing and Manufacturing (CAD/CAM)",
@@ -213,7 +213,7 @@
                     "Certificate in Jewellery Stone Setting (NVQ 3)",
                     "Certificate in Jewellery Casting and Electro Plating",
                     "Certificate in Jewellery Assaying and Hallmarking",
-                    "Certificate in Tailor – Made Course - Jewellery"
+                    "Jewellery Certificate in Tailor – Made Courses"
                 ],
                 "Diploma Level Courses": [
                     "Diploma in Professional Gemmology (Dip. PGSL)",
@@ -235,7 +235,7 @@
                     "Certificate in Gem Cutting and Polishing (NVQ 4)",
                     "Certificate in Gem Cutting and Polishing (Weekend)",
                     "Certificate in Gem Cutting and Polishing (10 DAYS)",
-                    "Certificate in Tailor – Made Course - Gem",
+                    "Gem Related Certificate in Tailor – Made Courses",
                     "Certificate in Jewellery Designing (Manual)",
                     "Certificate in Jewellery Designing Technology (NVQ 4)",
                     "Certificate in Computer Aided Jewellery Designing and Manufacturing (CAD/CAM)",
@@ -243,7 +243,7 @@
                     "Certificate in Jewellery Manufacturing (NVQ 4)",
                     "Certificate in Costume Jewellery Manufacturing",
                     "Certificate in Jewellery Stone Setting (NVQ 3)",
-                    "Certificate in Tailor – Made Course - Jewellery"
+                    "Jewellery Certificate in Tailor – Made Courses"
                 ],
                 "Diploma Level Courses": [
                     "Diploma in Professional Gemmology (Dip. PGSL)",
@@ -416,7 +416,7 @@
                 reg: 2000,
                 fee: 14000
             },
-            "Certificate in Tailor – Made Course - Gem": {
+            "Gem Related Certificate in Tailor – Made Courses": {
                 reg: 2000,
                 fee: 50000
             },
@@ -452,7 +452,7 @@
                 reg: 2000,
                 fee: 45000
             },
-            "Certificate in Tailor – Made Course - Jewellery": {
+            "Jewellery Certificate in Tailor – Made Courses": {
                 reg: 2000,
                 fee: 50000
             },
@@ -536,5 +536,29 @@
         };
     </script>
 </body>
+
+<?php
+session_start();
+if (isset($_SESSION['payment_success'])) {
+    $s = $_SESSION['payment_success'];
+    unset($_SESSION['payment_success']); // Show only once
+?>
+<div class="max-w-3xl mx-auto bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
+    <h2 class="text-xl font-bold text-green-700 mb-3">Payment Completed Successfully!</h2>
+    <p class="text-gray-700"><strong>Student:</strong> <?php echo htmlspecialchars($s['name']); ?></p>
+    <p class="text-gray-700"><strong>Reference No:</strong> <?php echo htmlspecialchars($s['ref']); ?></p>
+    <p class="text-gray-700"><strong>Course:</strong> <?php echo htmlspecialchars($s['course']); ?></p>
+    <p class="text-gray-700"><strong>Total Paid:</strong> Rs. <?php echo number_format($s['paid'], 2); ?></p>
+    <p class="text-gray-700"><strong>Remaining:</strong> Rs. <?php echo number_format($s['due'], 2); ?></p>
+    <?php if ($s['due'] <= 0): ?>
+        <p class="text-green-600 font-semibold mt-2">Full payment received. You're all set!</p>
+    <?php endif; ?>
+    <button onclick="window.print()" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">
+        Print Receipt
+    </button>
+</div>
+<?php } ?>
+
+<!-- Your existing index.php content continues below -->
 
 </html>

@@ -1,76 +1,32 @@
 <?php
+session_start();
 require_once __DIR__ . '/classes/db.php';
 
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+$to = $application['gmail']; 
+$subject = "Payment Confirmation - Reference #$reference_no";
+$message = "
+<html>
+<body>
+    <h2>Payment Confirmation</h2>
+    <p>Dear {$application['name']},</p>
+    <p>Thank you for your payment. Your transaction details are below:</p>
+    <ul>
+        <li><strong>Reference No:</strong> $reference_no</li>
+        <li><strong>Transaction ID:</strong> $transaction_id</li>
+        <li><strong>Regional Centre:</strong> {$application['regional_centre']}</li>
+        <li><strong>Course:</strong> {$application['course_name']}</li>
+        <li><strong>Total Amount Paid:</strong> Rs. {$application['amount']}</li>
+    </ul>
+    <p>Regards,<br>Gem Institute</p>
+</body>
+</html>
+";
+
+$headers = "From: Gem Institute <info@geminstitute.lk>\r\n";
+$headers .= "Reply-To: info@geminstitute.lk\r\n";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-type: text/html; charset=UTF-8\r\n";
 
 
-if (!isset($_POST['reference_no']) || !isset($_POST['transaction_id'])) {
-    header('Location: complete.php?email_status=error');
-    exit();
-}
-
-$reference_no = $_POST['reference_no'];
-$transaction_id = $_POST['transaction_id'];
-
-
-$db = new Database();
-$conn = $db->getConnection();
-
-$stmt = $conn->prepare("
-    SELECT s.name, s.email AS gmail, a.regional_centre, a.course_name, p.amount
-    FROM students s
-    JOIN applications a ON s.id = a.student_id
-    JOIN payments p ON a.id = p.application_id
-    WHERE s.reference_no = ? AND p.transaction_id = ?
-");
-$stmt->bind_param("ss", $reference_no, $transaction_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$application = $result->fetch_assoc();
-$stmt->close();
-$conn->close();
-
-if (!$application || empty($application['gmail'])) {
-    header('Location: complete.php?email_status=error');
-    exit();
-}
-
-
-$to = $application['gmail'];
-$subject = 'Payment Confirmation for Your Course Application';
-$message = <<<EOD
-Dear {$application['name']},
-
-Your payment for the course application has been successfully processed. Here are the details:
-
-- Reference Number: {$reference_no}
-- Name: {$application['name']}
-- Regional Centre: {$application['regional_centre']}
-- Course: {$application['course_name']}
-- Total Amount Paid: Rs. {$formatted_amount}
-
-Thank you for your payment!
-
-Best regards,
-CoursePay Team
-EOD;
-
-
-$formatted_amount = number_format($application['amount'], 2);
-$message = str_replace('{$formatted_amount}', $formatted_amount, $message);
-
-$headers = "From: no-reply@sltdigital.site\r\n" .
-           "Reply-To: no-reply@sltdigital.site\r\n" .
-           "X-Mailer: PHP/" . phpversion();
-
-if (mail($to, $subject, $message, $headers)) {
-    header('Location: complete.php?email_status=success');
-} else {
-    error_log("Failed to send email for reference_no: $reference_no");
-    header('Location: complete.php?email_status=error');
-}
-exit();
-?>
+mail($to, $subject, $message, $headers);
