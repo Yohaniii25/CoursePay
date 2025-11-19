@@ -4,7 +4,6 @@ require_once __DIR__ . '/../../classes/db.php';
 $db = new Database();
 $conn = $db->getConnection();
 
-// === HANDLE POST: EDIT & DELETE ===
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['edit'])) {
         $student_id = (int)$_POST['student_id'];
@@ -12,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $due_amount = (float)$_POST['due_amount'];
         $student_id_manual = trim($_POST['student_id_manual']);
 
-        // Update only: student_id_manual, next_payment_date
+        // manual update 
         $stmt = $conn->prepare("
             UPDATE students 
             SET student_id_manual = ?, next_payment_date = ? 
@@ -22,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $stmt->close();
 
-        // Update due_amount in payments
+        // Update due amount in payments
         $stmt = $conn->prepare("
             UPDATE payments p 
             JOIN applications a ON p.application_id = a.id 
@@ -50,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// === FETCH DATA ===
+
 $sql = "
 SELECT
     s.id AS student_id,
@@ -90,7 +89,7 @@ if (!$result) {
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
-        /* Custom scrollbar styling */
+       
         .custom-scrollbar::-webkit-scrollbar {
             height: 8px;
         }
@@ -159,6 +158,7 @@ if (!$result) {
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Ref No</th>
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Course</th>
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Centre</th>
+                            
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Due</th>
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Next Pay</th>
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">NIC</th>
@@ -261,14 +261,14 @@ if (!$result) {
                                                         Approve
                                                     </button>
                                                 </form>
-                                                <form method="POST" action="approve_action.php" class="flex-1">
-                                                    <input type="hidden" name="student_id" value="<?= $row['student_id'] ?>">
-                                                    <input type="hidden" name="action" value="not_approved">
-                                                    <button type="submit"
-                                                            class="w-full bg-gray-600 text-white px-2 py-1.5 rounded-md text-xs font-medium hover:bg-gray-700 transition">
-                                                        Reject
-                                                    </button>
-                                                </form>
+                                                <button type="button" onclick="openRejectModal(
+                                                    <?= $row['student_id'] ?>,
+                                                    '<?= htmlspecialchars($row['gmail']) ?>',
+                                                    '<?= htmlspecialchars($row['name']) ?>'
+                                                )"
+                                                        class="w-full bg-gray-600 text-white px-2 py-1.5 rounded-md text-xs font-medium hover:bg-gray-700 transition">
+                                                    Reject
+                                                </button>
                                             </div>
                                         <?php else: ?>
                                             <div class="w-full bg-green-100 text-green-700 px-3 py-1.5 rounded-md text-xs font-semibold text-center">
@@ -284,6 +284,38 @@ if (!$result) {
             </div>
         </div>
     </main>
+
+    <!-- Reject Modal -->
+    <div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md shadow-2xl">
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Reject Application</h3>
+            <p class="text-sm text-gray-600 mb-4">Please provide a reason for rejection. This will be sent to the applicant.</p>
+            <form method="POST" action="approve_action.php">
+                <input type="hidden" name="student_id" id="reject_student_id">
+                <input type="hidden" name="action" value="not_approved">
+                <input type="hidden" name="gmail" id="reject_gmail">
+                <input type="hidden" name="name" id="reject_name">
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Rejection Comment</label>
+                    <textarea name="rejection_comment" id="reject_comment"
+                              class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                              placeholder="Enter reason for rejection..."
+                              rows="4"
+                              required></textarea>
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="button" onclick="closeRejectModal()" 
+                            class="bg-gray-500 text-white px-6 py-2.5 rounded-lg hover:bg-gray-600 transition font-medium">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                            class="bg-red-600 text-white px-6 py-2.5 rounded-lg hover:bg-red-700 transition font-medium">
+                        Send Rejection
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Edit Modal -->
     <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
@@ -336,10 +368,27 @@ if (!$result) {
         function closeEdit() {
             document.getElementById('editModal').classList.add('hidden');
         }
-        // Close modal on outside click
+        
+        function openRejectModal(studentId, gmail, name) {
+            document.getElementById('reject_student_id').value = studentId;
+            document.getElementById('reject_gmail').value = gmail;
+            document.getElementById('reject_name').value = name;
+            document.getElementById('reject_comment').value = '';
+            document.getElementById('rejectModal').classList.remove('hidden');
+        }
+        function closeRejectModal() {
+            document.getElementById('rejectModal').classList.add('hidden');
+        }
+        
+        // Close modals on outside click
         document.getElementById('editModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeEdit();
+            }
+        });
+        document.getElementById('rejectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeRejectModal();
             }
         });
     </script>
