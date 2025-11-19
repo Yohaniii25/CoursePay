@@ -374,41 +374,12 @@ $conn->close();
         </a>
     </div>
 
-    <!-- BANK SLIP UPLOAD (PARTIAL PAYMENT) -->
-    <?php if ($current_due > 0 && !$upload_success): ?>
-        <div class="mt-10 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-6 no-print border border-indigo-100">
-            <h3 class="text-xl font-bold text-indigo-800 mb-4">Pay Remaining via Bank Slip</h3>
-            <p class="text-gray-700 mb-4">Remaining balance: <strong>Rs. <?= number_format($amount, 2) ?></strong></p>
-            <button onclick="toggleUpload()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg transition">
-                Upload Slip
-            </button>
-            <div id="upload-section" class="hidden mt-5 space-y-4">
-                <form action="" method="POST" enctype="multipart/form-data" class="bg-white p-5 rounded-xl shadow-md border">
-                    <input type="hidden" name="upload_slip" value="1">
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Amount Paid (Rs.) <span class="text-red-500">*</span></label>
-                        <input type="number" name="slip_amount" step="0.01" min="0.01" max="<?= $current_due ?>" required
-                               placeholder="Please enter your paid amount"
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                        <p class="text-xs text-gray-500 mt-1">Max allowed: Rs. <?= number_format($current_due, 2) ?></p>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Bank Slip (JPG/PNG/PDF) <span class="text-red-500">*</span></label>
-                        <input type="file" name="payment_slip" accept=".jpg,.jpeg,.png,.pdf" required
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
-                    </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 rounded-lg shadow-md transition transform hover:scale-105">
-                        Submit Slip
-                    </button>
-                </form>
-            </div>
-        </div>
-    <?php endif; ?>
+
 </div>
 
 <script>
     function printReceipt() { window.print(); }
-    function toggleUpload() { document.getElementById('upload-section').classList.toggle('hidden'); }
+    
 </script>
 </body>
 </html>

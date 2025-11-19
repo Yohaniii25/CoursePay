@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $due_amount = (float)$_POST['due_amount'];
         $student_id_manual = trim($_POST['student_id_manual']);
 
-        // manual update 
+        // Manual update 
         $stmt = $conn->prepare("
             UPDATE students 
             SET student_id_manual = ?, next_payment_date = ? 
@@ -49,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-
 $sql = "
 SELECT
     s.id AS student_id,
@@ -60,18 +59,23 @@ SELECT
     s.reference_no,
     s.student_id_manual,
     s.next_payment_date,
+    s.checked,
+    a.id AS application_id,
     a.course_name,
     a.regional_centre,
-    p.amount,
+    a.registration_fee,
+    a.course_fee,
+    a.charge_type,
+    p.amount AS total_billed,
     p.paid_amount,
     COALESCE(p.due_amount, 0) AS due_amount,
     p.status AS payment_status,
-    p.slip_file,
-    s.checked
+    p.slip_file
 FROM students s
 LEFT JOIN applications a ON s.id = a.student_id
 LEFT JOIN payments p ON a.id = p.application_id
-ORDER BY s.id DESC
+WHERE a.id IS NOT NULL
+ORDER BY a.id DESC
 ";
 
 $result = $conn->query($sql);
@@ -89,7 +93,6 @@ if (!$result) {
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
-       
         .custom-scrollbar::-webkit-scrollbar {
             height: 8px;
         }
@@ -158,7 +161,7 @@ if (!$result) {
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Ref No</th>
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Course</th>
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Centre</th>
-                            
+                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Charge Type</th> <!-- NEW COLUMN -->
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Due</th>
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Next Pay</th>
                             <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">NIC</th>
@@ -180,9 +183,45 @@ if (!$result) {
                                 <td class="px-4 py-4 text-sm font-medium text-purple-700 whitespace-nowrap"><?= htmlspecialchars($row['reference_no']) ?></td>
                                 <td class="px-4 py-4 text-sm text-gray-600"><?= htmlspecialchars($row['course_name'] ?? '—') ?></td>
                                 <td class="px-4 py-4 text-sm text-gray-600 whitespace-nowrap"><?= htmlspecialchars($row['regional_centre'] ?? '—') ?></td>
-                                <td class="px-4 py-4 text-sm font-semibold text-red-600 whitespace-nowrap">
-                                    Rs. <?= number_format($row['due_amount'], 2) ?>
+
+                                <!-- NEW CHARGE TYPE COLUMN -->
+                                <td class="px-4 py-4 text-center whitespace-nowrap">
+                                    <?php if ($row['checked'] == 1): ?>
+                                        <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full 
+                                            <?= $row['charge_type'] === 'free' ? 'bg-indigo-100 text-indigo-800' : 'bg-orange-100 text-orange-800' ?>">
+                                            <?= $row['charge_type'] === 'free' ? 'Free (Registration Fee Only)' : 'Payable (Full)' ?>
+                                        </span>
+                                    <?php else: ?>
+                                        <form method="POST" action="set_charge_type.php" class="inline">
+                                            <input type="hidden" name="application_id" value="<?= $row['application_id'] ?>">
+                                            <select name="charge_type" onchange="this.form.submit()" 
+                                                    class="text-xs rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                                                <option value="" <?= !$row['charge_type'] ? 'selected' : '' ?>>-- Select --</option>
+                                                <option value="payable" <?= $row['charge_type'] === 'payable' ? 'selected' : '' ?>>Payable (Full)</option>
+                                                <option value="free" <?= $row['charge_type'] === 'free' ? 'selected' : '' ?>>Free (Reg Only)</option>
+                                            </select>
+                                        </form>
+                                    <?php endif; ?>
                                 </td>
+
+                                <!-- DUE AMOUNT (Smart calculation based on Charge Type) -->
+                                <td class="px-4 py-4 text-sm font-bold whitespace-nowrap">
+                                    <?php
+                                    if ($row['charge_type'] === 'free') {
+                                        $due = max(0, $row['registration_fee'] - ($row['paid_amount'] ?? 0));
+                                        echo '<span class="text-indigo-700">Rs. ' . number_format($due, 2) . 
+                                             '<br><small class="font-normal text-indigo-600">(Reg Fee Only)</small></span>';
+                                    } else {
+                                        $full = $row['registration_fee'] + $row['course_fee'];
+                                        $due = max(0, $full - ($row['paid_amount'] ?? 0));
+                                        echo '<span class="text-red-600">Rs. ' . number_format($due, 2) . '</span>';
+                                        if ($row['charge_type'] === 'payable') {
+                                            echo '<br><small class="font-normal text-orange-600">(Full Course)</small>';
+                                        }
+                                    }
+                                    ?>
+                                </td>
+
                                 <td class="px-4 py-4 text-sm text-gray-600 whitespace-nowrap">
                                     <?= $row['next_payment_date'] ? date('d/m/Y', strtotime($row['next_payment_date'])) : '—' ?>
                                 </td>
@@ -225,17 +264,11 @@ if (!$result) {
                                 </td>
                                 <td class="px-4 py-4 whitespace-nowrap">
                                     <div class="flex flex-col gap-2">
-                                        <!-- Edit Button -->
-                                        <button onclick="openEdit(
-                                            <?= $row['student_id'] ?>,
-                                            '<?= $row['next_payment_date'] ?? '' ?>',
-                                            <?= $row['due_amount'] ?>,
-                                            '<?= htmlspecialchars($row['student_id_manual'] ?? '') ?>'
-                                        )" class="w-full bg-blue-600 text-white px-3 py-1.5 rounded-md text-xs font-medium hover:bg-blue-700 transition">
+                                        <button onclick="openEdit(<?= $row['student_id'] ?>, '<?= $row['next_payment_date'] ?? '' ?>', <?= $row['due_amount'] ?>, '<?= htmlspecialchars($row['student_id_manual'] ?? '') ?>')" 
+                                                class="w-full bg-blue-600 text-white px-3 py-1.5 rounded-md text-xs font-medium hover:bg-blue-700 transition">
                                             Edit
                                         </button>
 
-                                        <!-- Delete Button -->
                                         <form method="POST" class="w-full" onsubmit="return confirm('Are you sure you want to delete this student?')">
                                             <input type="hidden" name="student_id" value="<?= $row['student_id'] ?>">
                                             <button type="submit" name="delete"
@@ -244,7 +277,6 @@ if (!$result) {
                                             </button>
                                         </form>
 
-                                        <!-- Approve/Not Approve Buttons -->
                                         <?php if ($row['checked'] != 1): ?>
                                             <div class="flex gap-1 w-full">
                                                 <form method="POST" action="approve_action.php" class="flex-1">
@@ -254,18 +286,14 @@ if (!$result) {
                                                     <input type="hidden" name="name" value="<?= htmlspecialchars($row['name']) ?>">
                                                     <input type="hidden" name="course_name" value="<?= htmlspecialchars($row['course_name']) ?>">
                                                     <input type="hidden" name="regional_centre" value="<?= htmlspecialchars($row['regional_centre']) ?>">
-                                                    <input type="hidden" name="amount" value="<?= $row['amount'] ?>">
+                                                    <input type="hidden" name="amount" value="<?= $row['total_billed'] ?>">
                                                     <input type="hidden" name="reference_no" value="<?= htmlspecialchars($row['reference_no']) ?>">
                                                     <button type="submit"
                                                             class="w-full bg-green-600 text-white px-2 py-1.5 rounded-md text-xs font-medium hover:bg-green-700 transition">
                                                         Approve
                                                     </button>
                                                 </form>
-                                                <button type="button" onclick="openRejectModal(
-                                                    <?= $row['student_id'] ?>,
-                                                    '<?= htmlspecialchars($row['gmail']) ?>',
-                                                    '<?= htmlspecialchars($row['name']) ?>'
-                                                )"
+                                                <button type="button" onclick="openRejectModal(<?= $row['student_id'] ?>, '<?= htmlspecialchars($row['gmail']) ?>', '<?= htmlspecialchars($row['name']) ?>')"
                                                         class="w-full bg-gray-600 text-white px-2 py-1.5 rounded-md text-xs font-medium hover:bg-gray-700 transition">
                                                     Reject
                                                 </button>
@@ -289,35 +317,23 @@ if (!$result) {
     <div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
         <div class="bg-white rounded-lg p-6 w-full max-w-md shadow-2xl">
             <h3 class="text-xl font-bold mb-4 text-gray-800">Reject Application</h3>
-            <p class="text-sm text-gray-600 mb-4">Please provide a reason for rejection. This will be sent to the applicant.</p>
             <form method="POST" action="approve_action.php">
                 <input type="hidden" name="student_id" id="reject_student_id">
                 <input type="hidden" name="action" value="not_approved">
                 <input type="hidden" name="gmail" id="reject_gmail">
                 <input type="hidden" name="name" id="reject_name">
                 <div class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Rejection Comment</label>
-                    <textarea name="rejection_comment" id="reject_comment"
-                              class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                              placeholder="Enter reason for rejection..."
-                              rows="4"
-                              required></textarea>
+                    <textarea name="rejection_comment" id="reject_comment" class="w-full border border-gray-300 rounded-lg px-4 py-3" rows="4" required></textarea>
                 </div>
                 <div class="flex justify-end gap-3">
-                    <button type="button" onclick="closeRejectModal()" 
-                            class="bg-gray-500 text-white px-6 py-2.5 rounded-lg hover:bg-gray-600 transition font-medium">
-                        Cancel
-                    </button>
-                    <button type="submit"
-                            class="bg-red-600 text-white px-6 py-2.5 rounded-lg hover:bg-red-700 transition font-medium">
-                        Send Rejection
-                    </button>
+                    <button type="button" onclick="closeRejectModal()" class="bg-gray-500 text-white px-6 py-2.5 rounded-lg hover:bg-gray-600">Cancel</button>
+                    <button type="submit" class="bg-red-600 text-white px-6 py-2.5 rounded-lg hover:bg-red-700">Send Rejection</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Edit Modal -->
+    
     <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
         <div class="bg-white rounded-lg p-6 w-full max-w-md shadow-2xl">
             <h3 class="text-xl font-bold mb-6 text-gray-800">Edit Student Information</h3>
@@ -325,36 +341,24 @@ if (!$result) {
                 <input type="hidden" name="student_id" id="edit_id">
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Student ID</label>
-                    <input type="text" name="student_id_manual" id="edit_student_id_manual"
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
-                           placeholder="e.g. STU001">
+                    <input type="text" name="student_id_manual" id="edit_student_id_manual" class="w-full border border-gray-300 rounded-lg px-4 py-2.5">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Next Payment Date</label>
-                    <input type="text" name="next_payment_date" id="edit_date"
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-purple-500 focus:border-transparent flatpickr" 
-                           placeholder="YYYY-MM-DD">
+                    <input type="text" name="next_payment_date" id="edit_date" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 flatpickr" placeholder="YYYY-MM-DD">
                 </div>
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Due Amount (Rs.)</label>
-                    <input type="number" step="0.01" name="due_amount" id="edit_due"
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <input type="number" step="0.01" name="due_amount" id="edit_due" class="w-full border border-gray-300 rounded-lg px-4 py-2.5">
                 </div>
                 <div class="flex justify-end gap-3">
-                    <button type="button" onclick="closeEdit()" 
-                            class="bg-gray-500 text-white px-6 py-2.5 rounded-lg hover:bg-gray-600 transition font-medium">
-                        Cancel
-                    </button>
-                    <button type="submit" name="edit" 
-                            class="bg-purple-600 text-white px-6 py-2.5 rounded-lg hover:bg-purple-700 transition font-medium">
-                        Save Changes
-                    </button>
+                    <button type="button" onclick="closeEdit()" class="bg-gray-500 text-white px-6 py-2.5 rounded-lg hover:bg-gray-600">Cancel</button>
+                    <button type="submit" name="edit" class="bg-purple-600 text-white px-6 py-2.5 rounded-lg hover:bg-purple-700">Save Changes</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         function openEdit(id, date, due, studentId) {
@@ -365,30 +369,21 @@ if (!$result) {
             document.getElementById('editModal').classList.remove('hidden');
             flatpickr("#edit_date", { dateFormat: "Y-m-d" });
         }
-        function closeEdit() {
-            document.getElementById('editModal').classList.add('hidden');
-        }
-        
-        function openRejectModal(studentId, gmail, name) {
-            document.getElementById('reject_student_id').value = studentId;
+        function closeEdit() { document.getElementById('editModal').classList.add('hidden'); }
+        function openRejectModal(id, gmail, name) {
+            document.getElementById('reject_student_id').value = id;
             document.getElementById('reject_gmail').value = gmail;
             document.getElementById('reject_name').value = name;
-            document.getElementById('reject_comment').value = '';
             document.getElementById('rejectModal').classList.remove('hidden');
         }
-        function closeRejectModal() {
-            document.getElementById('rejectModal').classList.add('hidden');
-        }
+        function closeRejectModal() { document.getElementById('rejectModal').classList.add('hidden'); }
+
         
-        // Close modals on outside click
-        document.getElementById('editModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeEdit();
-            }
-        });
-        document.getElementById('rejectModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeRejectModal();
+        document.querySelectorAll('select[name="charge_type"]').forEach(select => {
+            const approveBtn = select.closest('tr').querySelector('button[type="submit"]');
+            if (approveBtn && approveBtn.textContent.includes('Approve')) {
+                approveBtn.disabled = !select.value;
+                select.addEventListener('change', () => approveBtn.disabled = !select.value);
             }
         });
     </script>

@@ -176,9 +176,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("Error: Invalid request method.");
 }
 
-$reference_no = filter_var($_POST['reference_no'] ?? '', FILTER_SANITIZE_STRING);
-$payment_method = filter_var($_POST['payment_method'] ?? '', FILTER_SANITIZE_STRING);
-$payment_option = filter_var($_POST['payment_option'] ?? '', FILTER_SANITIZE_STRING);
+$reference_no = filter_var($_POST['reference_no'] ?? '');
+$payment_method = filter_var($_POST['payment_method'] ?? '');
+$payment_option = filter_var($_POST['payment_option'] ?? '');
 
 if (empty($reference_no) || empty($payment_method) || empty($payment_option)) {
     error_log(date('[Y-m-d H:i:s] ') . "Missing required fields: reference_no=$reference_no, payment_method=$payment_method, payment_option=$payment_option", 3, $logDir . 'error.log');

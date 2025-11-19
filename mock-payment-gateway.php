@@ -4,9 +4,9 @@ require_once __DIR__ . '/classes/db.php';
 $db = new Database();
 $conn = $db->getConnection();
 
-$reference_no = filter_var($_GET['ref'] ?? '', FILTER_SANITIZE_STRING);
+$reference_no = filter_var($_GET['ref'] ?? '');
 $amount = (float)($_GET['amount'] ?? 0);
-$success = filter_var($_GET['success'] ?? '', FILTER_SANITIZE_STRING);
+$success = filter_var($_GET['success'] ?? '');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $success === 'true') {
     try {

@@ -63,7 +63,8 @@ $fullPaymentOnly = [
     "Gem-A Foundation Course",
     "Gem-A Diploma Course",
     "Gem Related Certificate in Tailor – Made Courses",
-    "Jewellery Certificate in Tailor – Made Courses"
+    "Jewellery Certificate in Tailor – Made Courses",
+    "Certificate in Geuda Heat Treatment"
 ];
 
 $courseName = trim($application['course_name']);
