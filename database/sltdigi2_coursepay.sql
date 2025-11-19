@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 18, 2025 at 04:34 AM
+-- Generation Time: Nov 19, 2025 at 06:31 AM
 -- Server version: 5.7.23-23
 -- PHP Version: 8.1.33
 
@@ -60,15 +60,6 @@ CREATE TABLE `applications` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `applications`
---
-
-INSERT INTO `applications` (`id`, `student_id`, `regional_centre`, `course_type`, `course_name`, `registration_fee`, `course_fee`, `status`, `created_at`) VALUES
-(100, 100, 'Head Office - Kaduwela', 'Certificate Level Courses', 'Certificate in Basic Gemmology', 2000.00, 50000.00, 'pending', '2025-11-13 04:52:30'),
-(101, 101, 'Head Office - Kaduwela', 'International Courses', 'Gem-A Foundation Course', 10000.00, 589567.22, 'pending', '2025-11-14 03:09:47'),
-(104, 104, 'Ratnapura', 'Diploma Level Courses', 'Diploma in Professional Gemmology (Dip. PGSL)', 2000.00, 150000.00, 'pending', '2025-11-14 04:13:45');
-
 -- --------------------------------------------------------
 
 --
@@ -87,15 +78,6 @@ CREATE TABLE `payments` (
   `due_amount` decimal(10,2) DEFAULT '0.00',
   `slip_file` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`id`, `application_id`, `amount`, `method`, `status`, `transaction_id`, `created_at`, `paid_amount`, `due_amount`, `slip_file`) VALUES
-(95, 100, 52000.00, '', 'completed', NULL, '2025-11-13 04:58:27', 52000.00, 0.00, 'Uploads/slips/1763010638_Payment Receipt - GJRTI.pdf'),
-(96, 101, 599567.22, 'Online Payment', 'completed', NULL, '2025-11-14 03:12:40', 599567.22, 0.00, NULL),
-(99, 104, 152000.00, 'Online Payment', 'pending', NULL, '2025-11-14 04:16:00', 76000.00, 76000.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -119,15 +101,6 @@ CREATE TABLE `students` (
   `gmail` varchar(100) DEFAULT NULL,
   `checked` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`id`, `student_id_manual`, `reference_no`, `name`, `nic_passport`, `nic_file`, `education_background`, `next_payment_date`, `declaration`, `created_at`, `contact_number`, `address`, `gmail`, `checked`) VALUES
-(100, NULL, 'A5DEBE0D', 'SATKUNANATHAN SUTHARSHAN', '930643523V', 'Uploads/nic/1763009550_Sym gjrti logo 2025.png', 'A/L', NULL, 0, '2025-11-13 04:52:30', '0754347886', 'Shangar Mill Road Vantharumoolai', 'sutharshankanna04@gmail.com', 1),
-(101, NULL, 'EAE0DF7F', 'SATKUNANATHAN SUTHARSHAN', '930643523V', 'Uploads/nic/1763089787_WhatsApp Image 2025-11-06 at 9.09.04 AM.jpeg', '', NULL, 0, '2025-11-14 03:09:47', '0754347886', 'Shangar Mill Road Vantharumoolai', 'sutharshankanna04@gmail.com', 1),
-(104, NULL, '5F06D467', 'Jegan Viththiya', '930643523V', 'Uploads/nic/1763093625_11.11 (2) (2).pdf', '', NULL, 0, '2025-11-14 04:13:45', '0754347886', 'Shangar Mill Road Vantharumoolai', 'jeganviththiya@gmail.com', 1);
 
 --
 -- Indexes for dumped tables

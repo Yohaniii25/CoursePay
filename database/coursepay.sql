@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2025 at 08:34 AM
+-- Generation Time: Nov 19, 2025 at 01:32 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -66,7 +66,7 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `student_id`, `regional_centre`, `course_type`, `course_name`, `registration_fee`, `course_fee`, `status`, `charge_type`, `created_at`) VALUES
-(113, 113, 'Kandy', 'Certificate Level Courses', 'Certificate in Basic Gemmology', '2000.00', '50000.00', 'pending', NULL, '2025-11-19 07:10:29');
+(113, 113, 'Kandy', 'Certificate Level Courses', 'Certificate in Basic Gemmology', '2000.00', '50000.00', 'pending', 'free', '2025-11-19 07:10:29');
 
 -- --------------------------------------------------------
 
