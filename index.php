@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +13,26 @@
 
 <body class="bg-gray-100">
 
+<?php
+if (isset($_SESSION['payment_success'])) {
+    $s = $_SESSION['payment_success'];
+    unset($_SESSION['payment_success']); // Show only once
+?>
+<div class="max-w-3xl mx-auto bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8 mt-10">
+    <h2 class="text-xl font-bold text-green-700 mb-3">Payment Completed Successfully!</h2>
+    <p class="text-gray-700"><strong>Student:</strong> <?php echo htmlspecialchars($s['name']); ?></p>
+    <p class="text-gray-700"><strong>Reference No:</strong> <?php echo htmlspecialchars($s['ref']); ?></p>
+    <p class="text-gray-700"><strong>Course:</strong> <?php echo htmlspecialchars($s['course']); ?></p>
+    <p class="text-gray-700"><strong>Total Paid:</strong> Rs. <?php echo number_format($s['paid'], 2); ?></p>
+    <p class="text-gray-700"><strong>Remaining:</strong> Rs. <?php echo number_format($s['due'], 2); ?></p>
+    <?php if ($s['due'] <= 0): ?>
+        <p class="text-green-600 font-semibold mt-2">Full payment received. You're all set!</p>
+    <?php endif; ?>
+    <button onclick="window.print()" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">
+        Print Receipt
+    </button>
+</div>
+<?php } ?>
 
 <header class="bg-white shadow-md py-4 px-6 flex items-center justify-between relative">
 
@@ -174,6 +197,15 @@
                         class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer">
                     <span class="ml-3 text-sm text-gray-700">
                         I hereby declare that the above information is true and correct.
+                    </span>
+                </label>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                <label class="flex items-start cursor-pointer">
+                    <input type="checkbox" name="declaration2" value="1" required
+                        class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                    <span class="ml-3 text-sm text-gray-700">
+                        I have read and understand the code of bylaws published by the institution.
                     </span>
                 </label>
             </div>
@@ -416,10 +448,7 @@
                 reg: 2000,
                 fee: 14000
             },
-            "Gem Related Certificate in Tailor – Made Courses": {
-                reg: 2000,
-                fee: 50000
-            },
+            "Gem Related Certificate in Tailor – Made Courses": {},
             "Certificate in Jewellery Designing (Manual)": {
                 reg: 2000,
                 fee: 43000
@@ -452,10 +481,7 @@
                 reg: 2000,
                 fee: 45000
             },
-            "Jewellery Certificate in Tailor – Made Courses": {
-                reg: 2000,
-                fee: 50000
-            },
+            "Jewellery Certificate in Tailor – Made Courses": {},
             "Certificate in Costume Jewellery Manufacturing": {
                 reg: 2000,
                 fee: 20000
@@ -510,13 +536,19 @@
 
         courseSelect.addEventListener('change', function() {
             const selectedCourse = this.value;
-            if (courseFees[selectedCourse]) {
-                const {
-                    reg,
-                    fee
-                } = courseFees[selectedCourse];
-                coursePrice.value =
-                    `Registration Fee: Rs. ${reg.toLocaleString()} | Course Fee: Rs. ${fee.toLocaleString()}`;
+            const tailorMessageCourses = [
+                "Gem Related Certificate in Tailor – Made Courses",
+                "Jewellery Certificate in Tailor – Made Courses"
+            ];
+
+            if (tailorMessageCourses.includes(selectedCourse)) {
+                coursePrice.value = "For further information such as course dates, duration, and payment details, please contact the administrator";
+                regFeeInput.value = "";
+                courseFeeInput.value = "";
+                totalFeeInput.value = "";
+            } else if (courseFees[selectedCourse]) {
+                const { reg, fee } = courseFees[selectedCourse];
+                coursePrice.value = `Registration Fee: Rs. ${reg.toLocaleString()} | Course Fee: Rs. ${fee.toLocaleString()}`;
                 regFeeInput.value = reg;
                 courseFeeInput.value = fee;
                 updateTotalFee();
@@ -536,29 +568,5 @@
         };
     </script>
 </body>
-
-<?php
-session_start();
-if (isset($_SESSION['payment_success'])) {
-    $s = $_SESSION['payment_success'];
-    unset($_SESSION['payment_success']); // Show only once
-?>
-<div class="max-w-3xl mx-auto bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
-    <h2 class="text-xl font-bold text-green-700 mb-3">Payment Completed Successfully!</h2>
-    <p class="text-gray-700"><strong>Student:</strong> <?php echo htmlspecialchars($s['name']); ?></p>
-    <p class="text-gray-700"><strong>Reference No:</strong> <?php echo htmlspecialchars($s['ref']); ?></p>
-    <p class="text-gray-700"><strong>Course:</strong> <?php echo htmlspecialchars($s['course']); ?></p>
-    <p class="text-gray-700"><strong>Total Paid:</strong> Rs. <?php echo number_format($s['paid'], 2); ?></p>
-    <p class="text-gray-700"><strong>Remaining:</strong> Rs. <?php echo number_format($s['due'], 2); ?></p>
-    <?php if ($s['due'] <= 0): ?>
-        <p class="text-green-600 font-semibold mt-2">Full payment received. You're all set!</p>
-    <?php endif; ?>
-    <button onclick="window.print()" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">
-        Print Receipt
-    </button>
-</div>
-<?php } ?>
-
-<!-- Your existing index.php content continues below -->
 
 </html>
