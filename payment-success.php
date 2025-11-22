@@ -30,11 +30,11 @@ if (empty($reference_no)) {
     </header>
 
     <div class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-8">
-        <h1 class="text-2xl font-bold mb-6 text-blue-700">Payment Successful</h1>
+        <h1 class="text-2xl font-bold mb-6 text-blue-700">Bank Slip Uploaded Successfully</h1>
         <div class="p-6 bg-green-50 border-l-4 border-green-500 rounded-lg mb-6">
-            <p class="font-semibold text-green-700">Payment Received</p>
-            <p class="text-gray-600 mt-2">Your bank slip payment for Reference No: <strong><?php echo htmlspecialchars($reference_no); ?></strong> has been successfully received.</p>
-            <p class="text-gray-600 mt-2">You will receive an email with payment details soon.</p>
+            <p class="font-semibold text-green-700">Bank Slip Received - Thank You!</p>
+            <p class="text-gray-600 mt-2">Your bank slip for Reference No: <strong><?php echo htmlspecialchars($reference_no); ?></strong> has been received.</p>
+            <p class="text-gray-600 mt-2">Our team will inform you about further details shortly.</p>
         </div>
         <a href="index.php" class="block text-center bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-lg mt-6">
             Return to Home

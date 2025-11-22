@@ -266,6 +266,9 @@ try {
     $remaining_amount = $payment_option === '50_percent' ? $due_amount / 2 : 0;
 
     if ($payment_method === 'Online Payment') {
+        // Generate unique transaction ID
+        $transaction_id = 'TXN-' . $reference_no . '-' . time() . '-' . uniqid();
+        
         // Store payment details in session
         $_SESSION['reference_no'] = $reference_no;
         $_SESSION['amount'] = $amount_to_pay;
@@ -273,7 +276,19 @@ try {
         $_SESSION['gmail'] = $application['gmail'];
         $_SESSION['course_name'] = $application['course_name'];
         $_SESSION['regional_centre'] = $application['regional_centre'];
-        error_log(date('[Y-m-d H:i:s] ') . "Online Payment: amount_to_pay=$amount_to_pay stored in session", 3, $logDir . 'error.log');
+        $_SESSION['transaction_id'] = $transaction_id;
+        error_log(date('[Y-m-d H:i:s] ') . "Online Payment: amount_to_pay=$amount_to_pay, transaction_id=$transaction_id stored in session", 3, $logDir . 'error.log');
+        
+        // Update payment record with transaction_id
+        $stmt = $conn->prepare("UPDATE payments SET transaction_id = ? WHERE id = ?");
+        if (!$stmt) {
+            throw new Exception("Prepare failed: " . $conn->error);
+        }
+        $stmt->bind_param("si", $transaction_id, $payment['id']);
+        if (!$stmt->execute()) {
+            throw new Exception("Failed to update transaction_id: " . $stmt->error);
+        }
+        $stmt->close();
 
         if (!$conn->commit()) {
             throw new Exception("Failed to commit transaction: " . $conn->error);
@@ -304,22 +319,25 @@ try {
             throw new Exception("Failed to upload bank slip.");
         }
 
+        // Generate unique transaction ID for bank slip
+        $transaction_id = 'SLIP-' . $reference_no . '-' . time() . '-' . uniqid();
+        
         // Update payment record
         $new_paid_amount = $payment['paid_amount'] + $amount_to_pay;
         $new_due_amount = $payment['amount'] - $new_paid_amount;
         $new_status = $new_due_amount <= 0 ? 'completed' : 'pending';
-        error_log(date('[Y-m-d H:i:s] ') . "Bank Slip: updating payment - paid_amount=$new_paid_amount, due_amount=$new_due_amount, status=$new_status", 3, $logDir . 'error.log');
+        error_log(date('[Y-m-d H:i:s] ') . "Bank Slip: updating payment - paid_amount=$new_paid_amount, due_amount=$new_due_amount, status=$new_status, transaction_id=$transaction_id", 3, $logDir . 'error.log');
 
         $stmt = $conn->prepare("
             UPDATE payments
-            SET paid_amount = ?, due_amount = ?, status = ?, method = ?, slip_file = ?
+            SET paid_amount = ?, due_amount = ?, status = ?, method = ?, slip_file = ?, transaction_id = ?
             WHERE id = ?
         ");
         if (!$stmt) {
             throw new Exception("Prepare failed: " . $conn->error);
         }
         $method = 'Bank Slip';
-        $stmt->bind_param("ddsssi", $new_paid_amount, $new_due_amount, $new_status, $method, $slip_file_path, $payment['id']);
+        $stmt->bind_param("ddssssi", $new_paid_amount, $new_due_amount, $new_status, $method, $slip_file_path, $transaction_id, $payment['id']);
         if (!$stmt->execute()) {
             throw new Exception("Failed to update payment record: " . $stmt->error);
         }
@@ -331,9 +349,10 @@ try {
         $message = "
 Dear {$application['name']},
 
-Your bank slip payment for the course '{$application['course_name']}' at {$application['regional_centre']} has been received.
+Your bank slip for the course '{$application['course_name']}' at {$application['regional_centre']} has been received.
 
 Reference Number: $reference_no
+Transaction ID: $transaction_id
 Amount Paid: Rs. " . number_format($amount_to_pay, 2) . "
 Remaining Balance: Rs. " . number_format($new_due_amount, 2) . "
 Payment Method: Bank Slip
@@ -344,7 +363,7 @@ The remaining 50% (Rs. " . number_format($remaining_amount, 2) . ") should be pa
 ";
         }
         $message .= "
-You will receive an email with verified payment details soon.
+Our Team will inform you about further details.
 
 Best regards,
 Gem and Jewellery Research and Training Institute
@@ -365,6 +384,7 @@ A bank slip payment has been received with the following details:
 
 Student Name: {$application['name']}
 Reference Number: $reference_no
+Transaction ID: $transaction_id
 Course: {$application['course_name']}
 Regional Centre: {$application['regional_centre']}
 Amount Paid: Rs. " . number_format($amount_to_pay, 2) . "
