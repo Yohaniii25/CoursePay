@@ -56,7 +56,11 @@ $total_amount = $application['registration_fee'] + $application['course_fee'];
 $due_amount = $application['due_amount'] ?? $total_amount;
 $paid_amount = $application['paid_amount'] ?? 0;
 $course_fee = $application['course_fee'];
-$half_due_amount = $due_amount / 2;
+$registration_fee = $application['registration_fee'];
+
+// Calculate 50% payment: Full Registration Fee + 50% Course Fee
+$fifty_percent_amount = $registration_fee + ($course_fee / 2);
+$remaining_fifty_percent = $course_fee / 2;
 
 // === CUSTOM INSTALLMENT LOGIC ===
 $fullPaymentOnly = [
@@ -145,17 +149,17 @@ $isFullOnly = in_array($courseName, $fullPaymentOnly);
                             </option>
                             <?php if ($due_amount > 0): ?>
                                 <option value="50_percent">
-                                    50% Due Amount (Rs. <?= number_format($half_due_amount, 2) ?>)
+                                    50% Payment - Full Reg Fee + 50% Course Fee (Rs. <?= number_format($fifty_percent_amount, 2) ?>)
                                 </option>
                             <?php endif; ?>
                         <?php endif; ?>
                     </select>
 
                     <p class="text-sm text-gray-600 mt-2 fifty-percent-message <?= $isFullOnly ? 'hidden' : '' ?>">
-                        The 50% due amount should be paid within half the time of the course 
-                        (e.g., if the course is 6 months, after three months payment should be completed).<br>
-                        <strong>Amount to be paid now:</strong> Rs. <?= number_format($half_due_amount, 2) ?><br>
-                        <strong>Remaining 50% to be paid:</strong> Rs. <?= number_format($half_due_amount, 2) ?>
+                        Payment Plan: Full Registration Fee (Rs. <?= number_format($registration_fee, 2) ?>) + 50% Course Fee (Rs. <?= number_format($remaining_fifty_percent, 2) ?>)<br>
+                        This should be paid within half the time of the course (e.g., if the course is 6 months, after three months the remaining 50% course fee should be paid).<br>
+                        <strong>Amount to be paid now:</strong> Rs. <?= number_format($fifty_percent_amount, 2) ?><br>
+                        <strong>Remaining 50% Course Fee to be paid:</strong> Rs. <?= number_format($remaining_fifty_percent, 2) ?>
                     </p>
                 </div>
 

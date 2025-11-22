@@ -253,8 +253,19 @@ try {
 
     // Calculate amount based on payment_option
     $due_amount = $payment['due_amount'];
-    $amount_to_pay = $payment_option === '50_percent' ? $due_amount / 2 : $due_amount;
-    error_log(date('[Y-m-d H:i:s] ') . "Payment calculation: due_amount=$due_amount, payment_option=$payment_option, amount_to_pay=$amount_to_pay", 3, $logDir . 'error.log');
+    $registration_fee = $application['registration_fee'];
+    $course_fee = $application['course_fee'];
+    
+    // 50% payment: Full Registration Fee + 50% Course Fee
+    if ($payment_option === '50_percent') {
+        $amount_to_pay = $registration_fee + ($course_fee / 2);
+        $remaining_amount = $course_fee / 2;
+    } else {
+        $amount_to_pay = $due_amount;
+        $remaining_amount = 0;
+    }
+    
+    error_log(date('[Y-m-d H:i:s] ') . "Payment calculation: due_amount=$due_amount, payment_option=$payment_option, amount_to_pay=$amount_to_pay, remaining=$remaining_amount", 3, $logDir . 'error.log');
 
     if ($amount_to_pay <= 0 || $amount_to_pay > $due_amount + 0.01) {
         throw new Exception("Invalid payment amount: $amount_to_pay, Due: $due_amount");
@@ -263,7 +274,6 @@ try {
     // Store payment option and amount for email and complete.php
     $_SESSION['payment_option'] = $payment_option;
     $_SESSION['amount_to_pay'] = $amount_to_pay;
-    $remaining_amount = $payment_option === '50_percent' ? $due_amount / 2 : 0;
 
     if ($payment_method === 'Online Payment') {
         // Generate unique transaction ID
