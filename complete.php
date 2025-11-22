@@ -328,14 +328,14 @@ $conn->close();
                     <span class="text-gray-600">Payment Received</span>
                     <span class="font-bold text-green-600">Rs. <?php echo number_format($amount, 2); ?></span>
                 </div>
-                <!--<div class="flex justify-between">-->
-                <!--    <span class="text-gray-600">Total Paid So Far</span>-->
-                <!--    <span class="font-bold text-blue-600">Rs. <?php echo number_format($current_paid, 2); ?></span>-->
-                <!--</div>-->
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Total Paid So Far</span>
+                    <span class="font-bold text-blue-600">Rs. <?php echo number_format($current_paid, 2); ?></span>
+                </div>
                 <div class="flex justify-between">
                     <span class="text-gray-600">Remaining Balance</span>
-                    <span class="font-bold <?php echo $amount > 0 ? 'text-orange-600' : 'text-green-600'; ?>">
-                        Rs. <?php echo number_format($amount, 2); ?>
+                    <span class="font-bold <?php echo $current_due > 0 ? 'text-orange-600' : 'text-green-600'; ?>">
+                        Rs. <?php echo number_format($current_due, 2); ?>
                     </span>
                 </div>
                 <div class="flex justify-between">
