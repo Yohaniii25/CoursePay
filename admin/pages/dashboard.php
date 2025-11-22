@@ -240,14 +240,27 @@ if (!$result) {
                                 </td>
                                 <td class="px-4 py-4 text-center whitespace-nowrap">
                                     <?php if ($row['slip_file']): ?>
-                                        <a href="/gem/CoursePay/<?= htmlspecialchars($row['slip_file']) ?>" target="_blank"
-                                           class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1.5 rounded-md hover:bg-green-200 transition text-xs font-medium">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                                            </svg>
-                                            View
-                                        </a>
+                                        <div class="flex flex-col gap-1">
+                                            <?php
+                                            $slips = json_decode($row['slip_file'], true);
+                                            if (json_last_error() === JSON_ERROR_NONE && is_array($slips)) {
+                                                foreach ($slips as $i => $s) {
+                                                    $label = ($i === 0) ? 'View 1st Slip' : 'View ' . ($i+1) . 'th Slip';
+                                                    echo '<a href="/gem/CoursePay/' . htmlspecialchars($s) . '" target="_blank" class="inline-flex items-center justify-center gap-1 bg-green-100 text-green-700 px-3 py-1.5 rounded-md hover:bg-green-200 transition text-xs font-medium">'
+                                                         . '<svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" /></svg>'
+                                                         . htmlspecialchars($label) . '</a>';
+                                                }
+                                            } else {
+                                                // Single string path
+                                                echo '<a href="/gem/CoursePay/' . htmlspecialchars($row['slip_file']) . '" target="_blank" class="inline-flex items-center justify-center gap-1 bg-green-100 text-green-700 px-3 py-1.5 rounded-md hover:bg-green-200 transition text-xs font-medium">'
+                                                     . '<svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" /></svg>'
+                                                     . 'View Slip</a>';
+                                            }
+                                            if ($row['charge_type'] === 'payable' && $row['paid_amount'] < ($row['total_billed'] ?? 0)) {
+                                                echo '<span class="text-xs text-gray-500 text-center">+ 2nd Slip (Pending)</span>';
+                                            }
+                                            ?>
+                                        </div>
                                     <?php else: ?>
                                         <span class="text-gray-400">—</span>
                                     <?php endif; ?>
@@ -299,8 +312,18 @@ if (!$result) {
                                                 </button>
                                             </div>
                                         <?php else: ?>
-                                            <div class="w-full bg-green-100 text-green-700 px-3 py-1.5 rounded-md text-xs font-semibold text-center">
-                                                ✓ Approved
+                                            <div class="flex flex-col gap-2">
+                                                <div class="w-full bg-green-100 text-green-700 px-3 py-1.5 rounded-md text-xs font-semibold text-center">
+                                                    ✓ Approved
+                                                </div>
+                                                <!-- Send Installment Reminder Button -->
+                                                <form method="POST" action="send_installment_reminder.php" class="w-full">
+                                                    <input type="hidden" name="student_id" value="<?= $row['student_id'] ?>">
+                                                    <input type="hidden" name="action" value="send_reminder">
+                                                    <button type="submit" class="w-full bg-purple-600 text-white px-3 py-1.5 rounded-md text-xs font-medium hover:bg-purple-700 transition">
+                                                        📧 Send 2nd Installment Reminder
+                                                    </button>
+                                                </form>
                                             </div>
                                         <?php endif; ?>
                                     </div>

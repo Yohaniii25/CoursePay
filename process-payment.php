@@ -282,12 +282,14 @@ try {
         // Store payment details in session
         $_SESSION['reference_no'] = $reference_no;
         $_SESSION['amount'] = $amount_to_pay;
-        $_SESSION['name'] = $application['name'];
-        $_SESSION['gmail'] = $application['gmail'];
-        $_SESSION['course_name'] = $application['course_name'];
-        $_SESSION['regional_centre'] = $application['regional_centre'];
-        $_SESSION['transaction_id'] = $transaction_id;
-        error_log(date('[Y-m-d H:i:s] ') . "Online Payment: amount_to_pay=$amount_to_pay, transaction_id=$transaction_id stored in session", 3, $logDir . 'error.log');
+            $_SESSION['name'] = $application['name'];
+            $_SESSION['gmail'] = $application['gmail'];
+            $_SESSION['course_name'] = $application['course_name'];
+            $_SESSION['regional_centre'] = $application['regional_centre'];
+            $_SESSION['transaction_id'] = $transaction_id;
+            error_log(date('[Y-m-d H:i:s] ') . "Online Payment: amount_to_pay=$amount_to_pay, transaction_id=$transaction_id stored in session", 3, $logDir . 'error.log');
+        
+            // (removed accidental bank-slip handling from online branch)
         
         // Update payment record with transaction_id
         $stmt = $conn->prepare("UPDATE payments SET transaction_id = ? WHERE id = ?");
@@ -338,20 +340,42 @@ try {
         $new_status = $new_due_amount <= 0 ? 'completed' : 'pending';
         error_log(date('[Y-m-d H:i:s] ') . "Bank Slip: updating payment - paid_amount=$new_paid_amount, due_amount=$new_due_amount, status=$new_status, transaction_id=$transaction_id", 3, $logDir . 'error.log');
 
-        $stmt = $conn->prepare("
-            UPDATE payments
-            SET paid_amount = ?, due_amount = ?, status = ?, method = ?, slip_file = ?, transaction_id = ?
-            WHERE id = ?
-        ");
-        if (!$stmt) {
-            throw new Exception("Prepare failed: " . $conn->error);
-        }
-        $method = 'Bank Slip';
-        $stmt->bind_param("ddssssi", $new_paid_amount, $new_due_amount, $new_status, $method, $slip_file_path, $transaction_id, $payment['id']);
-        if (!$stmt->execute()) {
-            throw new Exception("Failed to update payment record: " . $stmt->error);
-        }
-        $stmt->close();
+        
+            // Build slip file JSON array (preserve existing single-string values)
+            $existing_slip = isset($payment['slip_file']) ? $payment['slip_file'] : null;
+            $slips = [];
+            if ($existing_slip) {
+                $decoded = json_decode($existing_slip, true);
+                if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                    $slips = $decoded;
+                } else {
+                    $slips = [$existing_slip];
+                }
+            }
+            $slips[] = $slip_file_path;
+            $slip_json = json_encode($slips);
+        
+            // Update payment record
+            $new_paid_amount = $payment['paid_amount'] + $amount_to_pay;
+            $new_due_amount = $payment['amount'] - $new_paid_amount;
+            $new_status = $new_due_amount <= 0 ? 'completed' : 'pending';
+            error_log(date('[Y-m-d H:i:s] ') . "Bank Slip: updating payment - paid_amount=$new_paid_amount, due_amount=$new_due_amount, status=$new_status, transaction_id=$transaction_id", 3, $logDir . 'error.log');
+        
+            $stmt = $conn->prepare("
+                UPDATE payments
+                SET paid_amount = ?, due_amount = ?, status = ?, method = ?, slip_file = ?, transaction_id = ?
+                WHERE id = ?
+            ");
+            if (!$stmt) {
+                throw new Exception("Prepare failed: " . $conn->error);
+            }
+            $method = 'Bank Slip';
+            $stmt->bind_param("ddssssi", $new_paid_amount, $new_due_amount, $new_status, $method, $slip_json, $transaction_id, $payment['id']);
+            if (!$stmt->execute()) {
+                throw new Exception("Failed to update payment record: " . $stmt->error);
+            }
+            $stmt->close();
+            // (bank-slip handling will update slip_file as JSON array below)
 
         // Send emails
         $to = $application['gmail'];

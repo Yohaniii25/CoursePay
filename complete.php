@@ -174,12 +174,26 @@ try {
                 $final_due = $total_amount - $final_paid;
                 $final_status = $final_due <= 0 ? 'completed' : 'pending';
 
+                // Build slip file JSON array (preserve existing single-string values)
+                $existing_slip = isset($payment['slip_file']) ? $payment['slip_file'] : null;
+                $slips = [];
+                if ($existing_slip) {
+                    $decoded = json_decode($existing_slip, true);
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                        $slips = $decoded;
+                    } else {
+                        $slips = [$existing_slip];
+                    }
+                }
+                $slips[] = $slip_path;
+                $slip_json = json_encode($slips);
+
                 $stmt = $conn->prepare("
                     UPDATE payments
                     SET paid_amount = ?, due_amount = ?, status = ?, method = 'Bank Slip', slip_file = ?
                     WHERE id = ?
                 ");
-                $stmt->bind_param("ddssi", $final_paid, $final_due, $final_status, $slip_path, $payment['id']);
+                $stmt->bind_param("ddssi", $final_paid, $final_due, $final_status, $slip_json, $payment['id']);
                 $stmt->execute();
                 $stmt->close();
 
@@ -219,6 +233,7 @@ try {
                 $conn->close();
                 header("Location: index.php");
                 exit;
+                    
             }
         }
     }
