@@ -126,4 +126,20 @@
     "education_background": "g",
     "declaration": "1",
     "declaration2": "1"
+}[2025-11-25 07:39:25] submit.php: POST data: {
+    "name": "Yohani Abeykoon",
+    "contact_number": "011234456",
+    "gmail": "womoni3285@bizmud.com",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Manufacturing (NVQ 3)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 20,000",
+    "reg_fee": "2000",
+    "course_fee": "20000",
+    "total_fee_display": "Total Fee: Rs. 22,000",
+    "nic_passport": "1999999999",
+    "education_background": "e",
+    "declaration": "1",
+    "declaration2": "1"
 }

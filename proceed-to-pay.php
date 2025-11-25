@@ -7,93 +7,83 @@ if (!is_dir($logDir)) {
     mkdir($logDir, 0755, true);
     chmod($logDir, 0755);
 }
-error_log(date('[Y-m-d H:i:s] ') . "proceed-to-pay.php: GET data: " . json_encode($_GET, JSON_PRETTY_PRINT), 3, $logDir . 'error.log');
 
 $db = new Database();
 $conn = $db->getConnection();
 
-$reference_no = filter_var($_GET['ref'] ?? '');
+$reference_no = trim($_GET['ref'] ?? '');
 $error = $_GET['error'] ?? '';
 
 if (empty($reference_no)) {
     die("Error: Invalid reference number.");
 }
 
-// Fetch application details
+// Fetch application + total paid so far
 $stmt = $conn->prepare("
-    SELECT s.id AS student_id, s.name, s.gmail, s.checked, a.id AS application_id, a.course_name, a.regional_centre, a.registration_fee, a.course_fee,
-           p.id AS payment_id, p.amount, p.paid_amount, p.due_amount
+    SELECT 
+        s.name, s.gmail, s.checked,
+        a.id AS application_id,
+        a.course_name, a.regional_centre,
+        a.registration_fee, a.course_fee, a.charge_type,
+        COALESCE(SUM(p.paid_amount), 0) AS total_paid
     FROM students s
     JOIN applications a ON s.id = a.student_id
-    LEFT JOIN payments p ON a.id = p.application_id
+    LEFT JOIN payments p ON a.id = p.application_id AND p.status = 'completed'
     WHERE s.reference_no = ?
+    GROUP BY s.id, a.id
 ");
-if (!$stmt) {
-    error_log(date('[Y-m-d H:i:s] ') . "Prepare failed: " . $conn->error, 3, $logDir . 'error.log');
-    die("Prepare failed: " . $conn->error);
-}
 $stmt->bind_param("s", $reference_no);
-if (!$stmt->execute()) {
-    error_log(date('[Y-m-d H:i:s] ') . "Query failed: " . $stmt->error, 3, $logDir . 'error.log');
-    die("Query failed: " . $stmt->error);
-}
-$result = $stmt->get_result();
-$application = $result->fetch_assoc();
+$stmt->execute();
+$app = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 $conn->close();
 
-if (!$application) {
-    error_log(date('[Y-m-d H:i:s] ') . "Invalid Reference ID: $reference_no", 3, $logDir . 'error.log');
+if (!$app) {
     die("Error: Invalid Reference ID.");
 }
-
-if (!$application['checked']) {
-    error_log(date('[Y-m-d H:i:s] ') . "Application not approved: $reference_no", 3, $logDir . 'error.log');
+if (!$app['checked']) {
     die("Error: Your application is still pending approval. Please wait for admin approval.");
 }
 
-$total_amount = $application['registration_fee'] + $application['course_fee'];
-$due_amount = $application['due_amount'] ?? $total_amount;
-$paid_amount = $application['paid_amount'] ?? 0;
-$course_fee = $application['course_fee'];
-$registration_fee = $application['registration_fee'];
+$total_required = $app['charge_type'] === 'free'
+    ? $app['registration_fee']
+    : $app['registration_fee'] + $app['course_fee'];
 
-// Calculate 50% payment: Full Registration Fee + 50% Course Fee
-$fifty_percent_amount = $registration_fee + ($course_fee / 2);
-$remaining_fifty_percent = $course_fee / 2;
+$already_paid = (float)$app['total_paid'];
+$due_amount   = $total_required - $already_paid;
 
-// === CUSTOM INSTALLMENT LOGIC ===
-$fullPaymentOnly = [
+// Determine what has been paid
+$first_installment_amount = $app['registration_fee'] + ($app['course_fee'] * 0.5);
+$first_installment_paid = $already_paid >= $first_installment_amount - 0.01; // tolerance
+
+$courseName = trim($app['course_name']);
+$fullPaymentOnlyCourses = [
     "Gem-A Foundation Course",
     "Gem-A Diploma Course",
     "Gem Related Certificate in Tailor – Made Courses",
     "Jewellery Certificate in Tailor – Made Courses",
     "Certificate in Geuda Heat Treatment"
 ];
-
-$courseName = trim($application['course_name']);
-$isFullOnly = in_array($courseName, $fullPaymentOnly);
+$isFullOnlyCourse = in_array($courseName, $fullPaymentOnlyCourses);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proceed to Payment - Gem and Jewellery Research and Training Institute</title>
+    <title>Proceed to Payment - GJRTI</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
     <header class="bg-white shadow-md py-4 px-6 flex items-center justify-between relative">
         <div class="flex items-center">
-            <img src="https://sltdigital.site/gem/wp-content/uploads/2025/06/GJRT-1.png"
-                 alt="Gem and Jewellery Research and Training Institute Logo"
-                 class="h-20 w-auto">
+            <img src="https://sltdigital.site/gem/wp-content/uploads/2025/06/GJRT-1.png" alt="Logo" class="h-20 w-auto">
         </div>
         <h1 class="text-xl font-semibold text-indigo-800 text-center absolute left-1/2 transform -translate-x-1/2">
             Gem and Jewellery Research and Training Institute
         </h1>
-        <a href="https://sltdigital.site/gem/"
-           class="bg-[#25116F] text-white px-5 py-2 rounded-lg hover:opacity-90 transition">
+        <a href="https://sltdigital.site/gem/" class="bg-[#25116F] text-white px-5 py-2 rounded-lg hover:opacity-90 transition">
             ← Back to Website
         </a>
     </header>
@@ -104,114 +94,113 @@ $isFullOnly = in_array($courseName, $fullPaymentOnly);
         <?php if (!empty($error)): ?>
             <div class="p-6 bg-red-50 border-l-4 border-red-500 rounded-lg mb-6">
                 <p class="font-semibold text-red-700">Error</p>
-                <p class="text-gray-600 mt-2"><?php echo htmlspecialchars($error); ?></p>
+                <p class="text-gray-600 mt-2"><?= htmlspecialchars($error) ?></p>
             </div>
         <?php endif; ?>
 
-        <div class="mb-6">
-            <p class="text-gray-600">Reference Number: <strong><?php echo htmlspecialchars($reference_no); ?></strong></p>
-            <p class="text-gray-600">Course: <strong><?php echo htmlspecialchars($application['course_name']); ?></strong></p>
-            <p class="text-gray-600">Regional Centre: <strong><?php echo htmlspecialchars($application['regional_centre']); ?></strong></p>
-            <p class="text-gray-600">Registration Fee: <strong>Rs. <?php echo number_format($application['registration_fee'], 2); ?></strong></p>
-            <p class="text-gray-600">Course Fee: <strong>Rs. <?php echo number_format($course_fee, 2); ?></strong></p>
-            <p class="text-gray-600">Total Amount: <strong>Rs. <?php echo number_format($total_amount, 2); ?></strong></p>
-            <p class="text-gray-600">Paid Amount: <strong>Rs. <?php echo number_format($paid_amount, 2); ?></strong></p>
-            <p class="text-gray-600">Due Amount: <strong>Rs. <?php echo number_format($due_amount, 2); ?></strong></p>
+        <div class="mb-6 space-y-2">
+            <p><strong>Reference No:</strong> <?= htmlspecialchars($reference_no) ?></p>
+            <p><strong>Student:</strong> <?= htmlspecialchars($app['name']) ?></p>
+            <p><strong>Course:</strong> <?= htmlspecialchars($app['course_name']) ?></p>
+            <p><strong>Centre:</strong> <?= htmlspecialchars($app['regional_centre']) ?></p>
+            <p><strong>Registration Fee:</strong> Rs. <?= number_format($app['registration_fee'], 2) ?></p>
+            <p><strong>Course Fee:</strong> Rs. <?= number_format($app['course_fee'], 2) ?></p>
+            <p><strong>Total Required:</strong> Rs. <?= number_format($total_required, 2) ?></p>
+            <p class="text-green-600 font-bold"><strong>Already Paid:</strong> Rs. <?= number_format($already_paid, 2) ?></p>
+            <p class="text-red-600 font-bold"><strong>Due Amount:</strong> Rs. <?= number_format($due_amount, 2) ?></p>
         </div>
 
         <?php if ($due_amount > 0): ?>
             <h2 class="text-xl font-semibold mb-4 text-gray-700">Select Payment Method</h2>
             <form action="process-payment.php" method="POST" enctype="multipart/form-data" class="space-y-6">
-                <input type="hidden" name="reference_no" value="<?php echo htmlspecialchars($reference_no); ?>">
+                <input type="hidden" name="reference_no" value="<?= htmlspecialchars($reference_no) ?>">
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Payment Method <span class="text-red-500">*</span></label>
                     <select name="payment_method" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select a method</option>
-                        <option value="Online Payment">Online Payment</option>
-                        <option value="Bank Slip">Bank Slip</option>
+                        <option value="">Select method</option>
+                        <option value="Online Payment">Online Payment (Card / Bank)</option>
+                        <option value="Bank Slip">Bank Slip Upload</option>
                     </select>
                 </div>
 
-                <!-- PAYMENT OPTION: DYNAMIC BASED ON COURSE -->
+                <!-- PAYMENT OPTIONS — SMART LOGIC -->
                 <div class="payment-options">
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Payment Option <span class="text-red-500">*</span></label>
                     <select name="payment_option" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select an option</option>
+                        <option value="">Select option</option>
 
-                        <?php if ($isFullOnly): ?>
+                        <?php if ($first_installment_paid || $isFullOnlyCourse): ?>
+                            <!-- Only show 100% if first installment already done OR course doesn't allow installments -->
                             <option value="full">
-                                100% Due Amount (Rs. <?= number_format($due_amount, 2) ?>)
+                                Pay Full Remaining Amount – Rs. <?= number_format($due_amount, 2) ?>
                             </option>
                         <?php else: ?>
+                            <!-- First time visitor → show both options -->
                             <option value="full">
-                                100% Due Amount (Rs. <?= number_format($due_amount, 2) ?>)
+                                Pay Full Amount Now – Rs. <?= number_format($due_amount, 2) ?>
                             </option>
-                            <?php if ($due_amount > 0): ?>
-                                <option value="50_percent">
-                                    50% Payment - Full Reg Fee + 50% Course Fee (Rs. <?= number_format($fifty_percent_amount, 2) ?>)
-                                </option>
-                            <?php endif; ?>
+                            <option value="50_percent">
+                                Pay 50% Now (Reg Fee + 50% Course Fee) – Rs. <?= number_format($app['registration_fee'] + ($app['course_fee'] * 0.5), 2) ?>
+                            </option>
                         <?php endif; ?>
                     </select>
 
-                    <p class="text-sm text-gray-600 mt-2 fifty-percent-message <?= $isFullOnly ? 'hidden' : '' ?>">
-                        Payment Plan: Full Registration Fee (Rs. <?= number_format($registration_fee, 2) ?>) + 50% Course Fee (Rs. <?= number_format($remaining_fifty_percent, 2) ?>)<br>
-                        This should be paid within half the time of the course (e.g., if the course is 6 months, after three months the remaining 50% course fee should be paid).<br>
-                        <strong>Amount to be paid now:</strong> Rs. <?= number_format($fifty_percent_amount, 2) ?><br>
-                        <strong>Remaining 50% Course Fee to be paid:</strong> Rs. <?= number_format($remaining_fifty_percent, 2) ?>
-                    </p>
+                    <?php if (!$first_installment_paid && !$isFullOnlyCourse): ?>
+                        <p class="text-sm text-gray-600 mt-3 bg-amber-50 p-3 rounded-lg">
+                            <strong>50% Payment Plan:</strong><br>
+                            • Full Registration Fee + 50% of Course Fee<br>
+                            • Remaining 50% Course Fee must be paid within half the course duration<br>
+                            <strong>Amount now:</strong> Rs. <?= number_format($app['registration_fee'] + ($app['course_fee'] * 0.5), 2) ?><br>
+                            <strong>Remaining later:</strong> Rs. <?= number_format($app['course_fee'] * 0.5, 2) ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <div class="bank-slip-options hidden">
-                    <label for="payment_slip" class="block text-sm font-semibold text-gray-700 mb-2 mt-4">Upload Payment Slip <span class="text-red-500">*</span></label>
-                    <input type="file" name="payment_slip" accept=".jpg,.jpeg,.png,.pdf"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2 mt-4">
+                        Upload Payment Slip <span class="text-red-500">*</span>
+                    </label>
+                    <input type="file" name="payment_slip" accept=".jpg,.jpeg,.png,.pdf" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
                 </div>
 
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg">
-                    Proceed with Payment
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-lg text-lg">
+                    Proceed to Payment →
                 </button>
             </form>
+
         <?php else: ?>
-            <div class="p-6 bg-green-50 border-l-4 border-green-500 rounded-lg">
-                <p class="font-semibold text-green-700">Payment Completed</p>
-                <p class="text-gray-600 mt-2">No further payments are required.</p>
+            <div class="p-8 bg-green-50 border-l-4 border-green-500 rounded-lg text-center">
+                <h3 class="text-2xl font-bold text-green-700 mb-3">Payment Completed!</h3>
+                <p class="text-gray-700">Thank you! Your full course fee has been received.</p>
+                <p class="mt-4">You will receive confirmation via email shortly.</p>
             </div>
         <?php endif; ?>
 
-        <a href="index.php" class="block text-center bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-lg mt-6">
-            Return to Home
+        <a href="index.php" class="block text-center mt-8 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-lg">
+            ← Return to Home
         </a>
     </div>
 
-    <footer class="bg-black text-white text-sm py-4 text-left mt-10">
+    <footer class="bg-black text-white text-sm py-6 text-center mt-16">
         © 2025 Gem and Jewellery Research and Training Institute. All rights reserved.
     </footer>
 
     <script>
-        const paymentMethod = document.querySelector('[name="payment_method"]');
-        const paymentOptions = document.querySelector('.payment-options');
-        const bankSlipOptions = document.querySelector('.bank-slip-options');
-        const paymentOption = document.querySelector('[name="payment_option"]');
-        const fiftyPercentMessage = document.querySelector('.fifty-percent-message');
+        const methodSelect = document.querySelector('[name="payment_method"]');
+        const optionDiv = document.querySelector('.payment-options');
+        const slipDiv = document.querySelector('.bank-slip-options');
+        const optionSelect = document.querySelector('[name="payment_option"]');
 
-        paymentMethod.addEventListener('change', function () {
-            paymentOptions.classList.toggle('hidden', this.value === '');
-            bankSlipOptions.classList.toggle('hidden', this.value !== 'Bank Slip');
-            paymentOption.dispatchEvent(new Event('change'));
+        methodSelect?.addEventListener('change', function() {
+            const isBank = this.value === 'Bank Slip';
+            slipDiv.classList.toggle('hidden', !isBank);
+            optionDiv.classList.toggle('hidden', this.value === '');
+            if (isBank) document.querySelector('[name="payment_slip"]').required = true;
         });
 
-        paymentOption.addEventListener('change', function () {
-            fiftyPercentMessage.classList.toggle('hidden', this.value !== '50_percent');
-            const fileInput = document.querySelector('[name="payment_slip"]');
-            fileInput.required = (paymentMethod.value === 'Bank Slip');
-        });
-
-        // Initialize
-        if (paymentMethod.value) {
-            paymentMethod.dispatchEvent(new Event('change'));
-        }
+        // Trigger on load if already selected
+        if (methodSelect.value) methodSelect.dispatchEvent(new Event('change'));
     </script>
 </body>
 </html>
