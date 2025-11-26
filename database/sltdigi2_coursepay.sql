@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 22, 2025 at 07:17 AM
+-- Generation Time: Nov 26, 2025 at 05:01 AM
 -- Server version: 5.7.23-23
 -- PHP Version: 8.1.33
 
@@ -61,13 +61,6 @@ CREATE TABLE `applications` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `applications`
---
-
-INSERT INTO `applications` (`id`, `student_id`, `regional_centre`, `course_type`, `course_name`, `registration_fee`, `course_fee`, `status`, `charge_type`, `created_at`) VALUES
-(123, 123, 'Head Office - Kaduwela', 'Certificate Level Courses', 'Certificate in Gemmology', 2000.00, 70000.00, 'pending', 'payable', '2025-11-22 13:10:17');
-
 -- --------------------------------------------------------
 
 --
@@ -85,16 +78,8 @@ CREATE TABLE `payments` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `paid_amount` decimal(10,2) DEFAULT '0.00',
   `due_amount` decimal(10,2) DEFAULT '0.00',
-  `slip_file` varchar(255) DEFAULT NULL,
-  `slip_file_2` varchar(255) DEFAULT NULL
+  `slip_file` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`id`, `application_id`, `amount`, `method`, `status`, `installment_type`, `transaction_id`, `created_at`, `paid_amount`, `due_amount`, `slip_file`, `slip_file_2`) VALUES
-(115, 123, 72000.00, '', 'completed', 'second', 'SLIP-2ED6FBE0-1763817223', '2025-11-22 13:10:37', 72000.00, 0.00, 'Uploads/slips/1763817061_1. Gayan Edirisingha.jpg', 'Uploads/slips/1763817223_3. Ravindra Wickramasingha.jpg');
 
 -- --------------------------------------------------------
 
@@ -121,13 +106,6 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`id`, `student_id_manual`, `reference_no`, `name`, `nic_passport`, `nic_file`, `education_background`, `next_payment_date`, `declaration`, `declaration2`, `created_at`, `contact_number`, `address`, `gmail`, `checked`) VALUES
-(123, NULL, '2ED6FBE0', 'User Test', '1999999999', 'Uploads/nic/1763817017_1. Gayan Edirisingha.jpg', 'ccc', NULL, 1, 0, '2025-11-22 13:10:17', '0712345678', 'user test address', 'gem_test@sltdigital.site', 1);
-
---
 -- Indexes for dumped tables
 --
 
@@ -150,7 +128,9 @@ ALTER TABLE `applications`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `application_id` (`application_id`);
+  ADD KEY `application_id` (`application_id`),
+  ADD KEY `idx_application` (`application_id`),
+  ADD KEY `idx_installment` (`installment_type`);
 
 --
 -- Indexes for table `students`
@@ -173,19 +153,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
 -- Constraints for dumped tables

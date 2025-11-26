@@ -4,153 +4,130 @@ require_once __DIR__ . '/../../classes/db.php';
 $db = new Database();
 $conn = $db->getConnection();
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die("Invalid request method.");
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['action']) || !in_array($_POST['action'], ['approve_free', 'approve_payable'])) {
+    header("Location: dashboard.php");
+    exit;
 }
 
 try {
     $conn->begin_transaction();
 
-    $student_id      = filter_var($_POST['student_id']);
-    $action          = filter_var($_POST['action']);
-    $gmail           = filter_var($_POST['gmail'] ?? '');
-    $name            = filter_var($_POST['name'] ?? '');
-    $course_name     = filter_var($_POST['course_name'] ?? '');
-    $regional_centre = filter_var($_POST['regional_centre'] ?? '');
-    $reference_no    = filter_var($_POST['reference_no'] ?? '');
+    $student_id = (int)$_POST['student_id'];
+    $gmail = $_POST['gmail'] ?? '';
+    $name = $_POST['name'] ?? '';
+    $course_name = $_POST['course_name'] ?? '';
+    $regional_centre = $_POST['regional_centre'] ?? '';
+    $reference_no = $_POST['reference_no'] ?? '';
+    $action = $_POST['action'];
 
-    if (!$student_id || !in_array($action, ['approve', 'not_approved'])) {
-        throw new Exception("Invalid input data.");
+    if (!$student_id) {
+        throw new Exception("Invalid student ID.");
     }
 
-    /* -------------------------------------------------------------
-       1. GET THE REAL COURSE FEE FROM THE APPLICATION RECORD
-       ------------------------------------------------------------- */
-    $stmt = $conn->prepare("
-        SELECT a.registration_fee, a.course_fee
-        FROM applications a
-        WHERE a.student_id = ?
-    ");
+    // Get application
+    $stmt = $conn->prepare("SELECT id FROM applications WHERE student_id = ?");
     $stmt->bind_param("i", $student_id);
     $stmt->execute();
-    $res = $stmt->get_result();
-    $app = $res->fetch_assoc();
+    $app = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    if (!$app) throw new Exception("Application not found.");
+    $application_id = $app['id'];
+
+    // DETERMINE DUE AMOUNT
+    if ($action === 'approve_free') {
+        $due_amount = 2000.00;
+        $charge_type = 'free';
+        $email_msg = "FREE course approved – Registration Fee: Rs. 2000.00 only";
+    } else {
+        // FOR PAYABLE: USE THE LATEST due_amount FROM PAYMENTS (ADMIN SET)
+        $stmt = $conn->prepare("
+            SELECT due_amount 
+            FROM payments 
+            WHERE application_id = ? 
+            ORDER BY id DESC LIMIT 1
+        ");
+        $stmt->bind_param("i", $application_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $payment = $result->fetch_assoc();
+        $stmt->close();
+
+        if ($payment && $payment['due_amount'] > 0) {
+            $due_amount = (float)$payment['due_amount'];
+        } else {
+            // Fallback: reg + course fee (for normal courses)
+            $stmt = $conn->prepare("SELECT registration_fee + course_fee AS total FROM applications WHERE id = ?");
+            $stmt->bind_param("i", $application_id);
+            $stmt->execute();
+            $fallback = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+            $due_amount = $fallback ? (float)$fallback['total'] : 0;
+        }
+
+        $charge_type = 'payable';
+        $email_msg = "Application approved – Full Course Fee: Rs. " . number_format($due_amount, 2);
+    }
+
+    // Update charge_type
+    $stmt = $conn->prepare("UPDATE applications SET charge_type = ? WHERE id = ?");
+    $stmt->bind_param("si", $charge_type, $application_id);
+    $stmt->execute();
     $stmt->close();
 
-    if (!$app) {
-        throw new Exception("Application not found for student $student_id");
-    }
+    // Mark student as approved
+    $stmt = $conn->prepare("UPDATE students SET checked = 1 WHERE id = ?");
+    $stmt->bind_param("i", $student_id);
+    $stmt->execute();
+    $stmt->close();
 
-    $total_amount = $app['registration_fee'] + $app['course_fee'];   // <-- REAL amount
+    // Create/Update payment record
+    $stmt = $conn->prepare("
+        INSERT INTO payments 
+            (application_id, amount, paid_amount, due_amount, status, method)
+        VALUES (?, ?, 0, ?, 'pending', 'Online Payment')
+        ON DUPLICATE KEY UPDATE
+            amount = VALUES(amount),
+            paid_amount = 0,
+            due_amount = VALUES(due_amount),
+            status = 'pending'
+    ");
+    $stmt->bind_param("idd", $application_id, $due_amount, $due_amount);
+    $stmt->execute();
+    $stmt->close();
 
-    /* -------------------------------------------------------------
-       2. APPROVE – set checked = 1 + create/update payment row
-       ------------------------------------------------------------- */
-    if ($action === 'approve') {
-
-        // Mark student as approved
-        $stmt = $conn->prepare("UPDATE students SET checked = 1 WHERE id = ?");
-        $stmt->bind_param("i", $student_id);
-        $stmt->execute();
-        $stmt->close();
-
-        // Get application_id
-        $stmt = $conn->prepare("SELECT id FROM applications WHERE student_id = ?");
-        $stmt->bind_param("i", $student_id);
-        $stmt->execute();
-        $res = $stmt->get_result();
-        $appRow = $res->fetch_assoc();
-        $stmt->close();
-        $application_id = $appRow['id'];
-
-        // INSERT or UPDATE payments – full due amount
-        $stmt = $conn->prepare("
-            INSERT INTO payments 
-                (application_id, amount, paid_amount, due_amount, status, method)
-            VALUES (?, ?, 0, ?, 'pending', 'Online Payment')
-            ON DUPLICATE KEY UPDATE
-                amount = VALUES(amount),
-                paid_amount = 0,
-                due_amount = VALUES(amount),
-                status = 'pending',
-                method = 'Online Payment'
-        ");
-        $stmt->bind_param("idd", $application_id, $total_amount, $total_amount);
-        $stmt->execute();
-        $stmt->close();
-
-        // ----- APPROVAL EMAIL (now shows correct total) -----
-        if (!empty($gmail)) {
-            $to      = $gmail;
-            $subject = "Application Approved – Proceed to Payment";
-
-            $message = "
+    // SEND EMAIL
+    if (!empty($gmail)) {
+        $to = $gmail;
+        $subject = $action === 'approve_free' ? "Application Approved – FREE Course" : "Application Approved – Proceed to Payment";
+        $message = "
 Dear $name,
 
-Congratulations! Your application for the course **$course_name** at **$regional_centre** has been **APPROVED**.
+$email_msg
 
-**Reference Number:** $reference_no  
-**Total Course Fee:** Rs. " . number_format($total_amount, 2) . "
+Reference No: $reference_no
+Course: $course_name
+Centre: $regional_centre
 
-Please complete the payment to confirm your enrollment:
+Payment Link: https://sltdigital.site/gem/CoursePay/proceed-to-pay.php?ref=$reference_no
 
-[Pay Now →](https://sltdigital.site/gem/CoursePay/proceed-to-pay.php?ref=$reference_no)
-
-We look forward to having you in class!
-
-Best regards,  
+Best regards,
 Gem and Jewellery Research and Training Institute
-";
-
-            $headers  = "From: no-reply@sltdigital.site\r\n";
-            $headers .= "Reply-To: no-reply@sltdigital.site\r\n";
-            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-            if (!mail($to, $subject, $message, $headers)) {
-                error_log("approve_action.php – failed to send approval email to $to");
-            }
-        }
+        ";
+        $headers = "From: no-reply@sltdigital.site\r\nContent-Type: text/plain; charset=UTF-8\r\n";
+        mail($to, $subject, $message, $headers);
     }
 
-    /* -------------------------------------------------------------
-       3. REJECT – delete everything
-       ------------------------------------------------------------- */
-    elseif ($action === 'not_approved') {
-        $stmt = $conn->prepare("
-            DELETE p FROM payments p
-            INNER JOIN applications a ON p.application_id = a.id
-            WHERE a.student_id = ?
-        ");
-        $stmt->bind_param("i", $student_id);
-        $stmt->execute();
-        $stmt->close();
-
-        $stmt = $conn->prepare("DELETE FROM applications WHERE student_id = ?");
-        $stmt->bind_param("i", $student_id);
-        $stmt->execute();
-        $stmt->close();
-
-        $stmt = $conn->prepare("DELETE FROM students WHERE id = ?");
-        $stmt->bind_param("i", $student_id);
-        $stmt->execute();
-        $stmt->close();
-    }
-
-    /* -------------------------------------------------------------
-       4. COMMIT & REDIRECT
-       ------------------------------------------------------------- */
     $conn->commit();
 
-    $_SESSION['msg'] = $action === 'approve'
-        ? "Student approved – payment due set to Rs. " . number_format($total_amount, 2)
-        : "Student rejected and removed.";
+    $_SESSION['msg'] = $action === 'approve_free'
+        ? "Approved as FREE – Due: Rs. 2000"
+        : "Approved as PAYABLE – Due: Rs. " . number_format($due_amount, 2);
 
     header("Location: dashboard.php");
     exit;
 
 } catch (Exception $e) {
     $conn->rollback();
-    error_log("approve_action.php ERROR: " . $e->getMessage());
     $_SESSION['msg'] = "Error: " . $e->getMessage();
     header("Location: dashboard.php");
     exit;

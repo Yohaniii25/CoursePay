@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $dbname = "coursepay";
+    private $username = "sltdigi2_coursepay";
+    private $password = "pGz[t%1LZWZZ";
+    private $dbname = "sltdigi2_coursepay";
     private $conn;
 
     public function __construct() {

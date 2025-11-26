@@ -126,11 +126,751 @@
     "education_background": "g",
     "declaration": "1",
     "declaration2": "1"
-}[2025-11-25 07:39:25] submit.php: POST data: {
-    "name": "Yohani Abeykoon",
-    "contact_number": "011234456",
-    "gmail": "womoni3285@bizmud.com",
+}[2025-11-20 06:52:25] submit.php: POST data: {
+    "name": "Bank Slip user",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Ratnapura",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Geuda Heat Treatment",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 55,000",
+    "reg_fee": "2000",
+    "course_fee": "55000",
+    "total_fee_display": "Total Fee: Rs. 57,000",
+    "nic_passport": "1999999999",
+    "education_background": "ytty",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-20 06:54:16] proceed-to-pay.php: GET data: {
+    "ref": "E533E92A"
+}[2025-11-20 06:54:29] process-payment.php: Session started, ID: 9c4c76d81381a081186ea48f04fadabe[2025-11-20 06:54:29] POST data: {
+    "reference_no": "E533E92A",
+    "payment_method": "Bank Slip",
+    "payment_option": "full"
+}[2025-11-20 06:54:29] Payment calculation: due_amount=57000.00, payment_option=full, amount_to_pay=57000.00[2025-11-20 06:54:29] Bank Slip: updating payment - paid_amount=57000, due_amount=0, status=completed[2025-11-20 07:14:42] proceed-to-pay.php: GET data: {
+    "ref": "E533E92A"
+}[2025-11-20 07:21:59] submit.php: POST data: {
+    "name": "IPG User",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Blended Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "d",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-20 08:10:04] process-payment.php: Session started, ID: 9c4c76d81381a081186ea48f04fadabe[2025-11-20 08:10:04] POST data: [][2025-11-20 08:10:04] Invalid request method: GET[2025-11-20 08:10:18] process-payment.php: Session started, ID: 9c4c76d81381a081186ea48f04fadabe[2025-11-20 08:10:18] POST data: [][2025-11-20 08:10:18] Invalid request method: GET[2025-11-20 08:16:41] proceed-to-pay.php: GET data: {
+    "ref": "005B465D"
+}[2025-11-20 08:16:49] process-payment.php: Session started, ID: 9c4c76d81381a081186ea48f04fadabe[2025-11-20 08:16:49] POST data: {
+    "reference_no": "005B465D",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-20 08:16:49] Payment calculation: due_amount=72000.00, payment_option=50_percent, amount_to_pay=36000[2025-11-20 08:16:49] Online Payment: amount_to_pay=36000 stored in session[2025-11-20 08:16:49] ipg_start: total_amount=72000, due_amount=72000.00, amount=36000[2025-11-20 08:16:50] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002700192533N13170295K4","updateStatus":"SUCCESS","version":"1a735f6301"},"successIndicator":"15aadd6f0ac64124"}[2025-11-20 08:16:50] Session data set: {"payment_option":"50_percent","amount_to_pay":36000,"reference_no":"005B465D","amount":36000,"name":"IPG User","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Blended Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002700192533N13170295K4","success_indicator":"15aadd6f0ac64124"}[2025-11-20 08:18:05] complete.php started – SID: 9c4c76d81381a081186ea48f04fadabe
+[2025-11-20 08:18:05] GET: {"resultIndicator":"15aadd6f0ac64124","sessionVersion":"eec528ad09","checkoutVersion":"1.0.0"}
+[2025-11-20 08:18:05] POST: []
+[2025-11-20 08:18:05] SESSION: {"payment_option":"50_percent","amount_to_pay":36000,"reference_no":"005B465D","amount":36000,"name":"IPG User","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Blended Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002700192533N13170295K4","success_indicator":"15aadd6f0ac64124"}
+[2025-11-20 08:18:06] Online payment recorded: Rs. 36000 (option: 50_percent)
+[2025-11-22 01:01:25] submit.php: POST data: {
+    "name": "IpG user 2",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "International Courses",
+    "course": "Gem-A Foundation Course",
+    "course_fee_display": "Registration Fee: Rs. 10,000 | Course Fee: Rs. 589,567.22",
+    "reg_fee": "10000",
+    "course_fee": "589567.22",
+    "total_fee_display": "Total Fee: Rs. 599,567.22",
+    "nic_passport": "1999999999",
+    "education_background": "eee",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-22 01:26:37] proceed-to-pay.php: GET data: {
+    "ref": "264761D8"
+}[2025-11-22 01:26:50] process-payment.php: Session started, ID: 836d5c9a2c84652359658bdc8d8884b9[2025-11-22 01:26:50] POST data: {
+    "reference_no": "264761D8",
+    "payment_method": "Bank Slip",
+    "payment_option": "full"
+}[2025-11-22 01:26:50] Payment calculation: due_amount=599567.22, payment_option=full, amount_to_pay=599567.22[2025-11-22 01:26:50] Bank Slip: updating payment - paid_amount=599567.22, due_amount=0, status=completed, transaction_id=SLIP-264761D8-1763796410-692165ba06da7[2025-11-22 01:35:49] submit.php: POST data: {
+    "name": "IpG user 2",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "1999999999",
+    "education_background": "i8i8i8",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-22 01:36:15] proceed-to-pay.php: GET data: {
+    "ref": "4CF6BC0F"
+}[2025-11-22 01:45:16] proceed-to-pay.php: GET data: {
+    "ref": "4CF6BC0F"
+}[2025-11-22 01:45:43] proceed-to-pay.php: GET data: {
+    "ref": "4CF6BC0F"
+}[2025-11-22 01:46:45] process-payment.php: Session started, ID: 836d5c9a2c84652359658bdc8d8884b9[2025-11-22 01:46:45] POST data: {
+    "reference_no": "4CF6BC0F",
+    "payment_method": "Online Payment",
+    "payment_option": "50_percent"
+}[2025-11-22 01:46:45] Payment calculation: due_amount=152000.00, payment_option=50_percent, amount_to_pay=77000, remaining=75000[2025-11-22 01:46:45] Online Payment: amount_to_pay=77000, transaction_id=TXN-4CF6BC0F-1763797605-69216a65bbeea stored in session[2025-11-22 01:46:45] ipg_start: total_amount=152000, due_amount=152000.00, amount=77000[2025-11-22 01:46:46] MPGS INITIATE_CHECKOUT Response: {"checkoutMode":"WEBSITE","merchant":"TEST700182200500","result":"SUCCESS","session":{"id":"SESSION0002518905201J1885933G12","updateStatus":"SUCCESS","version":"d935030d01"},"successIndicator":"16622aebf10d427e"}[2025-11-22 01:46:46] Session data set: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":77000,"reference_no":"4CF6BC0F","amount":77000,"name":"IpG user 2","gmail":"gem_test@sltdigital.site","course_name":"Diploma in Professional Gemmology (Dip. PGSL)","regional_centre":"Head Office - Kaduwela","transaction_id":"TXN-4CF6BC0F-1763797605-69216a65bbeea","session_id":"SESSION0002518905201J1885933G12","success_indicator":"16622aebf10d427e"}[2025-11-22 01:47:42] complete.php started – SID: 836d5c9a2c84652359658bdc8d8884b9
+[2025-11-22 01:47:42] GET: {"resultIndicator":"16622aebf10d427e","sessionVersion":"727e8df209","checkoutVersion":"1.0.0"}
+[2025-11-22 01:47:42] POST: []
+[2025-11-22 01:47:42] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":77000,"reference_no":"4CF6BC0F","amount":77000,"name":"IpG user 2","gmail":"gem_test@sltdigital.site","course_name":"Diploma in Professional Gemmology (Dip. PGSL)","regional_centre":"Head Office - Kaduwela","transaction_id":"TXN-4CF6BC0F-1763797605-69216a65bbeea","session_id":"SESSION0002518905201J1885933G12","success_indicator":"16622aebf10d427e"}
+[2025-11-22 01:47:43] Online payment recorded: Rs. 77000 (option: 50_percent)
+[2025-11-22 01:50:55] complete.php started – SID: 836d5c9a2c84652359658bdc8d8884b9
+[2025-11-22 01:50:55] GET: {"resultIndicator":"16622aebf10d427e","sessionVersion":"727e8df209","checkoutVersion":"1.0.0"}
+[2025-11-22 01:50:55] POST: []
+[2025-11-22 01:50:55] SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"payment_option":"50_percent","amount_to_pay":77000,"reference_no":"4CF6BC0F","amount":77000,"name":"IpG user 2","gmail":"gem_test@sltdigital.site","course_name":"Diploma in Professional Gemmology (Dip. PGSL)","regional_centre":"Head Office - Kaduwela","transaction_id":"TXN-4CF6BC0F-1763797605-69216a65bbeea","session_id":"SESSION0002518905201J1885933G12","success_indicator":"16622aebf10d427e","online_processed":true}
+[2025-11-22 01:59:44] proceed-to-pay.php: GET data: {
+    "ref": "4CF6BC0F"
+}[2025-11-22 02:00:05] process-payment.php: Session started, ID: 836d5c9a2c84652359658bdc8d8884b9[2025-11-22 02:00:05] POST data: {
+    "reference_no": "4CF6BC0F",
+    "payment_method": "Bank Slip",
+    "payment_option": "full"
+}[2025-11-22 02:00:05] Payment calculation: due_amount=75000.00, payment_option=full, amount_to_pay=75000.00, remaining=0[2025-11-22 02:00:05] Bank Slip: updating payment - paid_amount=152000, due_amount=0, status=completed, transaction_id=SLIP-4CF6BC0F-1763798405-69216d85433ac[2025-11-22 02:02:37] submit.php: POST data: {
+    "name": "IpG user 2",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Ratnapura",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Designing (Manual)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 43,000",
+    "reg_fee": "2000",
+    "course_fee": "43000",
+    "total_fee_display": "Total Fee: Rs. 45,000",
+    "nic_passport": "1999999999",
+    "education_background": "eee",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-22 02:03:16] proceed-to-pay.php: GET data: {
+    "ref": "D4B58088"
+}[2025-11-22 02:03:36] process-payment.php: Session started, ID: 836d5c9a2c84652359658bdc8d8884b9[2025-11-22 02:03:36] POST data: {
+    "reference_no": "D4B58088",
+    "payment_method": "Bank Slip",
+    "payment_option": "50_percent"
+}[2025-11-22 02:03:36] Payment calculation: due_amount=45000.00, payment_option=50_percent, amount_to_pay=23500, remaining=21500[2025-11-22 02:03:36] Bank Slip: updating payment - paid_amount=23500, due_amount=21500, status=pending, transaction_id=SLIP-D4B58088-1763798616-69216e5835acb[2025-11-22 02:10:56] proceed-to-pay.php: GET data: {
+    "ref": "D4B58088"
+}[2025-11-22 02:12:12] proceed-to-pay.php: GET data: {
+    "ref": "D4B58088"
+}[2025-11-22 02:12:20] process-payment.php: Session started, ID: 836d5c9a2c84652359658bdc8d8884b9[2025-11-22 02:12:20] POST data: {
+    "reference_no": "D4B58088",
+    "payment_method": "Bank Slip",
+    "payment_option": "full"
+}[2025-11-22 02:12:20] Payment calculation: due_amount=21500.00, payment_option=full, amount_to_pay=21500.00, remaining=0[2025-11-22 02:12:20] Bank Slip: updating payment - paid_amount=45000, due_amount=0, status=completed, transaction_id=SLIP-D4B58088-1763799140-69217064cd5c8[2025-11-22 02:22:21] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "j",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-22 02:22:50] proceed-to-pay.php: GET data: {
+    "ref": "BC6FEFDF"
+}[2025-11-22 02:23:09] process-payment.php: Session started, ID: 836d5c9a2c84652359658bdc8d8884b9[2025-11-22 02:23:09] POST data: {
+    "reference_no": "BC6FEFDF",
+    "payment_method": "Bank Slip",
+    "payment_option": "50_percent"
+}[2025-11-22 02:23:09] Payment calculation: due_amount=72000.00, payment_option=50_percent, amount_to_pay=37000, remaining=35000[2025-11-22 02:23:09] Bank Slip: updating payment - paid_amount=37000, due_amount=35000, status=pending, transaction_id=SLIP-BC6FEFDF-1763799789-692172edb6185[2025-11-22 02:23:09] Bank Slip: updating payment - paid_amount=37000, due_amount=35000, status=pending, transaction_id=SLIP-BC6FEFDF-1763799789-692172edb6185[2025-11-22 02:23:37] proceed-to-pay.php: GET data: {
+    "ref": "BC6FEFDF"
+}[2025-11-22 02:23:49] process-payment.php: Session started, ID: 836d5c9a2c84652359658bdc8d8884b9[2025-11-22 02:23:49] POST data: {
+    "reference_no": "BC6FEFDF",
+    "payment_method": "Bank Slip",
+    "payment_option": "full"
+}[2025-11-22 02:23:49] Payment calculation: due_amount=35000.00, payment_option=full, amount_to_pay=35000.00, remaining=0[2025-11-22 02:23:49] Bank Slip: updating payment - paid_amount=72000, due_amount=0, status=completed, transaction_id=SLIP-BC6FEFDF-1763799829-69217315466e8[2025-11-22 02:23:49] Bank Slip: updating payment - paid_amount=72000, due_amount=0, status=completed, transaction_id=SLIP-BC6FEFDF-1763799829-69217315466e8[2025-11-22 05:04:23] complete.php started – SID: 837944517f760091ffdd1e4fcc15c5b9
+[2025-11-22 05:04:23] GET: []
+[2025-11-22 05:04:23] POST: []
+[2025-11-22 05:04:23] SESSION: []
+[2025-11-22 05:04:23] Missing session data
+[2025-11-22 05:04:23] proceed-to-pay.php: GET data: {
+    "ref": "",
+    "error": "Invalid session"
+}[2025-11-22 05:04:25] complete.php started – SID: 16aba3370e00870588e34c424338afa8
+[2025-11-22 05:04:25] GET: []
+[2025-11-22 05:04:25] POST: []
+[2025-11-22 05:04:25] SESSION: []
+[2025-11-22 05:04:25] Missing session data
+[2025-11-22 05:29:00] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "1999999999",
+    "education_background": "t",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-22 05:29:44] proceed-to-pay.php: GET data: {
+    "ref": "D177FBF9"
+}[2025-11-22 05:44:31] proceed-to-pay.php: GET data: {
+    "ref": "{$data['reference_no"
+}[2025-11-22 05:44:31] Invalid Reference ID: {$data['reference_no[2025-11-22 05:44:33] proceed-to-pay.php: GET data: {
+    "ref": "{$data['reference_no"
+}[2025-11-22 05:44:33] Invalid Reference ID: {$data['reference_no[2025-11-22 05:46:49] proceed-to-pay.php: GET data: {
+    "ref": "D177FBF9"
+}[2025-11-22 05:56:33] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "w",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-22 05:57:14] proceed-to-pay.php: GET data: {
+    "ref": "0D0C204C"
+}[2025-11-22 05:57:52] proceed-to-pay.php: GET data: {
+    "ref": "0D0C204C"
+}[2025-11-22 07:01:58] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "hi",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gems and Jewellery Valuation and Marketing",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 20,000",
+    "reg_fee": "2000",
+    "course_fee": "20000",
+    "total_fee_display": "Total Fee: Rs. 22,000",
+    "nic_passport": "1999999999",
+    "education_background": "oo",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-22 07:02:56] proceed-to-pay.php: GET data: {
+    "ref": "13D7D139"
+}[2025-11-22 07:03:36] proceed-to-pay.php: GET data: {
+    "ref": "13D7D139"
+}[2025-11-22 07:10:17] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "ccc",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-22 07:10:50] proceed-to-pay.php: GET data: {
+    "ref": "2ED6FBE0"
+}[2025-11-22 07:13:24] proceed-to-pay.php: GET data: {
+    "ref": "2ED6FBE0"
+}[2025-11-22 07:20:56] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "222",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-22 07:21:24] proceed-to-pay.php: GET data: {
+    "ref": "6F3AC03F"
+}[2025-11-22 07:29:17] complete.php started – SID: 836d5c9a2c84652359658bdc8d8884b9
+[2025-11-22 07:29:17] GET: {"resultIndicator":"0df1b69c5e0b4b22","sessionVersion":"f055fe7c09","checkoutVersion":"1.0.0"}
+[2025-11-22 07:29:17] POST: []
+[2025-11-22 07:29:17] SESSION: {"amount_to_pay":37000,"name":"User Test","gmail":"gem_test@sltdigital.site","course_name":"Certificate in Gemmology","regional_centre":"Head Office - Kaduwela","session_id":"SESSION0002092965481J8340584M64","success_indicator":"0df1b69c5e0b4b22","reference_no":"6F3AC03F","amount":37000}
+[2025-11-22 07:29:17] Online payment recorded: Rs. 37000 (option: full)
+[2025-11-24 00:20:35] proceed-to-pay.php: GET data: {
+    "ref": "6F3AC03F"
+}[2025-11-24 01:19:48] complete.php started – SID: e02bba9fed5655ff5bf934717afd8dd4
+[2025-11-24 01:19:48] GET: []
+[2025-11-24 01:19:48] POST: []
+[2025-11-24 01:19:48] SESSION: []
+[2025-11-24 01:19:48] Missing session data
+[2025-11-24 01:19:48] proceed-to-pay.php: GET data: {
+    "ref": "",
+    "error": "Invalid session"
+}[2025-11-24 01:19:50] complete.php started – SID: 2f93ed26aebb508b99d7240c38d77872
+[2025-11-24 01:19:50] GET: []
+[2025-11-24 01:19:50] POST: []
+[2025-11-24 01:19:50] SESSION: []
+[2025-11-24 01:19:50] Missing session data
+[2025-11-24 01:40:04] proceed-to-pay.php: GET data: {
+    "ref": "6F3AC03F"
+}[2025-11-24 02:19:30] proceed-to-pay.php: GET data: {
+    "ref": "6F3AC03F"
+}[2025-11-24 02:19:33] proceed-to-pay.php: GET data: {
+    "ref": "6F3AC03F"
+}[2025-11-24 02:19:41] proceed-to-pay.php: GET data: {
+    "ref": "6F3AC03F"
+}[2025-11-24 02:24:43] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
     "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "dd",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-24 02:26:49] complete.php started – SID: 818e9bb782bed08683f9892f41dbdb3b
+[2025-11-24 02:26:49] GET: {"resultIndicator":"4b42e3e89ef746c0","sessionVersion":"787e411a09","checkoutVersion":"1.0.0"}
+[2025-11-24 02:26:49] POST: []
+[2025-11-24 02:26:49] SESSION: {"pending_payment_app_id":125,"pending_amount":37000,"pending_installment":"first","session_id":"SESSION0002482750913N9232766F75","success_indicator":"4b42e3e89ef746c0","order_id":"1DA4DF07-FIRST-1763972720","amount":37000}
+[2025-11-24 02:26:49] Missing session data
+[2025-11-24 02:27:02] proceed-to-pay.php: GET data: {
+    "ref": "",
+    "error": "Invalid session"
+}[2025-11-24 02:27:04] proceed-to-pay.php: GET data: {
+    "ref": "",
+    "error": "Invalid session"
+}[2025-11-24 02:31:42] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "eee",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-24 02:32:02] proceed-to-pay.php: GET data: {
+    "ref": "E291E8C0"
+}[2025-11-24 02:33:15] complete.php started – SID: 818e9bb782bed08683f9892f41dbdb3b
+[2025-11-24 02:33:15] GET: {"resultIndicator":"b3ac21eff76f4144","sessionVersion":"da6e7c0809","checkoutVersion":"1.0.0"}
+[2025-11-24 02:33:15] POST: []
+[2025-11-24 02:33:15] SESSION: {"pending_payment_app_id":126,"pending_amount":27000,"pending_installment":"first","session_id":"SESSION0002051089226I9750816J96","success_indicator":"b3ac21eff76f4144","order_id":"E291E8C0-FIRST-1763973164","amount":27000}
+[2025-11-24 02:33:15] Missing session data
+[2025-11-24 02:33:15] proceed-to-pay.php: GET data: {
+    "ref": "",
+    "error": "Invalid session"
+}[2025-11-24 02:34:01] proceed-to-pay.php: GET data: {
+    "ref": "",
+    "error": "Invalid session"
+}[2025-11-24 02:34:03] proceed-to-pay.php: GET data: {
+    "ref": "",
+    "error": "Invalid session"
+}[2025-11-24 02:42:22] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "sw",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-24 02:42:52] proceed-to-pay.php: GET data: {
+    "ref": "2DB42F13"
+}[2025-11-24 02:50:44] proceed-to-pay.php: GET data: {
+    "ref": ""
+}[2025-11-24 02:50:46] proceed-to-pay.php: GET data: {
+    "ref": ""
+}[2025-11-24 02:53:52] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Blended Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "gg",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-24 02:54:11] proceed-to-pay.php: GET data: {
+    "ref": "708065D1"
+}[2025-11-24 04:21:38] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Ratnapura",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "s",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-24 04:22:05] proceed-to-pay.php: GET data: {
+    "ref": "B582C0AF"
+}[2025-11-24 04:39:56] submit.php: POST data: {
+    "name": "Test",
+    "contact_number": "0778439871",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "hi",
+    "regional_centre": "Ratnapura",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "1999999999",
+    "education_background": "r",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-24 04:40:15] proceed-to-pay.php: GET data: {
+    "ref": "4E25D62F"
+}[2025-11-24 04:43:21] proceed-to-pay.php: GET data: {
+    "ref": "4E25D62F"
+}[2025-11-24 05:22:17] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "1",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "hi",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Assaying and Hallmarking",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 45,000",
+    "reg_fee": "2000",
+    "course_fee": "45000",
+    "total_fee_display": "Total Fee: Rs. 47,000",
+    "nic_passport": "1999999999",
+    "education_background": "q",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-24 05:38:02] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "1",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Casting and Electro Plating",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "oo",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 00:25:45] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "1",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "test",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 00:35:46] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (NVQ 4)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 45,000",
+    "reg_fee": "2000",
+    "course_fee": "45000",
+    "total_fee_display": "Total Fee: Rs. 47,000",
+    "nic_passport": "1999999999",
+    "education_background": "dd",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 00:41:34] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Casting and Electro Plating",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "s",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 01:16:46] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Ratnapura",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "qwqw",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 01:21:52] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "www",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Manufacturing (NVQ 4)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "w",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 01:49:48] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Assaying and Hallmarking",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 45,000",
+    "reg_fee": "2000",
+    "course_fee": "45000",
+    "total_fee_display": "Total Fee: Rs. 47,000",
+    "nic_passport": "1999999999",
+    "education_background": "t",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 02:43:15] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Blended Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "r",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 02:48:29] submit.php: POST data: {
+    "name": "Tailor made",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Jewellery Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "For further information such as course dates, duration, and payment details, please contact the administrator",
+    "reg_fee": "",
+    "course_fee": "",
+    "total_fee_display": "",
+    "nic_passport": "1999999999",
+    "education_background": "qeqe",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 02:57:29] submit.php: POST data: {
+    "name": "Tailor made",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Gem Related Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "For further information such as course dates, duration, and payment details, please contact the administrator",
+    "reg_fee": "",
+    "course_fee": "",
+    "total_fee_display": "",
+    "nic_passport": "1999999999",
+    "education_background": "e",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 04:20:15] submit.php: POST data: {
+    "name": "Tailor made",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Jewellery Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "For further information such as course dates, duration, and payment details, please contact the administrator",
+    "reg_fee": "",
+    "course_fee": "",
+    "total_fee_display": "",
+    "nic_passport": "1999999999",
+    "education_background": "s",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 04:32:31] submit.php: POST data: {
+    "name": "user",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "c",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 04:36:42] submit.php: POST data: {
+    "name": "user",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Jewellery Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "For further information such as course dates, duration, and payment details, please contact the administrator",
+    "reg_fee": "",
+    "course_fee": "",
+    "total_fee_display": "",
+    "nic_passport": "1999999999",
+    "education_background": "q",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 04:40:48] submit.php: POST data: {
+    "name": "user",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ds",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "s",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 06:14:29] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "d",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 06:32:31] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "International Courses",
+    "course": "Gem-A Foundation Course",
+    "course_fee_display": "Registration Fee: Rs. 10,000 | Course Fee: Rs. 589,567.22",
+    "reg_fee": "10000",
+    "course_fee": "589567.22",
+    "total_fee_display": "Total Fee: Rs. 599,567.22",
+    "nic_passport": "1999999999",
+    "education_background": "yy",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 06:34:34] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ww",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "International Courses",
+    "course": "Gem-A Foundation Course",
+    "course_fee_display": "Registration Fee: Rs. 10,000 | Course Fee: Rs. 589,567.22",
+    "reg_fee": "10000",
+    "course_fee": "589567.22",
+    "total_fee_display": "Total Fee: Rs. 599,567.22",
+    "nic_passport": "1999999999",
+    "education_background": "3343",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 06:39:43] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
     "regional_centre": "Head Office - Kaduwela",
     "course_type": "Certificate Level Courses",
     "course": "Certificate in Jewellery Manufacturing (NVQ 3)",
@@ -138,6 +878,342 @@
     "reg_fee": "2000",
     "course_fee": "20000",
     "total_fee_display": "Total Fee: Rs. 22,000",
+    "nic_passport": "1999999999",
+    "education_background": "99",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 06:49:21] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "hi",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "dd",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 07:00:48] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "dd",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "d",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 07:20:35] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Gem Related Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "For further information such as course dates, duration, and payment details, please contact the administrator",
+    "reg_fee": "",
+    "course_fee": "",
+    "total_fee_display": "",
+    "nic_passport": "1999999999",
+    "education_background": "e",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 07:25:57] submit.php: POST data: {
+    "name": "User Test",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "w",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 22:15:13] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "011234456",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 70,000",
+    "reg_fee": "2000",
+    "course_fee": "70000",
+    "total_fee_display": "Total Fee: Rs. 72,000",
+    "nic_passport": "1999999999",
+    "education_background": "qqqq",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 22:21:37] submit.php: POST data: {
+    "name": "2",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (Weekend)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 35,000",
+    "reg_fee": "2000",
+    "course_fee": "35000",
+    "total_fee_display": "Total Fee: Rs. 37,000",
+    "nic_passport": "1999999999",
+    "education_background": "3344",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 22:24:12] submit.php: POST data: {
+    "name": "3",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Geuda Heat Treatment",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 55,000",
+    "reg_fee": "2000",
+    "course_fee": "55000",
+    "total_fee_display": "Total Fee: Rs. 57,000",
+    "nic_passport": "1999999999",
+    "education_background": "2",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 22:28:52] submit.php: POST data: {
+    "name": "4",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (NVQ 3)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 35,000",
+    "reg_fee": "2000",
+    "course_fee": "35000",
+    "total_fee_display": "Total Fee: Rs. 37,000",
+    "nic_passport": "1999999999",
+    "education_background": "qe",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 22:31:54] submit.php: POST data: {
+    "name": "5",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "International Courses",
+    "course": "Gem-A Foundation Course",
+    "course_fee_display": "Registration Fee: Rs. 10,000 | Course Fee: Rs. 589,567.22",
+    "reg_fee": "10000",
+    "course_fee": "589567.22",
+    "total_fee_display": "Total Fee: Rs. 599,567.22",
+    "nic_passport": "1999999999",
+    "education_background": "3",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 22:35:55] submit.php: POST data: {
+    "name": "6",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Jewellery Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "For further information such as course dates, duration, and payment details, please contact the administrator",
+    "reg_fee": "",
+    "course_fee": "",
+    "total_fee_display": "",
+    "nic_passport": "1999999999",
+    "education_background": "33",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 22:51:47] submit.php: POST data: {
+    "name": "7",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Jewellery Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "For further information such as course dates, duration, and payment details, please contact the administrator",
+    "reg_fee": "",
+    "course_fee": "",
+    "total_fee_display": "",
+    "nic_passport": "1999999999",
+    "education_background": "fgf",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 22:53:16] submit.php: POST data: {
+    "name": "9",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Assaying and Hallmarking",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 45,000",
+    "reg_fee": "2000",
+    "course_fee": "45000",
+    "total_fee_display": "Total Fee: Rs. 47,000",
+    "nic_passport": "1999999999",
+    "education_background": "3424",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-25 23:05:14] submit.php: POST data: {
+    "name": "10",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Casting and Electro Plating",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "4",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-26 00:47:57] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Gem Cutting and Polishing (NVQ 3)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 35,000",
+    "reg_fee": "2000",
+    "course_fee": "35000",
+    "total_fee_display": "Total Fee: Rs. 37,000",
+    "nic_passport": "1999999999",
+    "education_background": "jj",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-26 01:20:56] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "011234456",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Designing Technology (NVQ 4)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 60,000",
+    "reg_fee": "2000",
+    "course_fee": "60000",
+    "total_fee_display": "Total Fee: Rs. 62,000",
+    "nic_passport": "1999999999",
+    "education_background": "r",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-26 01:28:47] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "user test address",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Jewellery Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "For further information such as course dates, duration, and payment details, please contact the administrator",
+    "reg_fee": "",
+    "course_fee": "",
+    "total_fee_display": "",
+    "nic_passport": "1999999999",
+    "education_background": "2",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-26 01:29:45] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "aaaa",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Jewellery Certificate in Tailor \u2013 Made Courses",
+    "course_fee_display": "For further information such as course dates, duration, and payment details, please contact the administrator",
+    "reg_fee": "",
+    "course_fee": "",
+    "total_fee_display": "",
+    "nic_passport": "1999999999",
+    "education_background": "a",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-26 01:31:44] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "33",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Jewellery Casting and Electro Plating",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "3",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-26 02:07:55] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "e",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Certificate Level Courses",
+    "course": "Certificate in Basic Gemmology",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 50,000",
+    "reg_fee": "2000",
+    "course_fee": "50000",
+    "total_fee_display": "Total Fee: Rs. 52,000",
+    "nic_passport": "1999999999",
+    "education_background": "e",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-26 02:08:11] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "ee",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 2,000 | Course Fee: Rs. 150,000",
+    "reg_fee": "2000",
+    "course_fee": "150000",
+    "total_fee_display": "Total Fee: Rs. 152,000",
+    "nic_passport": "1999999999",
+    "education_background": "e",
+    "declaration": "1",
+    "declaration2": "1"
+}[2025-11-26 02:08:30] submit.php: POST data: {
+    "name": "1",
+    "contact_number": "0712345678",
+    "gmail": "gem_test@sltdigital.site",
+    "address": "e",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "International Courses",
+    "course": "Gem-A Foundation Course",
+    "course_fee_display": "Registration Fee: Rs. 10,000 | Course Fee: Rs. 589,567.22",
+    "reg_fee": "10000",
+    "course_fee": "589567.22",
+    "total_fee_display": "Total Fee: Rs. 599,567.22",
     "nic_passport": "1999999999",
     "education_background": "e",
     "declaration": "1",
