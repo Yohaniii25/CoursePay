@@ -24,7 +24,7 @@ if (!$app || $app['remaining_due'] <= 0) {
     echo "<div style='text-align:center; padding:50px; font-family:Arial;'>
             <h1 style='color:green;'>Payment Completed!</h1>
             <p>Thank you! Your full course fee has been received.</p>
-            <a href='https://sltdigital.site/gem/' style='color:#6B46C1;'>Back to Website</a>
+            <a href='https://www.gjrti.gov.lk/' style='color:#6B46C1;'>Back to Website</a>
           </div>";
     exit;
 }
@@ -51,7 +51,7 @@ if (!$app || $app['remaining_due'] <= 0) {
 </head>
 <body>
     <div class="container">
-        <img src="https://sltdigital.site/gem/wp-content/uploads/2025/06/GJRT-1.png" alt="Logo" class="logo">
+        <img src="https://www.gjrti.gov.lk/wp-content/uploads/2025/06/GJRT-1.png" alt="Logo" class="logo">
         <h1>Second Installment Due</h1>
         <p><strong>Reference:</strong> <?= htmlspecialchars($reference_no) ?></p>
         <p><strong>Student:</strong> <?= htmlspecialchars($app['name']) ?></p>
@@ -77,7 +77,7 @@ if (!$app || $app['remaining_due'] <= 0) {
         </form>
 
         <br>
-        <a href="https://sltdigital.site/gem/">Back to Website</a>
+        <a href="https://www.gjrti.gov.lk/">Back to Website</a>
     </div>
 
     <script>

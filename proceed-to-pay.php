@@ -12,8 +12,8 @@ $stmt = $conn->prepare("
     SELECT 
         s.name, s.checked,
         a.id AS application_id, a.course_name, a.regional_centre, a.charge_type,
-        a.registration_fee, a.course_fee,
-        COALESCE(p.due_amount, (a.registration_fee + a.course_fee)) AS amount_to_pay,
+        a.registration_fee, a.course_fee, a.refundable_deposit,
+        COALESCE(p.due_amount, (a.registration_fee + a.course_fee + a.refundable_deposit)) AS amount_to_pay,
         COALESCE(SUM(p2.paid_amount), 0) AS total_paid
     FROM students s
     JOIN applications a ON s.id = a.student_id
@@ -34,6 +34,7 @@ if (!$app || !$app['checked']) die("Application not approved.");
 $total_paid = (float)$app['total_paid'];
 $reg_fee = (float)$app['registration_fee'];
 $course_fee = (float)$app['course_fee'];
+$refundable_deposit = (float)($app['refundable_deposit'] ?? 0);
 $amount_to_pay = (float)$app['amount_to_pay'];
 $course_name = $app['course_name'];
 $charge_type = $app['charge_type'] ?? 'payable';
@@ -56,8 +57,8 @@ $noFiftyPercentCourses = [
 $allowFiftyPercent = !in_array($course_name, $noFiftyPercentCourses);
 $is_free_course = $charge_type === 'free';
 
-// Calculate 50% amount = Reg Fee + 50% Course Fee
-$fifty_percent_amount = $reg_fee + ($course_fee * 0.5);
+// Calculate 50% amount = Reg Fee + 50% Course Fee + Refundable Deposit
+$fifty_percent_amount = $reg_fee + ($course_fee * 0.5) + $refundable_deposit;
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +72,7 @@ $fifty_percent_amount = $reg_fee + ($course_fee * 0.5);
 <body class="bg-gray-100 min-h-screen py-12 px-4">
     <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl p-10">
         <div class="text-center mb-8">
-            <img src="https://sltdigital.site/gem/wp-content/uploads/2025/06/GJRT-1.png" alt="Logo" class="h-20 mx-auto mb-4">
+            <img src="https://www.gjrti.gov.lk/wp-content/uploads/2025/06/GJRT-1.png" alt="Logo" class="h-20 mx-auto mb-4">
             <h1 class="text-4xl font-bold text-purple-700">Proceed to Payment</h1>
         </div>
 
@@ -138,7 +139,7 @@ $fifty_percent_amount = $reg_fee + ($course_fee * 0.5);
         </form>
 
         <div class="text-center mt-10">
-            <a href="https://sltdigital.site/gem/" class="text-purple-600 hover:underline text-lg font-medium">
+            <a href="https://www.gjrti.gov.lk/" class="text-purple-600 hover:underline text-lg font-medium">
                 ← Back to Website
             </a>
         </div>

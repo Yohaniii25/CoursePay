@@ -7,8 +7,8 @@ $conn = $db->getConnection();
 
 
 $username = 'admin_gem';
-$email = 'admin_gem@gmail.com';
-$password = '7R%3Qk8x#';
+$email = '';
+$password = '';
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 

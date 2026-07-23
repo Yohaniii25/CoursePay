@@ -14,7 +14,7 @@ if (empty($reference_no)) {
 $stmt = $conn->prepare("
     SELECT s.id, s.name, s.gmail, s.reference_no,
            a.id AS application_id, a.course_name, a.regional_centre,
-           a.registration_fee, a.course_fee,
+           a.registration_fee, a.course_fee, a.refundable_deposit,
            p.id AS payment_id, p.paid_amount, p.due_amount, p.amount, p.status
     FROM students s
     JOIN applications a ON s.id = a.student_id
@@ -31,10 +31,11 @@ if (!$data) {
     die("Student not found.");
 }
 
-$total_amount = $data['registration_fee'] + $data['course_fee'];
+$refundable_deposit = (float)($data['refundable_deposit'] ?? 0);
+$total_amount = $data['registration_fee'] + $data['course_fee'] + $refundable_deposit;
 $registration_fee = $data['registration_fee'];
 $course_fee = $data['course_fee'];
-$fifty_percent_amount = $registration_fee + ($course_fee / 2);
+$fifty_percent_amount = $registration_fee + ($course_fee / 2) + $refundable_deposit;
 $remaining_fifty_percent = $course_fee / 2;
 
 // Send second installment reminder email
@@ -50,7 +51,7 @@ This is a friendly reminder about your second installment payment due for:
 - First Installment (Already Paid): Rs. " . number_format($fifty_percent_amount, 2) . "
 - Second Installment (Due Now): Rs. " . number_format($remaining_fifty_percent, 2) . "
 Please complete the second installment payment to continue your enrollment.
-Payment Link: https://sltdigital.site/gem/CoursePay/second-installment.php?ref={$data['reference_no']}
+Payment Link: https://www.gjrti.gov.lk/CoursePay/second-installment.php?ref={$data['reference_no']}
 If you have already made the payment, please disregard this reminder.
 For any queries, please contact us at:
 Email: info@sltdigital.site
@@ -59,17 +60,15 @@ Best regards,
 Gem and Jewellery Research and Training Institute
 ";
 
-$headers = "From: no-reply@sltdigital.site\r\n";
-$headers .= "Reply-To: no-reply@sltdigital.site\r\n";
-$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-if (mail($to, $subject, $message, $headers)) {
+require_once __DIR__ . '/../../classes/Mailer.php';
+if (Mailer::send($to, $subject, $message, false, 'no-reply@sltdigital.site')) {
     $_SESSION['msg'] = "Second installment reminder sent successfully to {$data['name']}!";
 } else {
     $_SESSION['msg'] = "Failed to send reminder email. Please try again.";
 }
 
 header("Location: dashboard.php");
+
 exit;
 
 $conn->close();
-?>

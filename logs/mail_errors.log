@@ -1,0 +1,2 @@
+[2026-07-23 06:10:34] PHPMailer error sending to test@example.com: Could not instantiate mail function. (Exception: Could not instantiate mail function.)
+[2026-07-23 06:10:36] Native mail() fallback also failed for recipient test@example.com

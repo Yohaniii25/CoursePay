@@ -55,8 +55,8 @@ try {
         if ($payment && $payment['due_amount'] > 0) {
             $due_amount = (float)$payment['due_amount'];
         } else {
-            // Fallback: reg + course fee (for normal courses)
-            $stmt = $conn->prepare("SELECT registration_fee + course_fee AS total FROM applications WHERE id = ?");
+            // Fallback: reg + course fee + refundable deposit (for normal courses)
+            $stmt = $conn->prepare("SELECT registration_fee + course_fee + refundable_deposit AS total FROM applications WHERE id = ?");
             $stmt->bind_param("i", $application_id);
             $stmt->execute();
             $fallback = $stmt->get_result()->fetch_assoc();
@@ -108,14 +108,15 @@ Reference No: $reference_no
 Course: $course_name
 Centre: $regional_centre
 
-Payment Link: https://sltdigital.site/gem/CoursePay/proceed-to-pay.php?ref=$reference_no
+Payment Link: https://www.gjrti.gov.lk/CoursePay/proceed-to-pay.php?ref=$reference_no
 
 Best regards,
 Gem and Jewellery Research and Training Institute
         ";
-        $headers = "From: no-reply@sltdigital.site\r\nContent-Type: text/plain; charset=UTF-8\r\n";
-        mail($to, $subject, $message, $headers);
+        require_once __DIR__ . '/../../classes/Mailer.php';
+        Mailer::send($to, $subject, $message, false, 'no-reply@sltdigital.site');
     }
+
 
     $conn->commit();
 
@@ -125,11 +126,9 @@ Gem and Jewellery Research and Training Institute
 
     header("Location: dashboard.php");
     exit;
-
 } catch (Exception $e) {
     $conn->rollback();
     $_SESSION['msg'] = "Error: " . $e->getMessage();
     header("Location: dashboard.php");
     exit;
 }
-?>

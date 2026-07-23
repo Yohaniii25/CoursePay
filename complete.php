@@ -4,7 +4,8 @@ require_once __DIR__ . '/classes/db.php';
 
 $logDir = __DIR__ . '/logs/';
 if (!is_dir($logDir)) mkdir($logDir, 0755, true);
-function logMsg($msg) {
+function logMsg($msg)
+{
     global $logDir;
     error_log(date('[Y-m-d H:i:s] ') . $msg . PHP_EOL, 3, $logDir . 'complete.log');
 }
@@ -39,7 +40,7 @@ if ($stmt->get_result()->num_rows > 0) {
 } else {
     // GET APPLICATION + CHARGE TYPE (FREE or PAYABLE)
     $stmt = $conn->prepare("
-        SELECT a.registration_fee, a.course_fee, a.charge_type,
+        SELECT a.registration_fee, a.course_fee, a.refundable_deposit, a.charge_type,
                COALESCE(SUM(p.paid_amount), 0) AS total_paid_so_far
         FROM applications a
         LEFT JOIN payments p ON a.id = p.application_id
@@ -54,7 +55,7 @@ if ($stmt->get_result()->num_rows > 0) {
     if ($app['charge_type'] === 'free') {
         $total_required = 2000.00;
     } else {
-        $total_required = $app['registration_fee'] + $app['course_fee'];
+        $total_required = $app['registration_fee'] + $app['course_fee'] + (float)($app['refundable_deposit'] ?? 0);
     }
 
     $current_paid = (float)$app['total_paid_so_far'];
@@ -90,7 +91,7 @@ $stmt = $conn->prepare("
            COALESCE(SUM(p.paid_amount), 0) AS total_paid,
            CASE 
                WHEN a.charge_type = 'free' THEN 2000.00
-               ELSE (a.registration_fee + a.course_fee)
+               ELSE (a.registration_fee + a.course_fee + a.refundable_deposit)
            END AS total_required
     FROM students s
     JOIN applications a ON s.id = a.student_id
@@ -127,8 +128,9 @@ if ($remaining <= 0) {
 
 $message .= "\nBest regards,\nGJRTI Team";
 
-$headers = "From: no-reply@sltdigital.site\r\nContent-Type: text/plain; charset=UTF-8";
-mail($to, $subject, $message, $headers);
+require_once __DIR__ . '/classes/Mailer.php';
+Mailer::send($to, $subject, $message, false);
+
 
 $_SESSION = [];
 session_destroy();
@@ -136,61 +138,64 @@ session_destroy();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Payment Success - GJRTI</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen flex items-center justify-center p-6">
-<div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-12 text-center">
-    <div class="w-28 h-28 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-        </svg>
-    </div>
-    <h1 class="text-4xl font-bold text-green-600 mb-4">Payment Successful!</h1>
-    <p class="text-2xl text-gray-700 mb-8">Rs. <?= number_format($amount_to_pay, 2) ?> Received</p>
 
-    <div class="bg-gray-50 rounded-2xl p-8 text-left space-y-4 text-lg">
-        <div><strong>Student:</strong> <?= htmlspecialchars($final['name']) ?></div>
-        <div><strong>Reference:</strong> <?= htmlspecialchars($reference_no) ?></div>
-        <div><strong>Course:</strong> <?= htmlspecialchars($final['course_name']) ?></div>
-        <?php if ($final['charge_type'] === 'free'): ?>
-            <div class="text-xl font-bold text-indigo-600 pt-4 border-t">
-                FREE Course – Registration Fee Only
+<body class="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen flex items-center justify-center p-6">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-12 text-center">
+        <div class="w-28 h-28 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+            </svg>
+        </div>
+        <h1 class="text-4xl font-bold text-green-600 mb-4">Payment Successful!</h1>
+        <p class="text-2xl text-gray-700 mb-8">Rs. <?= number_format($amount_to_pay, 2) ?> Received</p>
+
+        <!--<div class="bg-gray-50 rounded-2xl p-8 text-left space-y-4 text-lg">-->
+        <!--    <div><strong>Student:</strong> <?= htmlspecialchars($final['name']) ?></div>-->
+        <!--    <div><strong>Reference:</strong> <?= htmlspecialchars($reference_no) ?></div>-->
+        <!--    <div><strong>Course:</strong> <?= htmlspecialchars($final['course_name']) ?></div>-->
+        <!--    <?php if ($final['charge_type'] === 'free'): ?>-->
+        <!--        <div class="text-xl font-bold text-indigo-600 pt-4 border-t">-->
+        <!--            FREE Course – Registration Fee Only-->
+        <!--        </div>-->
+        <!--    <?php endif; ?>-->
+        <!--    <div class="text-2xl font-bold pt-6 border-t">-->
+        <!--        Total Amount: <span class="text-blue-600">Rs. <?= number_format($total_required, 2) ?></span>-->
+        <!--    </div>-->
+        <!--    <div class="text-2xl font-bold">-->
+        <!--        Total Paid: <span class="text-green-600">Rs. <?= number_format($total_paid, 2) ?></span>-->
+        <!--    </div>-->
+        <!--    <div class="text-2xl font-bold">-->
+        <!--        Remaining: <span class="<?= $remaining > 0 ? 'text-orange-600' : 'text-green-600' ?>">-->
+        <!--            Rs. <?= number_format($remaining, 2) ?>-->
+        <!--        </span>-->
+        <!--    </div>-->
+        <!--</div>-->
+
+        <?php if ($remaining <= 0): ?>
+            <div class="mt-10 p-8 bg-emerald-100 rounded-2xl text-emerald-800 font-bold text-3xl">
+                FULL PAYMENT COMPLETED!
             </div>
         <?php endif; ?>
-        <div class="text-2xl font-bold pt-6 border-t">
-            Total Amount: <span class="text-blue-600">Rs. <?= number_format($total_required, 2) ?></span>
+
+        <div class="mt-10 flex gap-6 justify-center">
+            <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 px-12 rounded-xl text-xl shadow-lg">
+                Print Receipt
+            </button>
+            <a href="https://www.gjrti.gov.lk/" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-5 px-12 rounded-xl text-xl shadow-lg">
+                Back to Website
+            </a>
         </div>
-        <div class="text-2xl font-bold">
-            Total Paid: <span class="text-green-600">Rs. <?= number_format($total_paid, 2) ?></span>
-        </div>
-        <div class="text-2xl font-bold">
-            Remaining: <span class="<?= $remaining > 0 ? 'text-orange-600' : 'text-green-600' ?>">
-                Rs. <?= number_format($remaining, 2) ?>
-            </span>
-        </div>
+
+        <p class="mt-10 text-sm text-gray-500">
+            Payment recorded at <?= date('d M Y, h:i A') ?> • Thank you for choosing GJRTI
+        </p>
     </div>
-
-    <?php if ($remaining <= 0): ?>
-        <div class="mt-10 p-8 bg-emerald-100 rounded-2xl text-emerald-800 font-bold text-3xl">
-            FULL PAYMENT COMPLETED!
-        </div>
-    <?php endif; ?>
-
-    <div class="mt-10 flex gap-6 justify-center">
-        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 px-12 rounded-xl text-xl shadow-lg">
-            Print Receipt
-        </button>
-        <a href="https://sltdigital.site/gem/" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-5 px-12 rounded-xl text-xl shadow-lg">
-            Back to Website
-        </a>
-    </div>
-
-    <p class="mt-10 text-sm text-gray-500">
-        Payment recorded at <?= date('d M Y, h:i A') ?> • Thank you for choosing GJRTI
-    </p>
-</div>
 </body>
+
 </html>

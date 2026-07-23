@@ -139,15 +139,13 @@ You will receive an email with verified payment details soon.
 Best regards,
 Gem and Jewellery Research and Training Institute
 ";
-        $headers = "From: no-reply@sltdigital.site\r\n";
-        $headers .= "Reply-To: no-reply@sltdigital.site\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-        if (!mail($to, $subject, $message, $headers)) {
+        require_once __DIR__ . '/classes/Mailer.php';
+        if (!Mailer::send($to, $subject, $message, false, 'no-reply@sltdigital.site')) {
             error_log("Failed to send payment confirmation email to $to");
         }
 
         // Send email to admin
-        $admin_email = 'yohanii725@gmail.com';
+        $admin_email = 'sutharshankanna04@gmail.com';
         $admin_subject = "Payment Received Notification";
         $admin_message = "
 Dear Admin,
@@ -167,12 +165,10 @@ Please verify the payment in the system.
 Best regards,
 Gem and Jewellery Research and Training Institute
 ";
-        $admin_headers = "From: no-reply@sltdigital.site\r\n";
-        $admin_headers .= "Reply-To: no-reply@sltdigital.site\r\n";
-        $admin_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-        if (!mail($admin_email, $admin_subject, $admin_message, $admin_headers)) {
+        if (!Mailer::send($admin_email, $admin_subject, $admin_message, false, 'no-reply@sltdigital.site')) {
             error_log("Failed to send payment notification email to $admin_email");
         }
+
 
         if (!$conn->commit()) {
             throw new Exception("Failed to commit transaction: " . $conn->error);
@@ -193,12 +189,14 @@ Gem and Jewellery Research and Training Institute
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mock Payment Gateway</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="bg-white shadow-lg rounded-xl p-8 max-w-md w-full">
         <h1 class="text-2xl font-bold text-gray-800 mb-4">Mock Payment Gateway</h1>
@@ -235,7 +233,9 @@ Gem and Jewellery Research and Training Institute
                 ------------
                 Please upload this slip after payment.
             `;
-            const blob = new Blob([slipContent], { type: 'text/plain' });
+            const blob = new Blob([slipContent], {
+                type: 'text/plain'
+            });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -245,4 +245,5 @@ Gem and Jewellery Research and Training Institute
         }
     </script>
 </body>
+
 </html>

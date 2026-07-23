@@ -16,7 +16,7 @@ $conn = $db->getConnection();
 
 
 $stmt = $conn->prepare("
-    SELECT s.name, s.contact_number, s.address, s.gmail, a.regional_centre, a.course_name, a.registration_fee, a.course_fee, p.amount, p.status
+    SELECT s.name, s.contact_number, s.address, s.gmail, a.regional_centre, a.course_name, a.registration_fee, a.course_fee, a.refundable_deposit, p.amount, p.status
     FROM students s
     JOIN applications a ON s.id = a.student_id
     JOIN payments p ON a.id = p.application_id
@@ -31,6 +31,11 @@ $conn->close();
 
 if (!$application) {
     die("Error: Payment not found or not completed.");
+}
+
+$deposit_line = '';
+if (!empty($application['refundable_deposit']) && (float)$application['refundable_deposit'] > 0) {
+    $deposit_line = '    \textbf{Refundable Deposit:} & Rs. ' . number_format($application['refundable_deposit'], 2) . ' \\\\';
 }
 
 // Generate LaTeX content
@@ -68,6 +73,7 @@ $latex_content = '
     \textbf{Course:} & ' . htmlspecialchars($application['course_name']) . ' \\
     \textbf{Registration Fee:} & Rs. ' . number_format($application['registration_fee'], 2) . ' \\
     \textbf{Course Fee:} & Rs. ' . number_format($application['course_fee'], 2) . ' \\
+' . $deposit_line . '
     \textbf{Total Amount Paid:} & Rs. ' . number_format($application['amount'], 2) . ' \\
     \textbf{Payment Status:} & Completed \\
 \end{tabular}

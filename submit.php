@@ -30,12 +30,13 @@ try {
     $course_name        = trim($_POST['course'] ?? '');
     $reg_fee            = (float)($_POST['reg_fee'] ?? 0);
     $course_fee         = (float)($_POST['course_fee'] ?? 0);
+    $refundable_deposit = (float)($_POST['refundable_deposit'] ?? 0);
     $nic_passport       = trim($_POST['nic_passport'] ?? '');
     $education_background = trim($_POST['education_background'] ?? '');
 
     // Declarations
     $declaration = (isset($_POST['declaration']) && $_POST['declaration'] == '1') &&
-                   (isset($_POST['declaration2']) && $_POST['declaration2'] == '1') ? 1 : 0;
+        (isset($_POST['declaration2']) && $_POST['declaration2'] == '1') ? 1 : 0;
 
     if (!$declaration) {
         throw new Exception("You must agree to both declarations.");
@@ -96,10 +97,10 @@ try {
     // Insert Application
     $stmt = $conn->prepare("
         INSERT INTO applications 
-        (student_id, regional_centre, course_type, course_name, registration_fee, course_fee)
-        VALUES (?, ?, ?, ?, ?, ?)
+        (student_id, regional_centre, course_type, course_name, registration_fee, course_fee, refundable_deposit)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
-    $stmt->bind_param("isssdd", $student_id, $regional_centre, $course_type, $course_name, $reg_fee, $course_fee);
+    $stmt->bind_param("isssddd", $student_id, $regional_centre, $course_type, $course_name, $reg_fee, $course_fee, $refundable_deposit);
     $stmt->execute();
     $application_id = $conn->insert_id;
     $stmt->close();
@@ -113,7 +114,7 @@ try {
     $is_tailor_made = in_array($course_name, $tailorMadeCourses);
 
     if (!$is_tailor_made) {
-        $total_due = $reg_fee + $course_fee;
+        $total_due = $reg_fee + $course_fee + $refundable_deposit;
 
         $stmt = $conn->prepare("
             INSERT INTO payments 
@@ -137,15 +138,16 @@ try {
     if ($is_tailor_made) {
         $msg .= "This is a Tailor-Made course. The admin will contact you with the exact fee and payment details.\n";
     } else {
-        $msg .= "Total Fee: Rs. " . number_format($reg_fee + $course_fee, 2) . "\n";
+        $msg .= "Total Fee: Rs. " . number_format($reg_fee + $course_fee + $refundable_deposit, 2) . "\n";
         $msg .= "Payment instructions will be sent after approval.\n";
     }
 
     $msg .= "\nThank you!\nGJRTI Team";
 
-    $headers = "From: no-reply@sltdigital.site\r\nContent-Type: text/plain; charset=UTF-8\r\n";
-    mail($gmail, "Application Submitted - Ref: $reference_no", $msg, $headers);
-    mail("yohanii725@gmail.com", "New Application - $reference_no", "New application from $name\nCourse: $course_name\nRef: $reference_no", $headers);
+    require_once __DIR__ . '/classes/Mailer.php';
+    Mailer::send($gmail, "Application Submitted - Ref: $reference_no", $msg, false);
+    Mailer::send("sutharshankanna04@gmail.com", "New Application - $reference_no", "New application from $name\nCourse: $course_name\nRef: $reference_no", false);
+
 
     $_SESSION['application_success'] = [
         'name' => $name,
@@ -155,10 +157,8 @@ try {
 
     header("Location: application-success.php?ref=$reference_no");
     exit;
-
 } catch (Exception $e) {
     $conn->rollback();
     error_log("submit.php ERROR: " . $e->getMessage());
     die("Application failed: " . $e->getMessage());
 }
-?>

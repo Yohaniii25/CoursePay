@@ -1,0 +1,309 @@
+/* ==========================================================================
+   GJRTI Student Application Form Custom CSS
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #1f2937;
+    line-height: 1.5;
+}
+
+/* Header Styles */
+.header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.header-logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+}
+
+.header-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #25116f;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.back-btn {
+    background-color: #25116f;
+    color: #ffffff;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.back-btn:hover {
+    opacity: 0.9;
+    background-color: #1c0d54;
+}
+
+/* Payment Success Banner */
+.success-banner {
+    max-width: 800px;
+    margin: 2rem auto 0;
+    background-color: #f0fdf4;
+    border-left: 5px solid #22c55e;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.success-banner h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #15803d;
+    margin-bottom: 0.75rem;
+}
+
+.success-banner p {
+    color: #374151;
+    margin-bottom: 0.35rem;
+}
+
+.success-banner .print-btn {
+    margin-top: 1rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.success-banner .print-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Form Container */
+.form-container {
+    max-width: 800px;
+    margin: 2.5rem auto;
+    background: #ffffff;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid #e5e7eb;
+}
+
+.form-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e1b4b;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 0.75rem;
+}
+
+.app-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Form Controls & Labels */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.required-star {
+    color: #ef4444;
+    margin-left: 2px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #1f2937;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: #25116f;
+    box-shadow: 0 0 0 3px rgba(37, 17, 111, 0.15);
+}
+
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%256b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.form-input[readonly] {
+    background-color: #f9fafb;
+    color: #4b5563;
+    cursor: not-allowed;
+    font-weight: 600;
+    border-color: #e5e7eb;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* File Input Styling */
+.form-file {
+    padding: 0.6rem;
+    background-color: #f9fafb;
+    cursor: pointer;
+}
+
+.form-file::file-selector-button {
+    margin-right: 1rem;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background-color: #e0e7ff;
+    color: #3730a3;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.form-file::file-selector-button:hover {
+    background-color: #c7d2fe;
+}
+
+/* Declaration Checkboxes */
+.declaration-box {
+    background-color: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    transition: background-color 0.2s ease;
+}
+
+.declaration-box:hover {
+    background-color: #e0f2fe;
+}
+
+.declaration-label {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    gap: 0.75rem;
+}
+
+.declaration-checkbox {
+    margin-top: 0.25rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: #25116f;
+    cursor: pointer;
+}
+
+.declaration-text {
+    font-size: 0.875rem;
+    color: #374151;
+    line-height: 1.4;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    background-color: #25116f;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(37, 17, 111, 0.25);
+    margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+    background-color: #1c0d54;
+    box-shadow: 0 6px 16px rgba(37, 17, 111, 0.35);
+    transform: translateY(-1px);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Footer */
+.footer {
+    background-color: #111827;
+    color: #9ca3af;
+    font-size: 0.875rem;
+    padding: 1.25rem 2rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .header-title {
+        position: static;
+        transform: none;
+        font-size: 1.1rem;
+    }
+
+    .form-container {
+        margin: 1.5rem 1rem;
+        padding: 1.5rem;
+    }
+}

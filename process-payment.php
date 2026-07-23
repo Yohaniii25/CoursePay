@@ -12,7 +12,7 @@ $GLOBALS['logDir'] = $logDir;
 
 function ipg_start($order_id, $amount, $reference_no, $installment_type, $application_id)
 {
-    $return_url = "https://sltdigital.site/gem/CoursePay/proceed-to-pay.php?ref=" . urlencode($reference_no);
+    $return_url = "https://www.gjrti.gov.lk/CoursePay/proceed-to-pay.php?ref=" . urlencode($reference_no);
 
     $curl = curl_init();
     curl_setopt_array($curl, [
@@ -23,8 +23,8 @@ function ipg_start($order_id, $amount, $reference_no, $installment_type, $applic
             "checkoutMode" => "WEBSITE",
             "interaction" => [
                 "operation" => "PURCHASE",
-                "merchant" => ["name" => "Gem and Jewellery", "url" => "https://sltdigital.site/gem/"],
-                "returnUrl" => "https://sltdigital.site/gem/CoursePay/complete.php"
+                "merchant" => ["name" => "Gem and Jewellery", "url" => "https://www.gjrti.gov.lk/"],
+                "returnUrl" => "https://www.gjrti.gov.lk/CoursePay/complete.php"
             ],
             "order" => [
                 "currency" => "LKR",
@@ -90,10 +90,10 @@ if (empty($reference_no) || empty($payment_method) || empty($payment_option)) {
 $stmt = $conn->prepare("
     SELECT 
         a.id AS application_id,
-        a.registration_fee, a.course_fee, a.charge_type,
+        a.registration_fee, a.course_fee, a.refundable_deposit, a.charge_type,
         COALESCE(
             (SELECT due_amount FROM payments WHERE application_id = a.id ORDER BY id DESC LIMIT 1),
-            (a.registration_fee + a.course_fee)
+            (a.registration_fee + a.course_fee + a.refundable_deposit)
         ) AS remaining_due,
         COALESCE(SUM(p.paid_amount), 0) AS total_paid
     FROM applications a
@@ -124,7 +124,7 @@ else {
             header("Location: proceed-to-pay.php?ref=" . urlencode($reference_no) . "&error=50%25+not+allowed");
             exit;
         }
-        $amount_to_pay = $app['registration_fee'] + ($app['course_fee'] * 0.5);
+        $amount_to_pay = $app['registration_fee'] + ($app['course_fee'] * 0.5) + (float)($app['refundable_deposit'] ?? 0);
         $installment_type = 'first';
     } else {
         $amount_to_pay = $remaining_due;

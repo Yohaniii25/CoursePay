@@ -1,0 +1,169 @@
+[24-Nov-2025 00:59:29 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 245
+[24-Nov-2025 00:59:29 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 245
+[24-Nov-2025 00:59:29 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 245
+[24-Nov-2025 00:59:29 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 245
+[24-Nov-2025 01:00:17 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 245
+[24-Nov-2025 01:00:17 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 245
+[24-Nov-2025 01:00:17 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 245
+[24-Nov-2025 01:00:17 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 245
+[24-Nov-2025 01:26:04 America/Chicago] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'p.slip_file_2' in 'field list' in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php:73
+Stack trace:
+#0 /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php(73): mysqli->query('\r\nSELECT\r\n    s...')
+#1 {main}
+  thrown in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 73
+[24-Nov-2025 01:26:06 America/Chicago] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'p.slip_file_2' in 'field list' in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php:73
+Stack trace:
+#0 /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php(73): mysqli->query('\r\nSELECT\r\n    s...')
+#1 {main}
+  thrown in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 73
+[24-Nov-2025 01:27:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 01:27:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 01:27:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 01:27:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 01:36:19 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 01:36:19 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:24:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:24:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:24:52 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:24:52 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:24:55 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:24:55 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:28:16 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:28:16 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:28:16 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:28:16 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:31:46 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:31:46 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:31:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:31:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:31:51 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:31:51 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:40:55 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:40:55 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:40:55 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:40:55 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:42:30 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:42:30 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:42:32 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:42:32 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:42:35 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:42:35 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:43:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:43:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:43:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:43:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:43:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:43:49 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:44:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:44:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:44:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:44:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:44:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:44:09 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:53:54 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:53:54 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:53:57 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:53:57 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:54:01 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:54:01 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:57:26 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:57:26 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:57:26 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 02:57:26 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:21:50 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:21:50 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:21:54 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:21:54 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:21:58 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:21:58 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:30:18 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:30:18 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:40:02 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:40:02 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:40:06 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:40:06 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:40:08 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:40:08 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:41:47 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:41:47 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:41:47 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:41:47 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:43:14 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:43:14 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:43:14 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 04:43:14 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:09:21 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:09:21 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:09:21 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:09:21 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:09:21 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:09:21 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:22:55 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:22:55 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:22:58 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:22:58 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:24:29 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:24:29 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:27:24 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:27:24 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:27:24 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:27:24 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:27:31 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:27:31 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:27:31 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:27:31 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:32:44 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:32:44 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:32:44 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:32:44 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:32:44 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:32:44 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:38:10 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:38:10 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:38:33 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:38:33 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:38:36 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:38:36 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:39:54 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:39:54 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:39:54 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:39:54 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:39:57 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:39:57 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:39:57 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:39:57 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:42:19 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:42:19 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:42:19 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:42:19 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:42:19 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:42:19 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:53:19 America/Chicago] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(PARTITION BY p.application_id ORDER BY p.id DESC) as rn
+    FROM payments p
+)' at line 30 in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php:85
+Stack trace:
+#0 /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php(85): mysqli->query('\r\nSELECT \r\n    ...')
+#1 {main}
+  thrown in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 85
+[24-Nov-2025 05:53:21 America/Chicago] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(PARTITION BY p.application_id ORDER BY p.id DESC) as rn
+    FROM payments p
+)' at line 30 in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php:85
+Stack trace:
+#0 /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php(85): mysqli->query('\r\nSELECT \r\n    ...')
+#1 {main}
+  thrown in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 85
+[24-Nov-2025 05:53:41 America/Chicago] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(PARTITION BY p.application_id ORDER BY p.id DESC) as rn
+    FROM payments p
+)' at line 30 in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php:89
+Stack trace:
+#0 /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php(89): mysqli->query('\r\nSELECT \r\n    ...')
+#1 {main}
+  thrown in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 89
+[24-Nov-2025 05:57:46 America/Chicago] PHP Warning:  Undefined array key "amount" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 181
+[24-Nov-2025 05:58:20 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:58:20 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:58:20 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:58:20 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:58:20 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 05:58:20 America/Chicago] PHP Warning:  Undefined array key "method" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 244
+[24-Nov-2025 06:00:46 America/Chicago] PHP Parse error:  syntax error, unexpected identifier "omitted" in /home1/sltdigi2/public_html/gem/CoursePay/admin/pages/dashboard.php on line 209

@@ -93,10 +93,9 @@ if (isset($_POST['do_reject'])) {
         <p><strong>Reason:</strong><br>$remark</p>
         <p>Thank you.<br>GJRTI Admissions</p>
     ";
-    $headers = "From: no-reply@gjrti.lk\r\n";
-    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-    mail($email, $subject, $message, $headers);
+    require_once __DIR__ . '/../../classes/Mailer.php';
+    Mailer::send($email, $subject, $message, true, 'no-reply@gjrti.lk');
 
     $conn->query("DELETE FROM students WHERE id = $student_id");
 
@@ -141,22 +140,34 @@ if (isset($_POST['verify_enroll'])) {
         <p><strong>GJRTI Admissions Team</strong></p>
     ";
 
-    $headers  = "From: no-reply@gjrti.lk\r\n";
-    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-
-    mail($email, $subject, $message, $headers);
+    require_once __DIR__ . '/../../classes/Mailer.php';
+    Mailer::send($email, $subject, $message, true, 'no-reply@gjrti.lk');
 
     $_SESSION['msg'] = "Payment verified & student enrolled successfully!";
+
     exit;
 }
 
-$sort           = isset($_GET['sort']) ? $_GET['sort'] : 'newest';
+$sort   = isset($_GET['sort']) ? $_GET['sort'] : 'newest';
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 // Base WHERE
 $where = ["a.id IS NOT NULL"];
 $params = [];
 $types  = '';
 
+if ($search !== '') {
+    $where[] = "(s.name LIKE ? OR s.gmail LIKE ? OR s.contact_number LIKE ? OR s.reference_no LIKE ? OR s.student_id_manual LIKE ? OR a.course_name LIKE ? OR a.regional_centre LIKE ?)";
+    $search_param = '%' . $search . '%';
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $types .= 'sssssss';
+}
 
 // Build ORDER BY
 switch ($sort) {
@@ -177,17 +188,55 @@ switch ($sort) {
 
 $where_clause = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
 
+// PAGINATION SETUP: 20 records per page
+$records_per_page = 20;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) && (int)$_GET['page'] > 0 ? (int)$_GET['page'] : 1;
+
+function get_page_url($page_num)
+{
+    $params = $_GET;
+    $params['page'] = $page_num;
+    return 'dashboard.php?' . http_build_query($params);
+}
+
+// Count total records
+$count_sql = "
+SELECT COUNT(DISTINCT s.id) AS total
+FROM students s
+JOIN applications a ON s.id = a.student_id
+LEFT JOIN payments p ON a.id = p.application_id AND p.status = 'completed'
+$where_clause
+";
+
+$count_stmt = $conn->prepare($count_sql);
+if (!empty($params)) {
+    $count_stmt->bind_param($types, ...$params);
+}
+$count_stmt->execute();
+$total_records = (int)$count_stmt->get_result()->fetch_assoc()['total'];
+$count_stmt->close();
+
+$total_pages = max(1, ceil($total_records / $records_per_page));
+if ($page > $total_pages) {
+    $page = $total_pages;
+}
+$offset = ($page - 1) * $records_per_page;
+
+$start_record = $total_records > 0 ? $offset + 1 : 0;
+$end_record   = min($offset + $records_per_page, $total_records);
+
+// Main SQL with LIMIT and OFFSET
 $sql = "
 SELECT
     s.id AS student_id,
     s.name, s.gmail, s.contact_number, s.nic_file, s.reference_no,
     s.student_id_manual, s.next_payment_date, s.checked,
     a.id AS application_id, a.course_name, a.regional_centre,
-    a.registration_fee, a.course_fee, a.charge_type,
+    a.registration_fee, a.course_fee, a.refundable_deposit, a.charge_type,
     COALESCE(SUM(p.paid_amount), 0) AS total_paid,
     COALESCE(
         (SELECT due_amount FROM payments WHERE application_id = a.id ORDER BY id DESC LIMIT 1),
-        (a.registration_fee + a.course_fee)
+        (a.registration_fee + a.course_fee + a.refundable_deposit)
     ) AS remaining_due
 FROM students s
 JOIN applications a ON s.id = a.student_id
@@ -195,13 +244,16 @@ LEFT JOIN payments p ON a.id = p.application_id AND p.status = 'completed'
 $where_clause
 GROUP BY s.id, a.id
 ORDER BY $order
+LIMIT ? OFFSET ?
 ";
 
-$stmt = $conn->prepare($sql);
+$params_with_limit = $params;
+$params_with_limit[] = $records_per_page;
+$params_with_limit[] = $offset;
+$types_with_limit  = $types . 'ii';
 
-if (!empty($params)) {
-    $stmt->bind_param($types, ...$params);
-}
+$stmt = $conn->prepare($sql);
+$stmt->bind_param($types_with_limit, ...$params_with_limit);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -214,107 +266,92 @@ if (!$result) die("Query Error: " . $conn->error);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - GJRTI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-    </style>
 </head>
 
-<body class="bg-gray-50">
-    <!-- [Your header - unchanged] -->
-    <header class="bg-white shadow-sm sticky top-0 z-10">
-        <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <div class="flex items-center gap-3">
-                    <img src="../assets/GJRT_1.png" alt="Logo" class="h-16 sm:h-20">
-                </div>
-                <h1 class="text-xl sm:text-2xl font-bold text-purple-700">Gem Institute Admin</h1>
-                <div class="flex gap-2 sm:gap-3">
-                    <a href="/" class="bg-purple-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-purple-700 transition text-sm sm:text-base">
-                        Visit Website
-                    </a>
-                    <a href="../logout.php" class="bg-red-500 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-red-600 transition text-sm sm:text-base">
-                        Logout
-                    </a>
-                </div>
+<body>
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo-section">
+                <img src="../assets/GJRT_1.png" alt="Logo" class="admin-logo-img">
+                <span class="admin-header-title">GJRTI Admin Panel</span>
+            </div>
+            <div class="admin-nav-actions">
+                <a href="/" class="btn-nav-website">
+                    Visit Website
+                </a>
+                <a href="../logout.php" class="btn-nav-logout">
+                    Logout
+                </a>
             </div>
         </div>
     </header>
-    <main class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <main class="admin-main">
         <?php if (isset($_SESSION['msg'])): ?>
-            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded">
+            <div class="alert-success">
                 <?= htmlspecialchars($_SESSION['msg']) ?>
             </div>
             <?php unset($_SESSION['msg']); ?>
         <?php endif; ?>
-        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-6">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">Student Applications</h2>
+        <div class="dashboard-toolbar">
+            <h2 class="dashboard-page-title">Student Applications</h2>
 
-            <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+            <div class="toolbar-controls">
+                <form method="GET" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <i class="fas fa-search" style="position: absolute; left: 0.75rem; color: #94a3b8; font-size: 0.85rem; pointer-events: none;"></i>
+                        <input type="text" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search name, email, ref, course..." class="sort-select" style="padding-left: 2.25rem; min-width: 240px;">
+                    </div>
 
-                <form method="GET" class="flex flex-col sm:flex-row gap-3">
-
-                    <select name="sort" onchange="this.form.submit()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-purple-500 focus:border-purple-500">
-                        <option value="newest" <?= (!isset($_GET['sort']) || $_GET['sort'] === 'newest') ? 'selected' : '' ?>>Newest First</option>
-                        <option value="oldest" <?= (isset($_GET['sort']) && $_GET['sort'] === 'oldest') ? 'selected' : '' ?>>Oldest First</option>
-                        <option value="az" <?= (isset($_GET['sort']) && $_GET['sort'] === 'az') ? 'selected' : '' ?>>Name A → Z</option>
-                        <option value="za" <?= (isset($_GET['sort']) && $_GET['sort'] === 'za') ? 'selected' : '' ?>>Name Z → A</option>
+                    <select name="sort" onchange="this.form.submit()" class="sort-select">
+                        <option value="newest" <?= ($sort === 'newest') ? 'selected' : '' ?>>Newest First</option>
+                        <option value="oldest" <?= ($sort === 'oldest') ? 'selected' : '' ?>>Oldest First</option>
+                        <option value="az" <?= ($sort === 'az') ? 'selected' : '' ?>>Name A → Z</option>
+                        <option value="za" <?= ($sort === 'za') ? 'selected' : '' ?>>Name Z → A</option>
                     </select>
 
-                    <?php if (isset($_GET['course_category']) || isset($_GET['sort'])): ?>
-                        <a href="dashboard.php" class="text-sm text-purple-600 hover:underline whitespace-nowrap">Clear filters</a>
+                    <button type="submit" class="btn-nav-website" style="padding: 0.5rem 1rem; border: none; cursor: pointer;">
+                        Search
+                    </button>
+
+                    <?php if (!empty($search) || isset($_GET['sort']) || isset($_GET['course_category'])): ?>
+                        <a href="dashboard.php" style="font-size: 0.85rem; color: #7e22ce; text-decoration: underline;">Clear filters</a>
                     <?php endif; ?>
                 </form>
 
-                <a href="export_csv.php" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-sm flex items-center gap-2 whitespace-nowrap">
-                    Export CSV
+                <a href="export_csv.php" class="btn-export">
+                    <i class="fas fa-file-csv"></i> Export CSV
                 </a>
             </div>
         </div>
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div class="overflow-x-auto custom-scrollbar" style="max-height: calc(100vh - 250px);">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <!-- [Your thead - unchanged] -->
-                    <thead class="bg-gradient-to-r from-purple-50 to-purple-100 sticky top-0 z-10">
+        <div class="table-card">
+            <div class="table-scroll-wrapper">
+                <table class="admin-table">
+                    <thead>
                         <tr>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Name</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Email</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Contact</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Student ID</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Ref No</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Course</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Centre</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Charge Type</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Due</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Next Pay</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">NIC</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-style text-gray-700 uppercase tracking-wider">All Payments</th>
-                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
-                            <th class="px-4 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
-                            <th class="px-4 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Verified</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Student ID</th>
+                            <th>Ref No</th>
+                            <th>Course</th>
+                            <th>Centre</th>
+                            <th>Charge Type</th>
+                            <th>Due</th>
+                            <th>Next Pay</th>
+                            <th>NIC</th>
+                            <th>All Payments</th>
+                            <th>Status</th>
+                            <th style="text-align: center;">Actions</th>
+                            <th style="text-align: center;">Verified</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <?php while ($row = $result->fetch_assoc()):
                             $display_id = $row['student_id_manual'] ?: "GJRTI" . str_pad($row['student_id'], 4, '0', STR_PAD_LEFT);
-                            $first_paid = $row['total_paid'] >= ($row['registration_fee'] + ($row['course_fee'] * 0.5));
+                            $first_paid = $row['total_paid'] >= ($row['registration_fee'] + ($row['course_fee'] * 0.5) + (float)($row['refundable_deposit'] ?? 0));
                             $second_pending = $row['remaining_due'] > 0 && $first_paid && $row['charge_type'] === 'payable';
                             $has_due = $row['remaining_due'] > 0;
                         ?>
@@ -354,7 +391,7 @@ if (!$result) die("Query Error: " . $conn->error);
                                 </td>
                                 <td class="px-4 py-4 text-center whitespace-nowrap">
                                     <?php if ($row['nic_file']): ?>
-                                        <a href="/gem/CoursePay/<?= htmlspecialchars($row['nic_file']) ?>" download class="inline-flex items-center gap-1 bg-blue-100 text-blue-700 px-3 py-1.5 rounded-md hover:bg-blue-200 text-xs">
+                                        <a href="/CoursePay/<?= htmlspecialchars($row['nic_file']) ?>" download class="inline-flex items-center gap-1 bg-blue-100 text-blue-700 px-3 py-1.5 rounded-md hover:bg-blue-200 text-xs">
                                             Download
                                         </a>
                                     <?php else: echo "—";
@@ -375,7 +412,7 @@ if (!$result) die("Query Error: " . $conn->error);
                                         while ($p = $payments->fetch_assoc()):
                                             $count++;
                                             if ($p['method'] === 'Upload Payslip' && $p['slip_file']): ?>
-                                                <a href="/gem/CoursePay/<?= htmlspecialchars($p['slip_file']) ?>" target="_blank"
+                                                <a href="/CoursePay/<?= htmlspecialchars($p['slip_file']) ?>" target="_blank"
                                                     class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1.5 rounded-md hover:bg-green-200 text-xs font-medium">
                                                     Payment <?= $count ?> (Slip)
                                                 </a>
@@ -501,38 +538,103 @@ if (!$result) die("Query Error: " . $conn->error);
                     </tbody>
                 </table>
             </div>
+
+            <!-- PAGINATION CONTROLS -->
+            <?php if ($total_records > 0): ?>
+                <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-sm text-gray-600">
+                        Showing <span class="font-semibold text-gray-900"><?= $start_record ?></span> to <span class="font-semibold text-gray-900"><?= $end_record ?></span> of <span class="font-semibold text-gray-900"><?= $total_records ?></span> records (20 per page)
+                    </div>
+                    <?php if ($total_pages > 1): ?>
+                        <div class="inline-flex items-center space-x-1">
+                            <!-- Previous Link -->
+                            <?php if ($page > 1): ?>
+                                <a href="<?= get_page_url($page - 1) ?>" class="px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-purple-50 transition">
+                                    &laquo; Prev
+                                </a>
+                            <?php else: ?>
+                                <span class="px-3 py-1.5 border border-gray-200 rounded-md text-sm font-medium text-gray-400 bg-gray-100 cursor-not-allowed">
+                                    &laquo; Prev
+                                </span>
+                            <?php endif; ?>
+
+                            <!-- Page Numbers -->
+                            <?php
+                            $start_loop = max(1, $page - 2);
+                            $end_loop   = min($total_pages, $page + 2);
+
+                            if ($start_loop > 1) {
+                                echo '<a href="' . get_page_url(1) . '" class="px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-purple-50 transition">1</a>';
+                                if ($start_loop > 2) {
+                                    echo '<span class="px-2 py-1.5 text-sm text-gray-400">...</span>';
+                                }
+                            }
+
+                            for ($i = $start_loop; $i <= $end_loop; $i++):
+                                if ($i == $page): ?>
+                                    <span class="px-3 py-1.5 border border-purple-600 bg-purple-600 text-white rounded-md text-sm font-semibold shadow-sm">
+                                        <?= $i ?>
+                                    </span>
+                                <?php else: ?>
+                                    <a href="<?= get_page_url($i) ?>" class="px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-purple-50 transition">
+                                        <?= $i ?>
+                                    </a>
+                            <?php endif;
+                            endfor;
+
+                            if ($end_loop < $total_pages) {
+                                if ($end_loop < $total_pages - 1) {
+                                    echo '<span class="px-2 py-1.5 text-sm text-gray-400">...</span>';
+                                }
+                                echo '<a href="' . get_page_url($total_pages) . '" class="px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-purple-50 transition">' . $total_pages . '</a>';
+                            }
+                            ?>
+
+                            <!-- Next Link -->
+                            <?php if ($page < $total_pages): ?>
+                                <a href="<?= get_page_url($page + 1) ?>" class="px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-purple-50 transition">
+                                    Next &raquo;
+                                </a>
+                            <?php else: ?>
+                                <span class="px-3 py-1.5 border border-gray-200 rounded-md text-sm font-medium text-gray-400 bg-gray-100 cursor-not-allowed">
+                                    Next &raquo;
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </div>
     </main>
-    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white rounded-xl shadow-2xl p-6 w-96 max-w-full mx-4">
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Edit Student</h3>
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3 class="modal-title">Edit Student</h3>
             <form method="POST">
                 <input type="hidden" name="student_id" id="edit_id">
                 <input type="hidden" name="reg_fee" id="reg_fee">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Student ID (Manual)</label>
-                    <input type="text" name="student_id_manual" id="edit_student_id_manual" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="input-label">Student ID (Manual)</label>
+                    <input type="text" name="student_id_manual" id="edit_student_id_manual" class="login-input" style="padding-left: 0.75rem;">
                 </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Next Payment Date</label>
-                    <input type="date" name="next_payment_date" id="edit_date" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="input-label">Next Payment Date</label>
+                    <input type="date" name="next_payment_date" id="edit_date" class="login-input" style="padding-left: 0.75rem;">
                 </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Full Course Fee (Rs.) <span class="text-red-600">*</span></label>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="input-label">Full Course Fee (Rs.) <span class="required-star">*</span></label>
                     <input type="number" step="0.01" name="due_amount" id="edit_due" required
-                        class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"
-                        placeholder="Enter total fee (e.g. 45000)">
-                    <p class="text-xs text-gray-500 mt-1">
+                        class="login-input" style="padding-left: 0.75rem;" placeholder="Enter total fee (e.g. 45000)">
+                    <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
                         For Tailor-Made courses: Set the full agreed amount here<br>
                         For Free courses: Enter <strong>2000.00</strong>
                     </p>
                 </div>
-                <div class="flex gap-3 mt-6">
-                    <button type="submit" name="edit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 font-medium">
+                <div class="modal-actions">
+                    <button type="submit" name="edit" class="btn-modal-save">
                         Save Changes
                     </button>
-                    <button type="button" onclick="document.getElementById('editModal').classList.add('hidden')"
-                        class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 font-medium">
+                    <button type="button" onclick="document.getElementById('editModal').classList.add('hidden')" class="btn-modal-cancel">
                         Cancel
                     </button>
                 </div>
@@ -540,43 +642,40 @@ if (!$result) die("Query Error: " . $conn->error);
         </div>
     </div>
 
-    <div id="onlineModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <div class="bg-white rounded-xl shadow-2xl p-6 max-w-sm w-full">
-            <h3 class="text-lg font-bold text-gray-800 mb-4" id="modalType">Payment Details</h3>
-            <div class="space-y-3 text-sm">
-                <div><strong>Transaction ID:</strong> <span id="modalTid" class="font-mono"></span></div>
+    <!-- Online Payment Details Modal -->
+    <div id="onlineModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3 class="modal-title" id="modalType">Payment Details</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem;">
+                <div><strong>Transaction ID:</strong> <span id="modalTid" style="font-family: monospace;"></span></div>
                 <div><strong>Amount Paid:</strong> Rs. <span id="modalAmount"></span></div>
                 <div><strong>Date & Time:</strong> <span id="modalDate"></span></div>
-                <div><strong>Status:</strong> <span id="modalStatus" class="px-2 py-1 rounded text-xs font-medium"></span></div>
+                <div><strong>Status:</strong> <span id="modalStatus" class="badge"></span></div>
             </div>
-            <button onclick="document.getElementById('onlineModal').classList.add('hidden')"
-                class="mt-6 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">
+            <button onclick="document.getElementById('onlineModal').classList.add('hidden')" class="btn-modal-cancel" style="width: 100%; margin-top: 1.5rem;">
                 Close
             </button>
         </div>
     </div>
 
-    <!--  Reject Modal -->
-    <div id="rejectBox" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
-            <h3 class="text-lg font-bold text-red-600 mb-4">Reject Application</h3>
+    <!-- Reject Modal -->
+    <div id="rejectBox" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3 class="modal-title" style="color: #dc2626;">Reject Application</h3>
             <form method="POST" action="">
                 <input type="hidden" name="reject_student_id" id="reject_id">
                 <input type="hidden" name="reject_email" id="reject_email">
 
-                <p class="mb-3 text-sm"><strong>Student:</strong> <span id="reject_name_display"></span></p>
-                <p class="mb-4 text-sm"><strong>Ref:</strong> <span id="reject_ref_display"></span></p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Student:</strong> <span id="reject_name_display"></span></p>
+                <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong>Ref:</strong> <span id="reject_ref_display"></span></p>
 
-                <textarea name="remark" required placeholder="Write reason for rejection..."
-                    class="w-full border border-gray-300 rounded px-3 py-2 text-sm" rows="4"></textarea>
+                <textarea name="remark" required placeholder="Write reason for rejection..." class="form-textarea" rows="4"></textarea>
 
-                <div class="flex gap-3 mt-5">
-                    <button type="submit" name="do_reject"
-                        class="bg-red-600 text-white px-5 py-2 rounded hover:bg-red-700 text-sm">
+                <div class="modal-actions">
+                    <button type="submit" name="do_reject" class="btn-action-delete" style="padding: 0.6rem 1rem;">
                         Send & Delete
                     </button>
-                    <button type="button" onclick="document.getElementById('rejectBox').classList.add('hidden')"
-                        class="bg-gray-500 text-white px-5 py-2 rounded hover:bg-gray-600 text-sm">
+                    <button type="button" onclick="document.getElementById('rejectBox').classList.add('hidden')" class="btn-modal-cancel">
                         Cancel
                     </button>
                 </div>
