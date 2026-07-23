@@ -11,7 +11,7 @@ if (empty($reference_no)) die("Invalid reference.");
 $stmt = $conn->prepare("
     SELECT 
         s.name, s.checked,
-        a.id AS application_id, a.course_name, a.regional_centre, a.charge_type,
+        a.id AS application_id, a.course_name, a.regional_centre, a.course_type, a.charge_type,
         a.registration_fee, a.course_fee, a.refundable_deposit,
         COALESCE(p.due_amount, (a.registration_fee + a.course_fee + a.refundable_deposit)) AS amount_to_pay,
         COALESCE(SUM(p2.paid_amount), 0) AS total_paid
@@ -134,7 +134,7 @@ $fifty_percent_amount = $reg_fee + ($course_fee * 0.5) + $refundable_deposit;
             </div>
 
             <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-2xl py-6 rounded-xl shadow-lg">
-                <?= $is_free_course ? 'Pay Rs. 2000 Now' : 'Pay Now' ?>
+                <?= $is_free_course ? 'Pay Rs. ' . number_format($amount_to_pay, 2) . ' Now' : 'Pay Now' ?>
             </button>
         </form>
 

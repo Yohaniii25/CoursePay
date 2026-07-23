@@ -6591,4 +6591,21 @@
     "education_background": "A\/L ",
     "declaration": "1",
     "declaration2": "1"
+}[2026-07-23 07:55:39] submit.php: POST data: {
+    "name": "Yohani Abeykoon",
+    "contact_number": "0778439871",
+    "gmail": "yohanii725@gmail.com",
+    "address": "eeee\r\nereer",
+    "regional_centre": "Head Office - Kaduwela",
+    "course_type": "Diploma Level Courses",
+    "course": "Diploma in Professional Gemmology (Dip. PGSL)",
+    "course_fee_display": "Registration Fee: Rs. 5,000 | Course Fee: Rs. 200,000 | Refundable Deposit: Rs. 5,000",
+    "reg_fee": "5000",
+    "course_fee": "200000",
+    "refundable_deposit": "5000",
+    "total_fee_display": "Total Fee: Rs. 210,000",
+    "nic_passport": "1999999999",
+    "education_background": "test",
+    "declaration": "1",
+    "declaration2": "1"
 }

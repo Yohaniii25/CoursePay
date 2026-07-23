@@ -25,7 +25,7 @@ try {
     }
 
     // Get application
-    $stmt = $conn->prepare("SELECT id FROM applications WHERE student_id = ?");
+    $stmt = $conn->prepare("SELECT id, course_type FROM applications WHERE student_id = ?");
     $stmt->bind_param("i", $student_id);
     $stmt->execute();
     $app = $stmt->get_result()->fetch_assoc();
@@ -35,9 +35,10 @@ try {
 
     // DETERMINE DUE AMOUNT
     if ($action === 'approve_free') {
-        $due_amount = 2000.00;
+        $is_diploma = ($app['course_type'] ?? '') === 'Diploma Level Courses';
+        $due_amount = $is_diploma ? 5000.00 : 2000.00;
         $charge_type = 'free';
-        $email_msg = "FREE course approved – Registration Fee: Rs. 2000.00 only";
+        $email_msg = "FREE course approved – Registration Fee: Rs. " . number_format($due_amount, 2) . " only";
     } else {
         // FOR PAYABLE: USE THE LATEST due_amount FROM PAYMENTS (ADMIN SET)
         $stmt = $conn->prepare("
@@ -121,7 +122,7 @@ Gem and Jewellery Research and Training Institute
     $conn->commit();
 
     $_SESSION['msg'] = $action === 'approve_free'
-        ? "Approved as FREE – Due: Rs. 2000"
+        ? "Approved as FREE – Due: Rs. " . number_format($due_amount, 2)
         : "Approved as PAYABLE – Due: Rs. " . number_format($due_amount, 2);
 
     header("Location: dashboard.php");

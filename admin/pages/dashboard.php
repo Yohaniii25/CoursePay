@@ -231,7 +231,7 @@ SELECT
     s.id AS student_id,
     s.name, s.gmail, s.contact_number, s.nic_file, s.reference_no,
     s.student_id_manual, s.next_payment_date, s.checked,
-    a.id AS application_id, a.course_name, a.regional_centre,
+    a.id AS application_id, a.course_name, a.regional_centre, a.course_type,
     a.registration_fee, a.course_fee, a.refundable_deposit, a.charge_type,
     COALESCE(SUM(p.paid_amount), 0) AS total_paid,
     COALESCE(
@@ -354,6 +354,8 @@ if (!$result) die("Query Error: " . $conn->error);
                             $first_paid = $row['total_paid'] >= ($row['registration_fee'] + ($row['course_fee'] * 0.5) + (float)($row['refundable_deposit'] ?? 0));
                             $second_pending = $row['remaining_due'] > 0 && $first_paid && $row['charge_type'] === 'payable';
                             $has_due = $row['remaining_due'] > 0;
+                            $is_diploma = ($row['course_type'] ?? '') === 'Diploma Level Courses';
+                            $free_text = $is_diploma ? 'Free (Rs. 5000)' : 'Free (Rs. 2000)';
                         ?>
                             <tr class="hover:bg-purple-50 transition">
                                 <td class="px-4 py-4 text-sm font-medium text-gray-900 whitespace-nowrap"><?= htmlspecialchars($row['name']) ?></td>
@@ -367,7 +369,7 @@ if (!$result) die("Query Error: " . $conn->error);
                                 <td class="px-4 py-4 text-center whitespace-nowrap">
                                     <?php if ($row['checked'] == 1): ?>
                                         <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full <?= $row['charge_type'] === 'free' ? 'bg-indigo-100 text-indigo-800' : 'bg-orange-100 text-orange-800' ?>">
-                                            <?= $row['charge_type'] === 'free' ? 'Free (Rs. 2000)' : 'Payable' ?>
+                                            <?= $row['charge_type'] === 'free' ? $free_text : 'Payable' ?>
                                         </span>
                                     <?php else: ?>
                                         <form method="POST" action="set_charge_type.php" class="inline">
@@ -375,7 +377,7 @@ if (!$result) die("Query Error: " . $conn->error);
                                             <select name="charge_type" onchange="this.form.submit()" class="text-xs rounded-md border-gray-300">
                                                 <option value="" <?= !$row['charge_type'] ? 'selected' : '' ?>>--</option>
                                                 <option value="payable" <?= $row['charge_type'] === 'payable' ? 'selected' : '' ?>>Payable</option>
-                                                <option value="free" <?= $row['charge_type'] === 'free' ? 'selected' : '' ?>>Free (Rs. 2000)</option>
+                                                <option value="free" <?= $row['charge_type'] === 'free' ? 'selected' : '' ?>><?= $free_text ?></option>
                                             </select>
                                         </form>
                                     <?php endif; ?>
@@ -495,7 +497,7 @@ if (!$result) die("Query Error: " . $conn->error);
                                             <!-- If approved (checked == 1) but not verified → show Approved + Reminder if needed -->
                                         <?php elseif ($row['checked'] == 1): ?>
                                             <div class="w-full min-w-36 px-3 py-2 bg-green-100 text-green-800 text-xs font-bold rounded-md text-center">
-                                                Approved<br><small>(<?= $row['charge_type'] === 'free' ? 'FREE Rs. 2000' : 'Full Fee' ?>)</small>
+                                                Approved<br><small>(<?= $row['charge_type'] === 'free' ? ($is_diploma ? 'FREE Rs. 5000' : 'FREE Rs. 2000') : 'Full Fee' ?>)</small>
                                             </div>
 
                                             <?php if ($has_due): ?>
@@ -627,7 +629,7 @@ if (!$result) die("Query Error: " . $conn->error);
                         class="login-input" style="padding-left: 0.75rem;" placeholder="Enter total fee (e.g. 45000)">
                     <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">
                         For Tailor-Made courses: Set the full agreed amount here<br>
-                        For Free courses: Enter <strong>2000.00</strong>
+                        For Free courses: Enter <strong>5000.00</strong> (Diploma) or <strong>2000.00</strong> (Certificate)
                     </p>
                 </div>
                 <div class="modal-actions">

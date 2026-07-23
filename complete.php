@@ -87,9 +87,10 @@ if ($stmt->get_result()->num_rows > 0) {
 
 // FETCH FINAL DATA FOR RECEIPT
 $stmt = $conn->prepare("
-    SELECT s.name, s.gmail, a.course_name, a.regional_centre, a.charge_type,
+    SELECT s.name, s.gmail, a.course_name, a.regional_centre, a.course_type, a.charge_type,
            COALESCE(SUM(p.paid_amount), 0) AS total_paid,
            CASE 
+               WHEN a.charge_type = 'free' AND a.course_type = 'Diploma Level Courses' THEN 5000.00
                WHEN a.charge_type = 'free' THEN 2000.00
                ELSE (a.registration_fee + a.course_fee + a.refundable_deposit)
            END AS total_required
@@ -119,7 +120,8 @@ $message .= "Total Paid: Rs. " . number_format($total_paid, 2) . "\n";
 $message .= "Remaining: Rs. " . number_format($remaining, 2) . "\n\n";
 
 if ($final['charge_type'] === 'free') {
-    $message .= "This is a FREE course. You only paid the registration fee of Rs. 2000.\n";
+    $free_fee_text = (($final['course_type'] ?? '') === 'Diploma Level Courses') ? '5000.00' : '2000.00';
+    $message .= "This is a FREE course. You only paid the registration fee of Rs. $free_fee_text.\n";
 }
 
 if ($remaining <= 0) {

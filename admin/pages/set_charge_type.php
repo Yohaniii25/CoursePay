@@ -15,17 +15,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['application_id'])) {
     $stmt->execute();
     $stmt->close();
 
-    // Get registration fee for "free" case
-    $stmt = $conn->prepare("SELECT registration_fee FROM applications WHERE id = ?");
+    // Get registration fee & course type for "free" case
+    $stmt = $conn->prepare("SELECT registration_fee, course_type FROM applications WHERE id = ?");
     $stmt->bind_param("i", $application_id);
     $stmt->execute();
-    $stmt->bind_result($reg_fee);
-    $stmt->fetch();
+    $app = $stmt->get_result()->fetch_assoc();
     $stmt->close();
 
+    $reg_fee = $app['registration_fee'] ?? 0.0;
+    $course_type = $app['course_type'] ?? '';
+
     if ($charge_type === 'free') {
-        // Only registration fee is required
-        $new_amount = $reg_fee; // usually 2000
+        // Only registration fee is required (5000 for Diploma Level Courses, 2000 for Certificate level)
+        $new_amount = ($course_type === 'Diploma Level Courses') ? 5000.00 : ($reg_fee ?: 2000.00);
 
         $update_stmt = $conn->prepare("
             UPDATE payments 

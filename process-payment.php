@@ -89,7 +89,7 @@ if (empty($reference_no) || empty($payment_method) || empty($payment_option)) {
 // GET APPLICATION + REMAINING DUE
 $stmt = $conn->prepare("
     SELECT 
-        a.id AS application_id,
+        a.id AS application_id, a.course_type,
         a.registration_fee, a.course_fee, a.refundable_deposit, a.charge_type,
         COALESCE(
             (SELECT due_amount FROM payments WHERE application_id = a.id ORDER BY id DESC LIMIT 1),
@@ -112,9 +112,10 @@ $remaining_due = (float)$app['remaining_due'];
 $total_paid = (float)$app['total_paid'];
 $is_first_payment = $total_paid == 0;
 
-// FREE COURSE = 2000 ONLY
+// FREE COURSE
 if ($app['charge_type'] === 'free') {
-    $amount_to_pay = 2000.00;
+    $free_fee = (($app['course_type'] ?? '') === 'Diploma Level Courses') ? 5000.00 : 2000.00;
+    $amount_to_pay = $remaining_due > 0 ? $remaining_due : $free_fee;
     $installment_type = 'full';
 } 
 // NORMAL COURSE
