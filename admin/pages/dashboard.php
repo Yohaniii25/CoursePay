@@ -393,7 +393,7 @@ if (!$result) die("Query Error: " . $conn->error);
                                 </td>
                                 <td class="px-4 py-4 text-center whitespace-nowrap">
                                     <?php if ($row['nic_file']): ?>
-                                        <a href="/CoursePay/<?= htmlspecialchars($row['nic_file']) ?>" download class="inline-flex items-center gap-1 bg-blue-100 text-blue-700 px-3 py-1.5 rounded-md hover:bg-blue-200 text-xs">
+                                        <a href="../download.php?file=<?= urlencode(basename($row['nic_file'])) ?>" class="inline-flex items-center gap-1 bg-blue-100 text-blue-700 px-3 py-1.5 rounded-md hover:bg-blue-200 text-xs">
                                             Download
                                         </a>
                                     <?php else: echo "—";
