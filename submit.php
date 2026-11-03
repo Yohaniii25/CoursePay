@@ -160,30 +160,59 @@ try {
 
     $conn->commit();
 
-    // Prepare email message
-    $msg = "Dear $name,\n\nYour application has been submitted!\n\n";
-    $msg .= "Reference No: $reference_no\n";
-    $msg .= "Course: $course_name\n";
-    $msg .= "Centre: $regional_centre\n\n";
-
-    if ($is_tailor_made) {
-        $msg .= "This is a Tailor-Made course. The admin will contact you with the exact fee and payment details.\n";
-    } else {
-        $msg .= "Total Fee: Rs. " . number_format($reg_fee + $course_fee + $refundable_deposit, 2) . "\n";
-        $msg .= "Payment instructions will be sent after approval.\n";
-    }
-
-    $msg .= "\nThank you!\nGJRTI Team";
-
-    // Send emails safely: do not fail application if Mailer is missing or SMTP fails
+    // Send attractive HTML email notifications safely
     try {
         if (file_exists(__DIR__ . '/classes/Mailer.php')) {
             require_once __DIR__ . '/classes/Mailer.php';
             if (class_exists('Mailer')) {
+                $feeDisplay = $is_tailor_made 
+                    ? 'Tailor-Made (Admin will contact you)' 
+                    : 'Rs. ' . number_format($reg_fee + $course_fee + $refundable_deposit, 2);
+
+                // 1. Student Confirmation Email
                 if (!empty($gmail)) {
-                    Mailer::send($gmail, "Application Submitted - Ref: $reference_no", $msg, false);
+                    $studentSubject = "Application Submitted - Ref: $reference_no";
+                    $studentHtml = Mailer::buildTemplate(
+                        "Application Submitted Successfully",
+                        "Ref: $reference_no",
+                        "green",
+                        "Dear $name,",
+                        "Thank you for applying to the Gem & Jewellery Research and Training Institute (GJRTI). Your application has been successfully recorded in our system.",
+                        [
+                            'Reference Number' => "<strong style='color:#25116F; font-size:16px;'>$reference_no</strong>",
+                            'Course Name'      => $course_name,
+                            'Regional Centre'  => $regional_centre,
+                            'Total Course Fee' => $feeDisplay,
+                            'Status'           => "<span style='color:#d97706; font-weight:700;'>Pending Admission Approval</span>"
+                        ],
+                        "View Application Status",
+                        "https://www.gjrti.gov.lk/CoursePay/application-success.php?ref=" . urlencode($reference_no),
+                        "Please keep this reference number safe. Our admissions team will review your application and send payment instructions once approved."
+                    );
+                    Mailer::send($gmail, $studentSubject, $studentHtml, true, 'no-reply@gjrti.gov.lk');
                 }
-                Mailer::send("yohanii725@gmail.com", "New Application - $reference_no", "New application from $name\nCourse: $course_name\nRef: $reference_no", false);
+
+                // 2. Admin Alert Email
+                $adminSubject = "New Application: $name - $reference_no";
+                $adminHtml = Mailer::buildTemplate(
+                    "New Student Application",
+                    "New Application",
+                    "amber",
+                    "Dear Admin,",
+                    "A new student has submitted an application on the CoursePay portal and is waiting for your review.",
+                    [
+                        'Applicant Name'   => $name,
+                        'Reference Number' => $reference_no,
+                        'Course'           => $course_name,
+                        'Regional Centre'  => $regional_centre,
+                        'Contact Number'   => $contact_number,
+                        'Applicant Email'  => $gmail,
+                        'NIC / Passport'   => $nic_passport
+                    ],
+                    "Open Admin Dashboard",
+                    "https://www.gjrti.gov.lk/CoursePay/admin/pages/dashboard.php"
+                );
+                Mailer::send("yohanii725@gmail.com", $adminSubject, $adminHtml, true, 'no-reply@gjrti.gov.lk');
             }
         }
     } catch (Throwable $mailEx) {

@@ -124,4 +124,118 @@ class Mailer {
         $entry = date('[Y-m-d H:i:s]') . " " . $message . "\n";
         @file_put_contents($logFile, $entry, FILE_APPEND);
     }
+    /**
+     * Generate an attractive, responsive HTML email template
+     */
+    public static function buildTemplate($title, $badgeText, $badgeColor, $greeting, $messageHtml, $details = [], $buttonText = '', $buttonUrl = '', $footerNote = '') {
+        $badgeBg = '#e0e7ff';
+        $badgeFg = '#3730a3';
+        if ($badgeColor === 'green') {
+            $badgeBg = '#dcfce7'; $badgeFg = '#166534';
+        } elseif ($badgeColor === 'amber' || $badgeColor === 'orange') {
+            $badgeBg = '#fef3c7'; $badgeFg = '#92400e';
+        } elseif ($badgeColor === 'red') {
+            $badgeBg = '#fee2e2'; $badgeFg = '#991b1b';
+        }
+
+        $rowsHtml = '';
+        if (!empty($details)) {
+            $rowsHtml .= '<table style="width:100%; border-collapse:collapse; margin:20px 0; background:#f9fafb; border-radius:8px; overflow:hidden; border:1px solid #e5e7eb;">';
+            foreach ($details as $label => $value) {
+                if ($value === null || $value === '') continue;
+                $rowsHtml .= '<tr style="border-bottom:1px solid #edf0f3;">';
+                $rowsHtml .= '<td style="padding:12px 16px; font-weight:600; color:#4b5563; font-size:14px; width:40%;">' . htmlspecialchars($label) . '</td>';
+                $rowsHtml .= '<td style="padding:12px 16px; color:#111827; font-size:14px; font-weight:500;">' . $value . '</td>';
+                $rowsHtml .= '</tr>';
+            }
+            $rowsHtml .= '</table>';
+        }
+
+        $buttonHtml = '';
+        if (!empty($buttonText) && !empty($buttonUrl)) {
+            $buttonHtml = '
+            <div style="text-align:center; margin:28px 0 16px;">
+                <a href="' . htmlspecialchars($buttonUrl) . '" style="display:inline-block; background:linear-gradient(135deg, #25116F 0%, #4338ca 100%); color:#ffffff; font-size:15px; font-weight:700; text-decoration:none; padding:14px 32px; border-radius:8px; box-shadow:0 4px 12px rgba(37, 17, 111, 0.25); letter-spacing:0.3px;">
+                    ' . htmlspecialchars($buttonText) . ' &rarr;
+                </a>
+            </div>';
+        }
+
+        $footerNoteHtml = '';
+        if (!empty($footerNote)) {
+            $footerNoteHtml = '
+            <div style="background:#f0fdf4; border-left:4px solid #22c55e; padding:12px 16px; border-radius:6px; margin:20px 0; font-size:13px; color:#166534; line-height:1.5;">
+                ' . $footerNote . '
+            </div>';
+        }
+
+        $badgeHtml = '';
+        if (!empty($badgeText)) {
+            $badgeHtml = '<span style="display:inline-block; background:' . $badgeBg . '; color:' . $badgeFg . '; font-size:12px; font-weight:700; padding:4px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px;">' . htmlspecialchars($badgeText) . '</span><br>';
+        }
+
+        $year = date('Y');
+        return "<!DOCTYPE html>
+<html>
+<head>
+<meta charset=\"UTF-8\">
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+<title>" . htmlspecialchars($title) . "</title>
+</head>
+<body style=\"margin:0; padding:0; background-color:#f1f5f9; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased;\">
+<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"background-color:#f1f5f9; padding:30px 15px;\">
+    <tr>
+        <td align=\"center\">
+            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:600px; background:#ffffff; border-radius:16px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.06); border:1px solid #e2e8f0;\">
+                
+                <!-- HEADER BANNER -->
+                <tr>
+                    <td style=\"background:linear-gradient(135deg, #1b0d54 0%, #2e1065 50%, #4338ca 100%); padding:28px 24px; text-align:center;\">
+                        <img src=\"https://www.gjrti.gov.lk/wp-content/uploads/2025/06/GJRT-1.png\" alt=\"GJRTI Logo\" style=\"height:65px; width:auto; margin-bottom:10px; display:inline-block; background:#ffffff; padding:6px 12px; border-radius:8px;\">
+                        <h1 style=\"color:#ffffff; margin:6px 0 2px; font-size:20px; font-weight:700; letter-spacing:0.3px;\">Gem & Jewellery Research and Training Institute</h1>
+                        <p style=\"color:#e0e7ff; margin:0; font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:1px;\">Official Notification</p>
+                    </td>
+                </tr>
+
+                <!-- MAIN CARD BODY -->
+                <tr>
+                    <td style=\"padding:32px 28px;\">
+                        {$badgeHtml}
+                        <h2 style=\"color:#0f172a; margin:0 0 16px; font-size:21px; font-weight:700;\">" . htmlspecialchars($title) . "</h2>
+                        
+                        <p style=\"color:#334155; font-size:15px; line-height:1.6; margin:0 0 16px;\">
+                            <strong>" . htmlspecialchars($greeting) . "</strong>
+                        </p>
+                        
+                        <div style=\"color:#475569; font-size:14px; line-height:1.6; margin-bottom:18px;\">
+                            {$messageHtml}
+                        </div>
+
+                        {$rowsHtml}
+                        {$buttonHtml}
+                        {$footerNoteHtml}
+
+                        <p style=\"color:#64748b; font-size:13px; line-height:1.6; margin-top:28px; border-top:1px solid #f1f5f9; padding-top:16px;\">
+                            Warm regards,<br>
+                            <strong style=\"color:#1e293b;\">GJRTI Admissions Division</strong><br>
+                            Gem and Jewellery Research and Training Institute
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- FOOTER -->
+                <tr>
+                    <td style=\"background:#f8fafc; border-top:1px solid #e2e8f0; padding:20px 24px; text-align:center; font-size:12px; color:#64748b; line-height:1.6;\">
+                        <p style=\"margin:0 0 6px;\">Questions? Contact us at <a href=\"mailto:info@gjrti.gov.lk\" style=\"color:#4338ca; text-decoration:none; font-weight:600;\">info@gjrti.gov.lk</a></p>
+                        <p style=\"margin:0; font-size:11px; color:#94a3b8;\">&copy; {$year} Gem and Jewellery Research and Training Institute. All rights reserved.</p>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>";
+    }
 }

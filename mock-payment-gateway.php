@@ -140,7 +140,7 @@ Best regards,
 Gem and Jewellery Research and Training Institute
 ";
         require_once __DIR__ . '/classes/Mailer.php';
-        if (!Mailer::send($to, $subject, $message, false, 'no-reply@sltdigital.site')) {
+        if (!Mailer::send($to, $subject, $message, false, 'no-reply@gjrti.gov.lk')) {
             error_log("Failed to send payment confirmation email to $to");
         }
 
@@ -165,7 +165,7 @@ Please verify the payment in the system.
 Best regards,
 Gem and Jewellery Research and Training Institute
 ";
-        if (!Mailer::send($admin_email, $admin_subject, $admin_message, false, 'no-reply@sltdigital.site')) {
+        if (!Mailer::send($admin_email, $admin_subject, $admin_message, false, 'no-reply@gjrti.gov.lk')) {
             error_log("Failed to send payment notification email to $admin_email");
         }
 
