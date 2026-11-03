@@ -1,8 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 require_once __DIR__ . '/../../classes/db.php';
-$db = new Database();
-$conn = $db->getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['action']) || !in_array($_POST['action'], ['approve_free', 'approve_payable'])) {
     header("Location: dashboard.php");
@@ -10,14 +12,21 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['action']) || !in_arr
 }
 
 try {
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    if (!$conn) {
+        throw new Exception("Database connection failed.");
+    }
+
     $conn->begin_transaction();
 
-    $student_id = (int)$_POST['student_id'];
-    $gmail = $_POST['gmail'] ?? '';
-    $name = $_POST['name'] ?? '';
-    $course_name = $_POST['course_name'] ?? '';
-    $regional_centre = $_POST['regional_centre'] ?? '';
-    $reference_no = $_POST['reference_no'] ?? '';
+    $student_id = (int)($_POST['student_id'] ?? 0);
+    $gmail = trim($_POST['gmail'] ?? '');
+    $name = trim($_POST['name'] ?? '');
+    $course_name = trim($_POST['course_name'] ?? '');
+    $regional_centre = trim($_POST['regional_centre'] ?? '');
+    $reference_no = trim($_POST['reference_no'] ?? '');
     $action = $_POST['action'];
 
     if (!$student_id) {
@@ -96,7 +105,10 @@ try {
     $stmt->execute();
     $stmt->close();
 
-    // SEND EMAIL
+    // Commit database transaction first so approval is saved
+    $conn->commit();
+
+    // SEND EMAIL SAFELY (do not crash if Mailer is missing or SMTP fails)
     if (!empty($gmail)) {
         $to = $gmail;
         $subject = $action === 'approve_free' ? "Application Approved – FREE Course" : "Application Approved – Proceed to Payment";
@@ -114,12 +126,18 @@ Payment Link: https://www.gjrti.gov.lk/CoursePay/proceed-to-pay.php?ref=$referen
 Best regards,
 Gem and Jewellery Research and Training Institute
         ";
-        require_once __DIR__ . '/../../classes/Mailer.php';
-        Mailer::send($to, $subject, $message, false, 'no-reply@sltdigital.site');
+
+        try {
+            if (file_exists(__DIR__ . '/../../classes/Mailer.php')) {
+                require_once __DIR__ . '/../../classes/Mailer.php';
+                if (class_exists('Mailer')) {
+                    Mailer::send($to, $subject, $message, false, 'no-reply@sltdigital.site');
+                }
+            }
+        } catch (Throwable $mailEx) {
+            error_log("approve_action.php Mail Error: " . $mailEx->getMessage());
+        }
     }
-
-
-    $conn->commit();
 
     $_SESSION['msg'] = $action === 'approve_free'
         ? "Approved as FREE – Due: Rs. " . number_format($due_amount, 2)
@@ -127,8 +145,11 @@ Gem and Jewellery Research and Training Institute
 
     header("Location: dashboard.php");
     exit;
-} catch (Exception $e) {
-    $conn->rollback();
+} catch (Throwable $e) {
+    if (isset($conn) && $conn instanceof mysqli && $conn->ping()) {
+        @$conn->rollback();
+    }
+    error_log("approve_action.php Error: " . $e->getMessage());
     $_SESSION['msg'] = "Error: " . $e->getMessage();
     header("Location: dashboard.php");
     exit;

@@ -81,3 +81,4 @@
 [2026-01-07 12:55:05] complete.php accessed – GET: {"resultIndicator":"a83af27756cc4207","sessionVersion":"5dad53c909","checkoutVersion":"1.0.0"} | SESSION: {"user":{"email":"admin_gem@gmail.com","username":"admin_gem"},"application_success":{"name":"Yohani Abeykoon","ref":"1079D146","course":"Certificate in Blended Gemmology"},"session_id":"SESSION0002576849232N1641038N91","success_indicator":"a83af27756cc4207","order_id":"1079D146-FULL-1767790394","reference_no":"1079D146","amount_to_pay":35000,"installment_type":"full","application_id":194}
 [2026-01-07 12:55:05] Payment recorded | Amount: Rs. 35000 | Due: Rs. 0 | Charge Type: payable | Ref: 1079D146
 [2026-01-07 12:55:06] complete.php accessed – GET: {"resultIndicator":"a83af27756cc4207","sessionVersion":"5dad53c909","checkoutVersion":"1.0.0"} | SESSION: []
+[2026-07-23 05:56:36] complete.php accessed – GET: [] | SESSION: []

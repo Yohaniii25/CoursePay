@@ -21,13 +21,13 @@ class Mailer {
     // Set your Webmail or SMTP Credentials below:
     private static $smtpHost     = 'mail.gjrti.gov.lk'; 
     private static $smtpAuth     = true;
-    private static $smtpUsername = 'no-reply@gjrti.gov.lk'; 
-    private static $smtpPassword = ''; // Put your webmail email password here
+    private static $smtpUsername = 'test@gjrti.gov.lk'; 
+    private static $smtpPassword = '?hD7^2,DIC1}gV5B'; // Put your webmail email password here
     private static $smtpSecure   = PHPMailer::ENCRYPTION_SMTPS; // ENCRYPTION_SMTPS (465) or ENCRYPTION_STARTTLS (587)
     private static $smtpPort     = 465; 
 
     // Default Sender Details
-    private static $fromEmail    = 'no-reply@gjrti.gov.lk';
+    private static $fromEmail    = 'test@gjrti.gov.lk';
     private static $fromName     = 'GJRTI CoursePay';
 
     /**
@@ -58,6 +58,13 @@ class Mailer {
                 $mail->Password   = self::$smtpPassword;
                 $mail->SMTPSecure = self::$smtpSecure;
                 $mail->Port       = self::$smtpPort;
+                $mail->SMTPOptions = [
+                    'ssl' => [
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    ]
+                ];
             } else {
                 // Otherwise use server mail() transport
                 $mail->isMail();

@@ -145,7 +145,7 @@ Gem and Jewellery Research and Training Institute
         }
 
         // Send email to admin
-        $admin_email = 'sutharshankanna04@gmail.com';
+        $admin_email = 'yohanii725@gmail.com';
         $admin_subject = "Payment Received Notification";
         $admin_message = "
 Dear Admin,

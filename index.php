@@ -9,6 +9,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Application Form - GJRTI</title>
     <link rel="stylesheet" href="css/style.css">
+	
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -181,6 +183,12 @@ if (isset($_SESSION['payment_success'])) {
                         I have read and understand the code of bylaws published by the institution.
                     </span>
                 </label>
+            </div>
+
+            <!-- ADD THIS CAPTCHA WIDGET HERE -->
+            <div class="form-group">
+                <!-- Replace 'YOUR_SITE_KEY' with your actual Google reCAPTCHA Site Key -->
+                <div class="g-recaptcha" data-sitekey="6LfDjpEtAAAAAPFcGsRQlXCUpZ-Va6V6Jhu9gDG_"></div>
             </div>
 
             <button type="submit" class="submit-btn">

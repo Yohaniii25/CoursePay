@@ -94,8 +94,16 @@ if (isset($_POST['do_reject'])) {
         <p>Thank you.<br>GJRTI Admissions</p>
     ";
 
-    require_once __DIR__ . '/../../classes/Mailer.php';
-    Mailer::send($email, $subject, $message, true, 'no-reply@gjrti.lk');
+        try {
+        if (file_exists(__DIR__ . '/../../classes/Mailer.php')) {
+            require_once __DIR__ . '/../../classes/Mailer.php';
+            if (class_exists('Mailer')) {
+                Mailer::send($email, $subject, $message, true, 'no-reply@gjrti.lk');
+            }
+        }
+    } catch (Throwable $mEx) {
+        error_log("dashboard.php mail error: " . $mEx->getMessage());
+    }
 
     $conn->query("DELETE FROM students WHERE id = $student_id");
 
@@ -140,8 +148,16 @@ if (isset($_POST['verify_enroll'])) {
         <p><strong>GJRTI Admissions Team</strong></p>
     ";
 
-    require_once __DIR__ . '/../../classes/Mailer.php';
-    Mailer::send($email, $subject, $message, true, 'no-reply@gjrti.lk');
+        try {
+        if (file_exists(__DIR__ . '/../../classes/Mailer.php')) {
+            require_once __DIR__ . '/../../classes/Mailer.php';
+            if (class_exists('Mailer')) {
+                Mailer::send($email, $subject, $message, true, 'no-reply@gjrti.lk');
+            }
+        }
+    } catch (Throwable $mEx) {
+        error_log("dashboard.php mail error: " . $mEx->getMessage());
+    }
 
     $_SESSION['msg'] = "Payment verified & student enrolled successfully!";
 

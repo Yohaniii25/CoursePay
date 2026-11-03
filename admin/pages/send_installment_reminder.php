@@ -60,15 +60,17 @@ Best regards,
 Gem and Jewellery Research and Training Institute
 ";
 
-require_once __DIR__ . '/../../classes/Mailer.php';
-if (Mailer::send($to, $subject, $message, false, 'no-reply@sltdigital.site')) {
+$headers = "From: no-reply@sltdigital.site\r\n";
+$headers .= "Reply-To: no-reply@sltdigital.site\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+if (mail($to, $subject, $message, $headers)) {
     $_SESSION['msg'] = "Second installment reminder sent successfully to {$data['name']}!";
 } else {
     $_SESSION['msg'] = "Failed to send reminder email. Please try again.";
 }
 
 header("Location: dashboard.php");
-
 exit;
 
 $conn->close();
+?>
