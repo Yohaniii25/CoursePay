@@ -54,6 +54,7 @@ CREATE TABLE `applications` (
   `regional_centre` varchar(100) NOT NULL,
   `course_type` varchar(100) NOT NULL,
   `course_name` varchar(150) NOT NULL,
+  `course_mode` varchar(50) DEFAULT NULL,
   `registration_fee` decimal(10,2) NOT NULL,
   `course_fee` decimal(10,2) NOT NULL,
   `refundable_deposit` decimal(10,2) NOT NULL DEFAULT 0.00,

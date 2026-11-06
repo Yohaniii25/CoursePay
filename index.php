@@ -138,6 +138,7 @@ if (isset($_SESSION['payment_success'])) {
                 <input type="hidden" id="reg-fee" name="reg_fee">
                 <input type="hidden" id="course-fee" name="course_fee">
                 <input type="hidden" id="refundable-deposit" name="refundable_deposit" value="0">
+                <input type="hidden" id="course-mode" name="course_mode">
             </div>
 
             <div class="form-group">

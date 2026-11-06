@@ -4,44 +4,43 @@ $db = new Database();
 $conn = $db->getConnection();
 
 /**
- * Determine whether a course is Full-Time or Part-Time
+ * Determine whether a course is Full-Time or Part-Time based on official GJRTI classification
  */
 function resolve_course_mode($course_name) {
     if (empty($course_name)) return '';
     $clean = trim($course_name);
-    $lower = strtolower($clean);
 
-    // Explicit Part-Time courses in GJRTI
     $part_time_courses = [
-        'certificate in basic gemmology',
-        'certificate in gem cutting and polishing (weekend)',
-        'certificate in gem cutting and polishing (10 days)',
-        'gem related certificate in tailor – made courses',
-        'jewellery certificate in tailor – made courses',
-        'certificate in tailor – made courses',
-        'gem related certificate in tailor - made courses',
-        'jewellery certificate in tailor - made courses',
-        'certificate in tailor - made courses',
+        'Certificate in Basic Gemmology',
+        'Certificate in Gemmology',
+        'Certificate in Blended Gemmology',
+        'Certificate in Geuda Heat Treatment',
+        'Certificate in Computer Aided Jewellery Designing and Manufacturing (CAD/CAM)',
+        'Certificate in Jewellery Stone Setting (NVQ 3)',
+        'Certificate in Jewellery Casting and Electro Plating',
+        'Certificate in Jewellery Assaying and Hallmarking',
+        'Diploma in Jewellery Manufacturing and Designing Technology (NVQ 5)/ Diploma in Professional Jewellery (Dip. PJSL)',
+        'Diploma in Jewellery Manufacturing and Designing Technology (NVQ 5)'
     ];
 
-    if (in_array($lower, $part_time_courses)) {
+    $full_time_courses = [
+        'Certificate in Gem Cutting and Polishing (NVQ 3)',
+        'Certificate in Jewellery Designing (Manual)',
+        'Certificate in Jewellery Designing Technology (NVQ 4)',
+        'Certificate in Jewellery Manufacturing (NVQ 3)',
+        'Certificate in Jewellery Manufacturing (NVQ 4)',
+        'Certificate in Jewellery Manufacturing'
+    ];
+
+    if (in_array($clean, $part_time_courses, true)) {
         return 'Part-Time';
     }
 
-    // Heuristics for keywords
-    if (
-        strpos($lower, 'weekend') !== false ||
-        strpos($lower, '10 day') !== false ||
-        strpos($lower, 'tailor') !== false ||
-        strpos($lower, 'basic gemmology') !== false ||
-        strpos($lower, 'part-time') !== false ||
-        strpos($lower, 'part time') !== false
-    ) {
-        return 'Part-Time';
+    if (in_array($clean, $full_time_courses, true)) {
+        return 'Full-Time';
     }
 
-    // All standard GJRTI certificate & diploma courses are Full-Time
-    return 'Full-Time';
+    return '';
 }
 
 
@@ -49,7 +48,7 @@ $sql = "SELECT
     s.name, s.gmail, s.contact_number,
     COALESCE(s.student_id_manual, CONCAT('GJRTI', LPAD(s.id, 4, '0'))) AS student_id,
     s.reference_no,
-    a.course_name, a.regional_centre,
+    a.course_name, a.course_mode, a.regional_centre,
     p.amount, p.paid_amount, p.due_amount, p.status,
     s.next_payment_date, s.nic_file, p.slip_file,
     p.method, p.transaction_id
@@ -68,19 +67,13 @@ $output = fopen('php://output', 'w');
 // Output UTF-8 BOM so Excel on Windows recognizes UTF-8 properly
 fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
 
-fputcsv($output, ['Name','Email','Contact','Student ID','Ref No','Course','Centre','Total','Paid','Due','Status','Next Pay','NIC','Slip','Transaction ID']);
+fputcsv($output, ['Name','Email','Contact','Student ID','Ref No','Course','Mode','Centre','Total','Paid','Due','Status','Next Pay','NIC','Slip','Transaction ID']);
 
 while ($row = $result->fetch_assoc()) {
     $raw_course = trim($row['course_name'] ?? '');
-    if ($raw_course !== '') {
-        if (!preg_match('/\b(full[\s-]?time|part[\s-]?time)\b/i', $raw_course)) {
-            $mode = resolve_course_mode($raw_course);
-            $course_display = $raw_course . ($mode ? " ({$mode})" : "");
-        } else {
-            $course_display = $raw_course;
-        }
-    } else {
-        $course_display = '';
+    $mode = trim($row['course_mode'] ?? '');
+    if ($mode === '' && $raw_course !== '') {
+        $mode = resolve_course_mode($raw_course);
     }
 
     $txn_id = '';
@@ -93,7 +86,7 @@ while ($row = $result->fetch_assoc()) {
     fputcsv($output, [
         $row['name'], $row['gmail'], $row['contact_number'],
         $row['student_id'], $row['reference_no'],
-        $course_display, $row['regional_centre'],
+        $raw_course, $mode, $row['regional_centre'],
         $row['amount'], $row['paid_amount'], $row['due_amount'],
         $row['status'], $row['next_payment_date'],
         $row['nic_file'] ? 'Yes' : 'No',

@@ -108,30 +108,34 @@ try {
     // Commit database transaction first so approval is saved
     $conn->commit();
 
-    // SEND EMAIL SAFELY (do not crash if Mailer is missing or SMTP fails)
+    // SEND ATTRACTIVE HTML EMAIL SAFELY
     if (!empty($gmail)) {
         $to = $gmail;
-        $subject = $action === 'approve_free' ? "Application Approved – FREE Course" : "Application Approved – Proceed to Payment";
-        $message = "
-Dear $name,
-
-$email_msg
-
-Reference No: $reference_no
-Course: $course_name
-Centre: $regional_centre
-
-Payment Link: https://www.gjrti.gov.lk/CoursePay/proceed-to-pay.php?ref=$reference_no
-
-Best regards,
-Gem and Jewellery Research and Training Institute
-        ";
-
+        $subject = $action === 'approve_free' ? "Application Approved: FREE Course - $course_name" : "Application Approved: Proceed to Payment - $course_name";
+        
         try {
             if (file_exists(__DIR__ . '/../../classes/Mailer.php')) {
                 require_once __DIR__ . '/../../classes/Mailer.php';
                 if (class_exists('Mailer')) {
-                    Mailer::send($to, $subject, $message, false, 'no-reply@sltdigital.site');
+                    $html = Mailer::buildTemplate(
+                        $action === 'approve_free' ? "Application Approved (FREE Course)" : "Application Approved – Proceed to Payment",
+                        "Approved",
+                        "green",
+                        "Dear " . htmlspecialchars($name) . ",",
+                        $action === 'approve_free'
+                            ? "Congratulations! Your course application has been approved under the FREE scholarship category. Only the registration fee is required to finalize your admission."
+                            : "Congratulations! Your course application has been approved by the admissions committee. Please proceed to complete your fee payment to secure your seat.",
+                        [
+                            'Reference Number' => "<strong style='color:#25116F; font-size:16px;'>$reference_no</strong>",
+                            'Course'           => $course_name,
+                            'Regional Centre'  => $regional_centre,
+                            'Amount Payable'   => "<strong style='color:#16a34a; font-size:16px;'>Rs. " . number_format($due_amount, 2) . "</strong>"
+                        ],
+                        "Proceed to Payment",
+                        "https://www.gjrti.gov.lk/CoursePay/proceed-to-pay.php?ref=" . urlencode($reference_no),
+                        "You can pay conveniently online via Card/Internet Banking or upload a scanned copy/photo of your bank deposit slip."
+                    );
+                    Mailer::send($to, $subject, $html, true, 'no-reply@gjrti.gov.lk');
                 }
             }
         } catch (Throwable $mailEx) {

@@ -45,6 +45,40 @@ try {
     $regional_centre    = trim($_POST['regional_centre'] ?? '');
     $course_type        = trim($_POST['course_type'] ?? '');
     $course_name        = trim($_POST['course'] ?? '');
+    $course_mode_input  = trim($_POST['course_mode'] ?? '');
+
+    // Resolve course mode according to official classification
+    $partTimeCourses = [
+        "Certificate in Basic Gemmology",
+        "Certificate in Gemmology",
+        "Certificate in Blended Gemmology",
+        "Certificate in Geuda Heat Treatment",
+        "Certificate in Computer Aided Jewellery Designing and Manufacturing (CAD/CAM)",
+        "Certificate in Jewellery Stone Setting (NVQ 3)",
+        "Certificate in Jewellery Casting and Electro Plating",
+        "Certificate in Jewellery Assaying and Hallmarking",
+        "Diploma in Jewellery Manufacturing and Designing Technology (NVQ 5)/ Diploma in Professional Jewellery (Dip. PJSL)",
+        "Diploma in Jewellery Manufacturing and Designing Technology (NVQ 5)"
+    ];
+
+    $fullTimeCourses = [
+        "Certificate in Gem Cutting and Polishing (NVQ 3)",
+        "Certificate in Jewellery Designing (Manual)",
+        "Certificate in Jewellery Designing Technology (NVQ 4)",
+        "Certificate in Jewellery Manufacturing (NVQ 3)",
+        "Certificate in Jewellery Manufacturing (NVQ 4)",
+        "Certificate in Jewellery Manufacturing"
+    ];
+
+    $course_mode = null;
+    if ($course_mode_input === 'Full-Time' || $course_mode_input === 'Part-Time') {
+        $course_mode = $course_mode_input;
+    } elseif (in_array($course_name, $partTimeCourses, true)) {
+        $course_mode = 'Part-Time';
+    } elseif (in_array($course_name, $fullTimeCourses, true)) {
+        $course_mode = 'Full-Time';
+    }
+
     $reg_fee            = (float)($_POST['reg_fee'] ?? 0);
     $course_fee         = (float)($_POST['course_fee'] ?? 0);
     $refundable_deposit = (float)($_POST['refundable_deposit'] ?? 0);
@@ -128,10 +162,10 @@ try {
     // Insert Application
     $stmt = $conn->prepare("
         INSERT INTO applications 
-        (student_id, regional_centre, course_type, course_name, registration_fee, course_fee, refundable_deposit)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        (student_id, regional_centre, course_type, course_name, course_mode, registration_fee, course_fee, refundable_deposit)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ");
-    $stmt->bind_param("isssddd", $student_id, $regional_centre, $course_type, $course_name, $reg_fee, $course_fee, $refundable_deposit);
+    $stmt->bind_param("issssddd", $student_id, $regional_centre, $course_type, $course_name, $course_mode, $reg_fee, $course_fee, $refundable_deposit);
     $stmt->execute();
     $application_id = $conn->insert_id;
     $stmt->close();
@@ -181,6 +215,7 @@ try {
                         [
                             'Reference Number' => "<strong style='color:#25116F; font-size:16px;'>$reference_no</strong>",
                             'Course Name'      => $course_name,
+                            'Course Mode'      => $course_mode ?: 'N/A',
                             'Regional Centre'  => $regional_centre,
                             'Total Course Fee' => $feeDisplay,
                             'Status'           => "<span style='color:#d97706; font-weight:700;'>Pending Admission Approval</span>"
@@ -204,6 +239,7 @@ try {
                         'Applicant Name'   => $name,
                         'Reference Number' => $reference_no,
                         'Course'           => $course_name,
+                        'Course Mode'      => $course_mode ?: 'N/A',
                         'Regional Centre'  => $regional_centre,
                         'Contact Number'   => $contact_number,
                         'Applicant Email'  => $gmail,

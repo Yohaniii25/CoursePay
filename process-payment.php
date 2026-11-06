@@ -193,33 +193,33 @@ try {
         $conn->commit();
         $conn->autocommit(TRUE);
 
-        // SEND NOTIFICATION EMAILS (via authenticated SMTP)
+        // SEND ATTRACTIVE HTML NOTIFICATION EMAILS
         require_once __DIR__ . '/classes/Mailer.php';
 
         // 1. Confirmation Email to Student
         if (!empty($app['gmail'])) {
-            $student_subject = "Bank Slip Payment Submitted - Ref: $reference_no";
-            $student_message = "Dear {$app['name']},
-
-Thank you for uploading your course payment slip.
-
-Payment Details:
-- Reference Number: $reference_no
-- Course: {$app['course_name']}
-- Regional Centre: {$app['regional_centre']}
-- Amount Paid: Rs. " . number_format($amount_to_pay, 2) . "
-- Remaining Balance: Rs. " . number_format($new_due, 2) . "
-- Payment Method: Bank Slip Upload
-- Installment: " . ucfirst($installment_type) . "
-- Status: Pending Verification
-
-Your bank slip has been received and is currently under review by our admissions and finance team. You will receive an official confirmation once your payment is verified.
-
-Best regards,
-Gem and Jewellery Research and Training Institute (GJRTI)
-";
+            $student_subject = "Bank Slip Uploaded - Ref: $reference_no";
+            $student_html = Mailer::buildTemplate(
+                "Payment Slip Received",
+                "Pending Verification",
+                "amber",
+                "Dear " . htmlspecialchars($app['name']) . ",",
+                "Thank you for submitting your course payment receipt. Our admissions and accounts team will verify your slip shortly.",
+                [
+                    'Reference Number' => "<strong style='color:#25116F; font-size:16px;'>$reference_no</strong>",
+                    'Course'           => $app['course_name'],
+                    'Regional Centre'  => $app['regional_centre'],
+                    'Amount Paid'      => "Rs. " . number_format($amount_to_pay, 2),
+                    'Remaining Due'    => "Rs. " . number_format($new_due, 2),
+                    'Payment Method'   => "Bank Slip Upload (" . ucfirst($installment_type) . " Payment)",
+                    'Status'           => "<span style='color:#d97706; font-weight:700;'>Pending Verification</span>"
+                ],
+                "View Payment Status",
+                "https://www.gjrti.gov.lk/CoursePay/payment-success.php?ref=" . urlencode($reference_no),
+                "Once your payment is verified by our team, you will receive an official enrollment confirmation email with your class schedule."
+            );
             try {
-                Mailer::send($app['gmail'], $student_subject, $student_message, false, 'no-reply@gjrti.gov.lk');
+                Mailer::send($app['gmail'], $student_subject, $student_html, true, 'no-reply@gjrti.gov.lk');
             } catch (Throwable $mEx) {
                 error_log("process-payment.php student mail error: " . $mEx->getMessage());
             }
@@ -228,27 +228,27 @@ Gem and Jewellery Research and Training Institute (GJRTI)
         // 2. Alert Email to Admin
         $admin_email = 'yohanii725@gmail.com';
         $admin_subject = "New Bank Slip Uploaded - Ref: $reference_no";
-        $admin_message = "Dear Admin,
-
-A student has uploaded a bank payment slip for verification:
-
-Student Name: {$app['name']}
-Reference Number: $reference_no
-Course: {$app['course_name']}
-Regional Centre: {$app['regional_centre']}
-Amount Paid: Rs. " . number_format($amount_to_pay, 2) . "
-Installment Type: " . ucfirst($installment_type) . "
-Remaining Balance: Rs. " . number_format($new_due, 2) . "
-Slip File: $slip_path
-
-Please log in to the admin dashboard to verify and approve the payment:
-https://www.gjrti.gov.lk/CoursePay/admin/pages/dashboard.php
-
-Best regards,
-GJRTI CoursePay System
-";
+        $admin_html = Mailer::buildTemplate(
+            "New Bank Slip Uploaded",
+            "Verification Needed",
+            "purple",
+            "Dear Admin,",
+            "A student has uploaded a bank payment slip for verification in the CoursePay portal.",
+            [
+                'Student Name'     => $app['name'],
+                'Reference Number' => $reference_no,
+                'Course'           => $app['course_name'],
+                'Regional Centre'  => $app['regional_centre'],
+                'Amount Paid'      => "Rs. " . number_format($amount_to_pay, 2),
+                'Remaining Due'    => "Rs. " . number_format($new_due, 2),
+                'Installment'      => ucfirst($installment_type) . " Payment",
+                'Slip File'        => $slip_path
+            ],
+            "Open Admin Dashboard",
+            "https://www.gjrti.gov.lk/CoursePay/admin/pages/dashboard.php"
+        );
         try {
-            Mailer::send($admin_email, $admin_subject, $admin_message, false, 'no-reply@gjrti.gov.lk');
+            Mailer::send($admin_email, $admin_subject, $admin_html, true, 'no-reply@gjrti.gov.lk');
         } catch (Throwable $mEx) {
             error_log("process-payment.php admin mail error: " . $mEx->getMessage());
         }

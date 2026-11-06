@@ -85,20 +85,26 @@ if (isset($_POST['do_reject'])) {
     $stmt->close();
 
     // Send email
-    $subject = "Application Rejected - Ref: $ref";
-    $message = "
-        <h3>Dear $name,</h3>
-        <p>Your application has been <strong>rejected</strong>.</p>
-        <p><strong>Reference No:</strong> $ref</p>
-        <p><strong>Reason:</strong><br>$remark</p>
-        <p>Thank you.<br>GJRTI Admissions</p>
-    ";
-
-        try {
+    $subject = "Application Status Update - Ref: $ref";
+    try {
         if (file_exists(__DIR__ . '/../../classes/Mailer.php')) {
             require_once __DIR__ . '/../../classes/Mailer.php';
             if (class_exists('Mailer')) {
-                Mailer::send($email, $subject, $message, true, 'no-reply@gjrti.lk');
+                $rejectHtml = Mailer::buildTemplate(
+                    "Application Status Update",
+                    "Not Approved",
+                    "red",
+                    "Dear " . htmlspecialchars($name) . ",",
+                    "Thank you for your interest in the Gem & Jewellery Research and Training Institute (GJRTI). We regret to inform you that your course application could not be approved at this time.",
+                    [
+                        'Reference Number' => "<strong style='color:#25116F;'>$ref</strong>",
+                        'Reason'           => htmlspecialchars($remark)
+                    ],
+                    "",
+                    "",
+                    "If you have questions regarding this decision or wish to re-apply for a future batch, please contact our admissions office at info@gjrti.gov.lk."
+                );
+                Mailer::send($email, $subject, $rejectHtml, true, 'no-reply@gjrti.gov.lk');
             }
         }
     } catch (Throwable $mEx) {
@@ -135,31 +141,37 @@ if (isset($_POST['verify_enroll'])) {
     $conn->query("UPDATE students SET checked = 2 WHERE id = $student_id");
 
     // Send enrollment email
-    $subject = "Successfully Enrolled - Ref: $ref";
-    $message = "
-        <h2>Congratulations $name!</h2>
-        <p>Your payment has been <strong>verified</strong> and you are now <strong>officially enrolled</strong> in:</p>
-        <h3 style='color:#1d4ed8;'>$course</h3>
-        <p><strong>Centre:</strong> $centre<br>
-           <strong>Reference No:</strong> $ref</p>
-        <p>Your classes will begin soon. We will contact you with the schedule.</p>
-        <br>
-        <p>Welcome to GJRTI Family!</p>
-        <p><strong>GJRTI Admissions Team</strong></p>
-    ";
-
-        try {
+    $subject = "Enrollment Confirmed: $course - Ref: $ref";
+    try {
         if (file_exists(__DIR__ . '/../../classes/Mailer.php')) {
             require_once __DIR__ . '/../../classes/Mailer.php';
             if (class_exists('Mailer')) {
-                Mailer::send($email, $subject, $message, true, 'no-reply@gjrti.lk');
+                $enrollHtml = Mailer::buildTemplate(
+                    "Payment Verified – You are Officially Enrolled!",
+                    "Enrolled",
+                    "green",
+                    "Congratulations " . htmlspecialchars($name) . "!",
+                    "Your payment has been verified by our accounts division, and your enrollment is officially confirmed. Welcome to the Gem & Jewellery Research and Training Institute family!",
+                    [
+                        'Student Name'     => $name,
+                        'Reference Number' => "<strong style='color:#25116F; font-size:16px;'>$ref</strong>",
+                        'Course'           => $course,
+                        'Regional Centre'  => $centre,
+                        'Enrollment Status'=> "<span style='color:#16a34a; font-weight:700;'>Confirmed & Active</span>"
+                    ],
+                    "Visit GJRTI Official Portal",
+                    "https://www.gjrti.gov.lk/",
+                    "Your class timetable, orientation details, and student guidelines will be communicated to you by your regional centre. Please keep your Reference Number for your records."
+                );
+                Mailer::send($email, $subject, $enrollHtml, true, 'no-reply@gjrti.gov.lk');
             }
         }
     } catch (Throwable $mEx) {
-        error_log("dashboard.php mail error: " . $mEx->getMessage());
+        error_log("dashboard.php enroll mail error: " . $mEx->getMessage());
     }
 
     $_SESSION['msg'] = "Payment verified & student enrolled successfully!";
+    header("Location: dashboard.php");
 
     exit;
 }
@@ -173,7 +185,7 @@ $params = [];
 $types  = '';
 
 if ($search !== '') {
-    $where[] = "(s.name LIKE ? OR s.gmail LIKE ? OR s.contact_number LIKE ? OR s.reference_no LIKE ? OR s.student_id_manual LIKE ? OR a.course_name LIKE ? OR a.regional_centre LIKE ?)";
+    $where[] = "(s.name LIKE ? OR s.gmail LIKE ? OR s.contact_number LIKE ? OR s.reference_no LIKE ? OR s.student_id_manual LIKE ? OR a.course_name LIKE ? OR a.course_mode LIKE ? OR a.regional_centre LIKE ?)";
     $search_param = '%' . $search . '%';
     $params[] = $search_param;
     $params[] = $search_param;
@@ -182,7 +194,8 @@ if ($search !== '') {
     $params[] = $search_param;
     $params[] = $search_param;
     $params[] = $search_param;
-    $types .= 'sssssss';
+    $params[] = $search_param;
+    $types .= 'ssssssss';
 }
 
 // Build ORDER BY
@@ -247,7 +260,7 @@ SELECT
     s.id AS student_id,
     s.name, s.gmail, s.contact_number, s.nic_file, s.reference_no,
     s.student_id_manual, s.next_payment_date, s.checked,
-    a.id AS application_id, a.course_name, a.regional_centre, a.course_type,
+    a.id AS application_id, a.course_name, a.course_mode, a.regional_centre, a.course_type,
     a.registration_fee, a.course_fee, a.refundable_deposit, a.charge_type,
     COALESCE(SUM(p.paid_amount), 0) AS total_paid,
     COALESCE(
@@ -379,7 +392,14 @@ if (!$result) die("Query Error: " . $conn->error);
                                 <td class="px-4 py-4 text-sm text-gray-600 whitespace-nowrap"><?= htmlspecialchars($row['contact_number']) ?></td>
                                 <td class="px-4 py-4 text-sm font-medium text-blue-700 whitespace-nowrap"><?= htmlspecialchars($display_id) ?></td>
                                 <td class="px-4 py-4 text-sm font-medium text-purple-700 whitespace-nowrap"><?= htmlspecialchars($row['reference_no']) ?></td>
-                                <td class="px-4 py-4 text-sm text-gray-600"><?= htmlspecialchars($row['course_name'] ?? '—') ?></td>
+                                <td class="px-4 py-4 text-sm text-gray-600">
+                                    <div class="font-medium text-gray-900"><?= htmlspecialchars($row['course_name'] ?? '—') ?></div>
+                                    <?php if (!empty($row['course_mode'])): ?>
+                                        <span class="inline-block mt-1 px-2.5 py-0.5 text-xs font-semibold rounded-full <?= $row['course_mode'] === 'Full-Time' ? 'bg-blue-100 text-blue-800 border border-blue-200' : 'bg-purple-100 text-purple-800 border border-purple-200' ?>">
+                                            <?= htmlspecialchars($row['course_mode']) ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </td>
                                 <td class="px-4 py-4 text-sm text-gray-600 whitespace-nowrap"><?= htmlspecialchars($row['regional_centre'] ?? '—') ?></td>
                                 <!-- Charge Type -->
                                 <td class="px-4 py-4 text-center whitespace-nowrap">

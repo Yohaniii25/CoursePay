@@ -50,36 +50,29 @@ $due_amount  = isset($data['due_amount']) && $data['due_amount'] !== null
     ? (float)$data['due_amount'] 
     : ($course_fee / 2);
 
-// Send second installment reminder email via authenticated Mailer
+// Send attractive second installment reminder email
 $to = $data['gmail'];
-$subject = "Payment Reminder: Second Installment - " . $data['course_name'];
-$message = "Dear {$data['name']},
-
-We hope you have started your course and are enjoying the learning experience!
-
-This is a friendly reminder about your outstanding installment payment due for:
-Course: {$data['course_name']}
-Regional Centre: {$data['regional_centre']}
-Reference Number: {$data['reference_no']}
-
-Payment Details:
-- Amount Paid: Rs. " . number_format($paid_amount, 2) . "
-- Remaining Due Now: Rs. " . number_format($due_amount, 2) . "
-
-Please complete your installment payment using the link below:
-https://www.gjrti.gov.lk/CoursePay/second-installment.php?ref=" . urlencode($data['reference_no']) . "
-
-If you have already made the payment, please disregard this reminder.
-
-For any queries, please contact us at:
-Email: info@gjrti.gov.lk
-
-Best regards,
-Gem and Jewellery Research and Training Institute (GJRTI)
-";
+$subject = "Payment Reminder: Course Installment - " . $data['course_name'];
+$html = Mailer::buildTemplate(
+    "Course Fee Installment Reminder",
+    "Payment Due",
+    "orange",
+    "Dear " . htmlspecialchars($data['name']) . ",",
+    "We hope you are having an enriching learning experience with GJRTI! This is a friendly reminder regarding your outstanding course installment payment.",
+    [
+        'Reference Number'  => "<strong style='color:#25116F; font-size:16px;'>{$data['reference_no']}</strong>",
+        'Course Name'       => $data['course_name'],
+        'Regional Centre'   => $data['regional_centre'],
+        'Amount Paid'       => "Rs. " . number_format($paid_amount, 2),
+        'Remaining Due Now' => "<strong style='color:#dc2626; font-size:16px;'>Rs. " . number_format($due_amount, 2) . "</strong>"
+    ],
+    "Pay Remaining Balance Online",
+    "https://www.gjrti.gov.lk/CoursePay/second-installment.php?ref=" . urlencode($data['reference_no']),
+    "Please settle your pending balance promptly to ensure continuous participation in lectures and practical examination eligibility. If you have already paid, kindly disregard this notice."
+);
 
 try {
-    if (Mailer::send($to, $subject, $message, false, 'no-reply@gjrti.gov.lk')) {
+    if (Mailer::send($to, $subject, $html, true, 'no-reply@gjrti.gov.lk')) {
         $_SESSION['msg'] = "Second installment reminder sent successfully to {$data['name']} ({$data['gmail']})!";
     } else {
         $_SESSION['msg'] = "Failed to send reminder email. Please check mail settings.";
