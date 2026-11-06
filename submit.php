@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
+require_once __DIR__ . '/classes/CourseHelper.php';
 
 $logDir = __DIR__ . '/logs/';
 if (!is_dir($logDir)) {
@@ -47,36 +48,12 @@ try {
     $course_name        = trim($_POST['course'] ?? '');
     $course_mode_input  = trim($_POST['course_mode'] ?? '');
 
-    // Resolve course mode according to official classification
-    $partTimeCourses = [
-        "Certificate in Basic Gemmology",
-        "Certificate in Gemmology",
-        "Certificate in Blended Gemmology",
-        "Certificate in Geuda Heat Treatment",
-        "Certificate in Computer Aided Jewellery Designing and Manufacturing (CAD/CAM)",
-        "Certificate in Jewellery Stone Setting (NVQ 3)",
-        "Certificate in Jewellery Casting and Electro Plating",
-        "Certificate in Jewellery Assaying and Hallmarking",
-        "Diploma in Jewellery Manufacturing and Designing Technology (NVQ 5)/ Diploma in Professional Jewellery (Dip. PJSL)",
-        "Diploma in Jewellery Manufacturing and Designing Technology (NVQ 5)"
-    ];
-
-    $fullTimeCourses = [
-        "Certificate in Gem Cutting and Polishing (NVQ 3)",
-        "Certificate in Jewellery Designing (Manual)",
-        "Certificate in Jewellery Designing Technology (NVQ 4)",
-        "Certificate in Jewellery Manufacturing (NVQ 3)",
-        "Certificate in Jewellery Manufacturing (NVQ 4)",
-        "Certificate in Jewellery Manufacturing"
-    ];
-
     $course_mode = null;
     if ($course_mode_input === 'Full-Time' || $course_mode_input === 'Part-Time') {
         $course_mode = $course_mode_input;
-    } elseif (in_array($course_name, $partTimeCourses, true)) {
-        $course_mode = 'Part-Time';
-    } elseif (in_array($course_name, $fullTimeCourses, true)) {
-        $course_mode = 'Full-Time';
+    } else {
+        $resolved = CourseHelper::resolveCourseMode($course_name);
+        $course_mode = !empty($resolved) ? $resolved : null;
     }
 
     $reg_fee            = (float)($_POST['reg_fee'] ?? 0);

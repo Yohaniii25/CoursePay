@@ -1,48 +1,9 @@
 <?php
 require_once __DIR__ . '/../../classes/db.php';
+require_once __DIR__ . '/../../classes/CourseHelper.php';
+
 $db = new Database();
 $conn = $db->getConnection();
-
-/**
- * Determine whether a course is Full-Time or Part-Time based on official GJRTI classification
- */
-function resolve_course_mode($course_name) {
-    if (empty($course_name)) return '';
-    $clean = trim($course_name);
-
-    $part_time_courses = [
-        'Certificate in Basic Gemmology',
-        'Certificate in Gemmology',
-        'Certificate in Blended Gemmology',
-        'Certificate in Geuda Heat Treatment',
-        'Certificate in Computer Aided Jewellery Designing and Manufacturing (CAD/CAM)',
-        'Certificate in Jewellery Stone Setting (NVQ 3)',
-        'Certificate in Jewellery Casting and Electro Plating',
-        'Certificate in Jewellery Assaying and Hallmarking',
-        'Diploma in Jewellery Manufacturing and Designing Technology (NVQ 5)/ Diploma in Professional Jewellery (Dip. PJSL)',
-        'Diploma in Jewellery Manufacturing and Designing Technology (NVQ 5)'
-    ];
-
-    $full_time_courses = [
-        'Certificate in Gem Cutting and Polishing (NVQ 3)',
-        'Certificate in Jewellery Designing (Manual)',
-        'Certificate in Jewellery Designing Technology (NVQ 4)',
-        'Certificate in Jewellery Manufacturing (NVQ 3)',
-        'Certificate in Jewellery Manufacturing (NVQ 4)',
-        'Certificate in Jewellery Manufacturing'
-    ];
-
-    if (in_array($clean, $part_time_courses, true)) {
-        return 'Part-Time';
-    }
-
-    if (in_array($clean, $full_time_courses, true)) {
-        return 'Full-Time';
-    }
-
-    return '';
-}
-
 
 $sql = "SELECT 
     s.name, s.gmail, s.contact_number,
@@ -73,7 +34,7 @@ while ($row = $result->fetch_assoc()) {
     $raw_course = trim($row['course_name'] ?? '');
     $mode = trim($row['course_mode'] ?? '');
     if ($mode === '' && $raw_course !== '') {
-        $mode = resolve_course_mode($raw_course);
+        $mode = CourseHelper::resolveCourseMode($raw_course);
     }
 
     $txn_id = '';

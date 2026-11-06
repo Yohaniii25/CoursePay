@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../../classes/db.php';
+require_once __DIR__ . '/../../classes/CourseHelper.php';
 
 $db = new Database();
 $conn = $db->getConnection();
@@ -350,9 +351,17 @@ if (!$result) die("Query Error: " . $conn->error);
                     <?php endif; ?>
                 </form>
 
-                <a href="export_csv.php" class="btn-export">
-                    <i class="fas fa-file-csv"></i> Export CSV
-                </a>
+                <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                    <a href="export_excel.php" class="btn-export" style="background-color: #15803d; border-color: #15803d;" title="Export all students to Excel (.xls)">
+                        <i class="fas fa-file-excel"></i> Export Excel
+                    </a>
+                    <a href="export_pdf.php" target="_blank" class="btn-export" style="background-color: #b91c1c; border-color: #b91c1c;" title="Export or print as PDF">
+                        <i class="fas fa-file-pdf"></i> Export PDF
+                    </a>
+                    <a href="export_csv.php" class="btn-export" style="background-color: #25116F; border-color: #25116F;" title="Export to CSV">
+                        <i class="fas fa-file-csv"></i> Export CSV
+                    </a>
+                </div>
             </div>
         </div>
         <div class="table-card">
@@ -366,6 +375,7 @@ if (!$result) die("Query Error: " . $conn->error);
                             <th>Student ID</th>
                             <th>Ref No</th>
                             <th>Course</th>
+                            <th>Mode</th>
                             <th>Centre</th>
                             <th>Charge Type</th>
                             <th>Due</th>
@@ -392,12 +402,22 @@ if (!$result) die("Query Error: " . $conn->error);
                                 <td class="px-4 py-4 text-sm text-gray-600 whitespace-nowrap"><?= htmlspecialchars($row['contact_number']) ?></td>
                                 <td class="px-4 py-4 text-sm font-medium text-blue-700 whitespace-nowrap"><?= htmlspecialchars($display_id) ?></td>
                                 <td class="px-4 py-4 text-sm font-medium text-purple-700 whitespace-nowrap"><?= htmlspecialchars($row['reference_no']) ?></td>
-                                <td class="px-4 py-4 text-sm text-gray-600">
-                                    <div class="font-medium text-gray-900"><?= htmlspecialchars($row['course_name'] ?? '—') ?></div>
-                                    <?php if (!empty($row['course_mode'])): ?>
-                                        <span class="inline-block mt-1 px-2.5 py-0.5 text-xs font-semibold rounded-full <?= $row['course_mode'] === 'Full-Time' ? 'bg-blue-100 text-blue-800 border border-blue-200' : 'bg-purple-100 text-purple-800 border border-purple-200' ?>">
-                                            <?= htmlspecialchars($row['course_mode']) ?>
+                                <td class="px-4 py-4 text-sm text-gray-900 font-medium">
+                                    <?= htmlspecialchars($row['course_name'] ?? '—') ?>
+                                </td>
+                                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                    <?php 
+                                    $mode = !empty($row['course_mode']) ? $row['course_mode'] : CourseHelper::resolveCourseMode($row['course_name'] ?? '');
+                                    if ($mode === 'Full-Time'): ?>
+                                        <span class="inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full" style="background-color: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; padding: 2px 8px; border-radius: 9999px;">
+                                            Full-Time
                                         </span>
+                                    <?php elseif ($mode === 'Part-Time'): ?>
+                                        <span class="inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full" style="background-color: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; padding: 2px 8px; border-radius: 9999px;">
+                                            Part-Time
+                                        </span>
+                                    <?php else: ?>
+                                        <span class="text-gray-400 text-xs">—</span>
                                     <?php endif; ?>
                                 </td>
                                 <td class="px-4 py-4 text-sm text-gray-600 whitespace-nowrap"><?= htmlspecialchars($row['regional_centre'] ?? '—') ?></td>
